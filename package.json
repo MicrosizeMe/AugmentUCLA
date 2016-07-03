@@ -1,7 +1,7 @@
 {
   "name": "wei.leaguebackendtesting",
   "version": "1.0.0",
-  "description": "Testing grounds for league backend",
+  "description": "Testing for website",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/MicrosizeMe/NodeJSFiddle#readme",
   "dependencies": {
-    "express": "^4.14.0",
-    "passport": "^0.3.2"
+    "angular": "^1.5.7",
+    "express": "^4.14.0"
   }
 }
