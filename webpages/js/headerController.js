@@ -19,7 +19,7 @@
 	app.directive("navigationBar", function() {
 		return {
 			restrict: "E",
-			templateUrl: "navbar.html",
+			templateUrl: "htmltemplates/navbar.html",
 			controller: 'HeaderController',
 			controllerAs: "header"
 		}
