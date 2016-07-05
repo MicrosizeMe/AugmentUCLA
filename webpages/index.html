@@ -24,7 +24,6 @@
     <script type="text/JavaScript" src="/js/angular.min.js"></script>
     <script type="text/javascript" src="/js/indexBlogApp.js"></script>
     <script type="text/javascript" src="/js/headerController.js"></script>
-    <script type="text/javascript" src="/js/blogController.js"></script>
     <script type="text/javascript" src="/js/blogSidebar.js"></script>
     <script type="text/javascript" src="/js/looseTemplates.js"></script>
 
@@ -73,19 +72,19 @@
 
                 <div ng-repeat="brief in blog.briefs">
                     <h2>
-                        <a href="{{'/blogpost/' + brief.id}}"><!-- Blog Post Title -->{{brief.title}} </a>
+                        <a href="{{'/blogpost/?postID=' + brief.id}}" target="_self"><!-- Blog Post Title -->{{brief.title}} </a>
                     </h2>
                     <p class="lead">
-                        by <a href="{{'/blogpost/' + brief.id}}"><!-- Author -->{{brief.author}} </a>
+                        by <a href="{{'/blogpost/?postID=' + brief.id}}"><!-- Author -->{{brief.author}} </a>
                     </p>
                     <p><i class="fa fa-clock-o"></i> <!-- Posted on August 28, 2013 at 10:00 PM --> Posted on {{brief.date | date:"MMMM d, yyyy 'at' h:mm a"}} </p>
                     <hr>
-                    <a href="{{'/blogpost/' + brief.id}}" ng-show="{{brief.imageSource != null && brief.imageSource != undefined}}">
+                    <a href="{{'/blogpost/?postID=' + brief.id}}" target="_self" ng-show="{{brief.imageSource != null && brief.imageSource != undefined}}">
                         <img class="img-responsive img-hover" ng-src="{{brief.imageSource}}" alt="{{brief.imageAltText}}">
                     </a>
                     <hr>
                     <p>{{brief.description}}</p>
-                    <a class="btn btn-primary" href="#">Read More <i class="fa fa-angle-right"></i></a>
+                    <a class="btn btn-primary" href="{{'/blogpost/?postID=' + brief.id}}" target="_self">Read More <i class="fa fa-angle-right"></i></a>
                     <hr>
                 </div>
 
