@@ -1,7 +1,9 @@
 (function() {
-
-	var app = angular.module('blogController', []);
-
+	var app = angular.module('BlogFrontPage', [
+		'headerController', 
+		'looseDirectives',
+		'blogSidebarController'
+	]);
 
 	app.controller('BlogController', ["$http", "$anchorScroll", "$location", function($http, $anchorScroll, $location) {
 		this.logo = "/logos/augmentlogonontransparent.png";
@@ -31,6 +33,24 @@
 				imageSource: "http://i.imgur.com/pfkiPP6.gif",
 				imageAltText: null,
 				description: "Holy balls?"
+			},
+			{
+				id:125567,
+				title: "Welcome to Augment!",
+				author: "Anbo Wei",
+				date: 1234567876,
+				imageSource: "http://i.imgur.com/pfkiPP6.gif",
+				imageAltText: null,
+				description: "Holy balls?"
+			},
+			{
+				id:125567,
+				title: "Welcome to Augment!",
+				author: "Anbo Wei",
+				date: 1234567876,
+				imageSource: "http://i.imgur.com/pfkiPP6.gif",
+				imageAltText: null,
+				description: "Holy balls?"
 			}
 		];
 
@@ -43,5 +63,4 @@
 			$anchorScroll("scroll-header");
 		}
 	}]);
-
 })();

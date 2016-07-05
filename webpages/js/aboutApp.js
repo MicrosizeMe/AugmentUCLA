@@ -79,6 +79,7 @@
 		//Store the specific team we should be pulling data from
 		var team = $location.search().team;
 
+		//Get some stuff
 		this.header = "Teams";
 		this.iconData = [
 			{

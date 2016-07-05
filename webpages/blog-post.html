@@ -24,6 +24,8 @@
     <script type="text/JavaScript" src="/js/angular.min.js"></script>
     <script type="text/javascript" src="/js/headerController.js"></script>
     <script type="text/javascript" src="/js/looseTemplates.js"></script>
+    <script type="text/javascript" src="/js/blogSidebar.js"></script>
+    <script type="text/javascript" src="/js/blogPostApp.js"></script>
 
     <!-- Base Path -->
     <base href="/">
@@ -37,26 +39,26 @@
 
 </head>
 
-<body ng-app="LeaguePage">
+<body ng-app="BlogPostPage">
 
     <!-- Navigation -->
     <navigation-bar></navigation-bar>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="BlogPostController as post">
 
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Blog Post
-                    <small>by <a href="#">Start Bootstrap</a>
+                <h1 class="page-header">{{post.mainPost.title}}
+                    <small>by <a href="#">{{post.mainPost.author}}</a>
                     </small>
                 </h1>
-                <ol class="breadcrumb">
+                <!-- <ol class="breadcrumb">
                     <li><a href="index.html">Home</a>
                     </li>
                     <li class="active">Blog Post</li>
-                </ol>
+                </ol> -->
             </div>
         </div>
         <!-- /.row -->
@@ -72,21 +74,25 @@
                 <hr>
 
                 <!-- Date/Time -->
-                <p><i class="fa fa-clock-o"></i> Posted on August 24, 2013 at 9:00 PM</p>
+                <p><i class="fa fa-clock-o"></i> Posted on {{post.mainPost.date | date:"MMMM d, yyyy 'at' h:mm a"}}</p>
 
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive" ng-src="{{post.mainPost.imageSrc}}" alt="">
 
                 <hr>
 
                 <!-- Post Content -->
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+                <p class="lead">{{post.mainPost.description}}</p>
+                <p ng-bind-html="post.mainPost.text">
+                    <!-- {{post.mainPost.text}} -->
+                </p>
+
+                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p> -->
 
                 <hr>
 
@@ -108,15 +114,27 @@
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-                <div class="media">
+                <div class="media" ng-repeat="comment in post.comments">
                     <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        <img class="media-object" ng-src="{{comment.imageSrc}}" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading">{{comment.author}}
+                            <small><i class="fa fa-clock-o"></i> {{comment.date | date:"MMMM d, yyyy 'at' h:mm a"}}</small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        {{comment.text}}
+                        <!-- Nested Comments -->
+                        <div class="media" ng-repeat="innerComment in comment.comments">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" ng-src="{{innerComment.imageSrc}}" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{innerComment.author}}
+                                    <small><i class="fa fa-clock-o"></i> {{comment.date | date:"MMMM d, yyyy 'at' h:mm a"}}</small>
+                                </h4>
+                                {{innerComment.text}}
+                                </div>
+                        </div>
                     </div>
                 </div>
 
@@ -146,61 +164,14 @@
                     </div>
                 </div>
 
+                <!-- Padding. A bit hacky, but it works, so whatever.  -->
+                <div class="row" style="margin-top:20px;"></div>
+
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
-
+                <blog-sidebar></blog-sidebar>
             </div>
 
         </div>
