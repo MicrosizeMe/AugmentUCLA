@@ -2,6 +2,7 @@
 	var app = angular.module('BlogFrontPage', [
 		'headerController', 
 		'blogController',
-		'looseDirectives'
+		'looseDirectives',
+		'blogSidebarController'
 	]);
 })();

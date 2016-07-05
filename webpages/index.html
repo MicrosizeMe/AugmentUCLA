@@ -25,6 +25,7 @@
     <script type="text/javascript" src="/js/indexBlogApp.js"></script>
     <script type="text/javascript" src="/js/headerController.js"></script>
     <script type="text/javascript" src="/js/blogController.js"></script>
+    <script type="text/javascript" src="/js/blogSidebar.js"></script>
     <script type="text/javascript" src="/js/looseTemplates.js"></script>
 
     <!-- Base Path -->
@@ -64,7 +65,8 @@
         </div> -->
         <!-- /.row -->
 
-        <div class="row">
+        <!-- scroll-header is the tag to scroll to when the previous and next buttons are clicked.  -->
+        <div class="row" id="scroll-header"> 
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
@@ -76,7 +78,7 @@
                     <p class="lead">
                         by <a href="{{'/blogpost/' + brief.id}}"><!-- Author -->{{brief.author}} </a>
                     </p>
-                    <p><i class="fa fa-clock-o"></i> <!-- Posted on August 28, 2013 at 10:00 PM --> Posted on {{brief.date | date:"MMMM d, yyyy at h:mm a"}} </p>
+                    <p><i class="fa fa-clock-o"></i> <!-- Posted on August 28, 2013 at 10:00 PM --> Posted on {{brief.date | date:"MMMM d, yyyy 'at' h:mm a"}} </p>
                     <hr>
                     <a href="{{'/blogpost/' + brief.id}}" ng-show="{{brief.imageSource != null && brief.imageSource != undefined}}">
                         <img class="img-responsive img-hover" ng-src="{{brief.imageSource}}" alt="{{brief.imageAltText}}">
@@ -102,52 +104,7 @@
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- List half of the obtained catagories -->
-                            <ul class="list-unstyled">
-                                <li ng-repeat="catagory in blog.catagories" ng-if="$index < (blog.catagories.length / 2)"><a href="#">{{catagory}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li ng-repeat="catagory in blog.catagories" ng-if="$index >= (blog.catagories.length / 2)"><a href="#">{{catagory}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h3>Sign up for tournaments!</h3>
-                    <p>Should find an image to announce this.</p>
-                </div>
-
-                <!-- Club Logos Well -->
-                <div class="well">
-                    <h3>Club logos here</h3>
-                    <p>Should find an image to accompany this.</p>
-                </div>
+                <blog-sidebar></blog-sidebar>
 
             </div>
 

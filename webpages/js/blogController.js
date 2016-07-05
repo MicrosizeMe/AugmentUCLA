@@ -3,13 +3,23 @@
 	var app = angular.module('blogController', []);
 
 
-	app.controller('BlogController', ["$http", function($http) {
+	app.controller('BlogController', ["$http", "$anchorScroll", "$location", function($http, $anchorScroll, $location) {
 		this.logo = "/logos/augmentlogonontransparent.png";
+
+		//Search term is included in the url. Store if it exists
+		var searchTerm = $location.search().search;
 
 		//Get information briefs about the blog posts, 
 
-		this.upperMost = 1;//get the newest one somehow
-		this.viewLimit = 10;
+		this.viewLimit = 10; //max number of posts to view at a time. Likely should be
+			//moved to another file of constants.
+
+		//get the newest post number somehow
+		this.upperMost = $location.search().page ? 
+			$location.search().page * this.viewLimit : 1;
+
+		//Set a scroll offset. 
+		$anchorScroll.yOffset = 100;
 
 		//Get info somehow
 		this.briefs = [
@@ -24,13 +34,13 @@
 			}
 		];
 
-		//Get catagories by most popular
-		this.catagories = ["1", "2", "3", "4", "5", "6"];
-
 		//Called by the previous and next buttons to add to the end of the list
+		//Scrolls to the top of the list.
 		this.getSet = function(startIndex) {
 			this.upperMost = startIndex;
 			//Get some amount of things, update brief array, so on
+
+			$anchorScroll("scroll-header");
 		}
 	}]);
 
