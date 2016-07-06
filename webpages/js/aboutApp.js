@@ -1,7 +1,7 @@
 (function() {
 	var app = angular.module('AboutPage', [
 		'headerController',
-		'looseDirectives',
+		'looseDirectives'
 	]);
 
 	app.controller('CarouselController', ["$http", "$location",  function($http, $location) {

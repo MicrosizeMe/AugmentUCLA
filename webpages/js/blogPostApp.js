@@ -40,7 +40,7 @@
 					author: "Anbo Wei",
 					imageSrc: "http://megaicons.net/static/img/icons_sizes/7/59/64/pixelmator-icon.png",
 					text: "WOW! SUCH AN INFORMATIVE POST!",
-
+					date: 1678909876,
 					comments: [
 
 					]

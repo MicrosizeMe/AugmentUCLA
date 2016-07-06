@@ -37,7 +37,7 @@ app.get('/contact', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/contact.html'));
 });
 
-app.get('/blogpost/', function(req, res) {
+app.get('/blogpost', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/blog-post.html'));
 });
 

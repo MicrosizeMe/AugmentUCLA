@@ -12,6 +12,11 @@
 			this.logo = "logos/augmentlogo.png";
 
 			this.isActive = function(path) {
+				if (path == "/") {
+					//Hack for the index root
+					console.log($location.path());
+					return ($location.path() == "/" || $location.path() == "/blogpost");
+				}
 				return ($location.path().indexOf(path) === 0);
 			};
 	}]);
@@ -19,7 +24,7 @@
 	app.directive("navigationBar", function() {
 		return {
 			restrict: "E",
-			templateUrl: "htmltemplates/navbar.html",
+			templateUrl: "/htmltemplates/navbar.html",
 			controller: 'HeaderController',
 			controllerAs: "header"
 		}
