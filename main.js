@@ -11,8 +11,10 @@ http.createServer(function(request, response) {
 var express = require('express');
 
 var path = require('path');
-
+ 
 var app = express();
+
+// var authAgent = require("./auth")
 
 app.use('/', express.static('webpages'));
 
@@ -39,6 +41,10 @@ app.get('/contact', function(req, res) {
 
 app.get('/blogpost', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/blog-post.html'));
+});
+
+app.get('/register', function(req, res) {
+	res.sendFile(path.join(__dirname, 'webpages/register.html'));
 });
 
 
