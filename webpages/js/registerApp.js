@@ -19,8 +19,14 @@
 		this.email;
 
 		//Checks whether the given inputs are valid. Shows an error if so. 
-		this.validate = function(type) {
-
+		this.validateUsername = function(name) {
+			console.log("!!!");
+			return "1";
+			// if (!name) return "required"
+			// trimmed = name.trim();
+			// if (trimmed.length == 0) return "required"
+			// if (trimmed.length <= 5) return "minlength";
+			// if (/\s/.test(trimmed)) return "whitespace"; //If there is any whitespace in the string
 		}
 
 		this.register = function() {

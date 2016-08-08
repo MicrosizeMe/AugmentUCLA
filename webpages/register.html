@@ -54,7 +54,7 @@
                     <form name="registrationForm">    
                         <!-- Username and Password Info -->
                         <div class="row">
-                            <div class="col-sm-12 form-group has-error">
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.username.$error != {} && registrationForm.username.$touched) }">
                                 <label class="control-label">Username</label>
                                 <div ng-messages="registrationForm.username.$error" style="color:maroon" role="alert" ng-hide="registrationForm.username.$untouched">
                                     <div class="alert alert-danger" role="alert" ng-message="required">
@@ -65,7 +65,7 @@
                                     <div class="alert alert-danger" role="alert" ng-message="minlength">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
-                                        Username must be at least 5 characters long
+                                        Username must be at least 5 characters long.
                                     </div>
                                 </div>
                                 <input type="text" 
@@ -74,6 +74,56 @@
                                     ng-model="register.username" 
                                     required
                                     name="username"
+                                    ng-minlength="5"
+                                >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.username.$error != {} && registrationForm.username.$touched) }">
+                                <label class="control-label">Username</label>
+                                <div ng-messages="registrationForm.username.$error" style="color:maroon" role="alert" ng-hide="registrationForm.username.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        A username is required.
+                                    </div>
+                                    <div class="alert alert-danger" role="alert" ng-message="minlength">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Username must be at least 5 characters long.
+                                    </div>
+                                </div>
+                                <input type="text" 
+                                    placeholder="Username" 
+                                    class="form-control"
+                                    ng-model="register.username" 
+                                    required
+                                    name="username"
+                                    ng-minlength="5"
+                                >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.password.$error != {} && registrationForm.password.$touched) }">
+                                <label class="control-label">Password</label>
+                                <div ng-messages="registrationForm.password.$error" style="color:maroon" role="alert" ng-hide="registrationForm.password.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        A password is required.
+                                    </div>
+                                    <div class="alert alert-danger" role="alert" ng-message="minlength">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Password must be at least 5 characters long.
+                                    </div>
+                                </div>
+                                <input type="password" 
+                                    placeholder="Password" 
+                                    class="form-control"
+                                    ng-model="register.password" 
+                                    required
+                                    name="password"
                                     ng-minlength="5"
                                 >
                             </div>
