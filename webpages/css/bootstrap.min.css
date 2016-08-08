@@ -2510,7 +2510,7 @@ tbody.collapse.in {
     z-index: 1000;
     display: none;
     float: left;
-    min-width: 160px;
+    min-width: 300px;
     padding: 5px 0;
     margin: 2px 0 0;
     font-size: 14px;
@@ -2582,7 +2582,7 @@ tbody.collapse.in {
 .dropdown-header {
     display: block;
     padding: 3px 20px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.42857143;
     color: #777;
     white-space: nowrap;

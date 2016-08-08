@@ -19,7 +19,12 @@
 				}
 				return ($location.path().indexOf(path) === 0);
 			};
-	}]);
+
+			this.isLoggedIn = function() {
+				return false;
+			}
+		}
+	]);
 
 	app.directive("navigationBar", function() {
 		return {
