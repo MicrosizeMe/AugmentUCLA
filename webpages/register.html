@@ -54,16 +54,19 @@
                     <form name="registrationForm">    
                         <!-- Username and Password Info -->
                         <div class="row">
-                            <div class="col-sm-12 form-group">
-                                <label>Username</label>
-                                <div ng-messages="registrationForm.username.$error" style="color:maroon" role="alert" ng-hide="registrationForm.username.$pristine">
+                            <div class="col-sm-12 form-group has-error">
+                                <label class="control-label">Username</label>
+                                <div ng-messages="registrationForm.username.$error" style="color:maroon" role="alert" ng-hide="registrationForm.username.$untouched">
                                     <div class="alert alert-danger" role="alert" ng-message="required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
                                         A username is required.
                                     </div>
-                                    <div ng-message="minlength">Your field is too short</div>
-                                    <div ng-message="maxlength">Your field is too long</div>
+                                    <div class="alert alert-danger" role="alert" ng-message="minlength">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Username must be at least 5 characters long
+                                    </div>
                                 </div>
                                 <input type="text" 
                                     placeholder="Username" 
@@ -71,6 +74,7 @@
                                     ng-model="register.username" 
                                     required
                                     name="username"
+                                    ng-minlength="5"
                                 >
                             </div>
                         </div>
