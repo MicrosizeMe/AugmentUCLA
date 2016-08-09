@@ -31,6 +31,7 @@
 
 	}]);
 
+	//Verification code to ensure that the username is correct. Creates the nv-verify-username field. 
 	app.directive('ngVerifyUsername', function() {
 		return {
 			restrict: "A",
