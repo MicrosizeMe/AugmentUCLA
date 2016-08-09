@@ -37,7 +37,7 @@
 			require: "ngModel",
 			link: function($scope, $element, $attrs, ngModel) {
 				ngModel.$validators.required = function(modelValue) {
-					return modelValue != undefined;
+					return (modelValue != undefined && modelValue.length != 0);
 				};
 
 				ngModel.$validators.minlength = function(modelValue) {
@@ -46,8 +46,51 @@
 					return true;
 				};
 
-				ngModel.$validators.test = function(modelValue) {
-					return modelValue != "testing";
+				ngModel.$validators.alphanum = function(modelValue) {
+					if (modelValue != undefined) {
+						return /^[a-z0-9]+$/i.test(modelValue);
+					}
+					return true;
+				};
+			}
+		}
+	});
+
+	app.directive('ngVerifyPassword', function() {
+		return {
+			restrict: "A",
+			require: "ngModel",
+			link: function($scope, $element, $attrs, ngModel) {
+				ngModel.$validators.required = function(modelValue) {
+					return (modelValue != undefined && modelValue.length != 0);
+				};
+
+				ngModel.$validators.minlength = function(modelValue) {
+					if (modelValue != undefined)
+						return modelValue.length > 10;
+					return true;
+				};
+			}
+		}
+	});
+
+	app.directive('ngVerifyMatches', function() {
+		return {
+			restrict: "A",
+			require: "ngModel",
+			scope: {
+				otherModelValue: "=ngVerifyMatches"
+			},
+			link: function($scope, $element, $attrs, ngModel) {
+				ngModel.$validators.required = function(modelValue) {
+					return (modelValue != undefined && modelValue.length != 0);
+				};
+
+				ngModel.$validators.matches = function(modelValue) {
+					if (modelValue != undefined) {
+						return modelValue == $scope.otherModelValue;
+					}
+					return true;
 				};
 			}
 		}

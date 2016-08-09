@@ -52,14 +52,15 @@
                 <h1 class="col-lg-12 well">Registration Form</h1>
                 <div class="col-lg-12 well">
                     <form name="registrationForm">    
-                        <!-- Username and Password Info -->
                         <!-- http://stackoverflow.com/questions/31127532/validate-custom-directive-using-ngmessages -->
+                        <!-- Username and Password info -->
+                        <!-- Username -->
+                        {{registrationForm.$valid}}
                         <div class="row">
-                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.username.$invalid && registrationForm.username.$touched) }">
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.username.$invalid && registrationForm.username.$touched) ,
+                                                                         'has-success': (registrationForm.username.$valid && registrationForm.username.$touched)}">
                                 <label class="control-label">Username</label>
                                 <p class="form-text text-muted">Alpha-numeric characters, at least 5 characters long.</p>
-                                {{registrationForm.$invalid | json}}
-                                {{registrationForm.username}}
                                 <div ng-messages="registrationForm.username.$error" style="color:maroon" role="alert" ng-hide="registrationForm.username.$untouched">
                                     <div class="alert alert-danger" role="alert" ng-message="required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -71,10 +72,10 @@
                                         <span class="sr-only">Error:</span>
                                         Username must be at least 5 characters long.
                                     </div>
-                                    <div class="alert alert-danger" role="alert" ng-message="test">
+                                    <div class="alert alert-danger" role="alert" ng-message="alphanum">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
-                                        teeest.
+                                        Username is not alphanumeric.
                                     </div>
                                 </div>
                                 <input type="text" 
@@ -83,39 +84,16 @@
                                     ng-model="register.username" 
                                     required
                                     ng-verify-username
-                                    name="username"
-                                    
+                                    name="username"   
                                 >
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.username.$error != {} && registrationForm.username.$touched) }">
-                                <label class="control-label">Username</label>
-                                <div ng-messages="registrationForm.username.$error" style="color:maroon" role="alert" ng-hide="registrationForm.username.$untouched">
-                                    <div class="alert alert-danger" role="alert" ng-message="required">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <span class="sr-only">Error:</span>
-                                        A username is required.
-                                    </div>
-                                    <div class="alert alert-danger" role="alert" ng-message="minlength">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <span class="sr-only">Error:</span>
-                                        Username must be at least 5 characters long.
-                                    </div>
-                                </div>
-                                <input type="text" 
-                                    placeholder="Username" 
-                                    class="form-control"
-                                    ng-model="register.username" 
-                                    required
-                                    name="username"
-                                    ng-minlength="5"
-                                >
-                            </div>
-                        </div> -->
+                        <!-- Password -->
                         <div class="row">
-                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.password.$error != {} && registrationForm.password.$touched) }">
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.password.$invalid && registrationForm.password.$touched) ,
+                                                                         'has-success': (registrationForm.password.$valid && registrationForm.password.$touched)}">
                                 <label class="control-label">Password</label>
+                                <p class="form-text text-muted">At least 10 characters long.</p>
                                 <div ng-messages="registrationForm.password.$error" style="color:maroon" role="alert" ng-hide="registrationForm.password.$untouched">
                                     <div class="alert alert-danger" role="alert" ng-message="required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -125,7 +103,7 @@
                                     <div class="alert alert-danger" role="alert" ng-message="minlength">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
-                                        Password must be at least 5 characters long.
+                                        Password must be at least 10 characters long.
                                     </div>
                                 </div>
                                 <input type="password" 
@@ -133,21 +111,36 @@
                                     class="form-control"
                                     ng-model="register.password" 
                                     required
-                                    name="password"
-                                    ng-minlength="5"
+                                    ng-verify-password
+                                    name="password"   
                                 >
                             </div>
                         </div>
+                        <!-- Confirm password -->
                         <div class="row">
-                            <div class="col-sm-12 form-group">
-                                <label>Password</label>
-                                <input type="password" placeholder="Password" class="form-control" ng-model="register.password" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" placeholder="Repeat Password" class="form-control" required>
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': register.confirmPassword != register.password && registrationForm.confirmpass.$touched,
+                                                                         'has-success': register.confirmPassword === register.password && registrationForm.confirmpass.$touched}">
+                                <label class="control-label">Confirm Password</label>
+                                <div ng-messages="registrationForm.confirmpass.$error" style="color:maroon" role="alert" ng-hide="registrationForm.confirmpass.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        A password is required.
+                                    </div>
+                                    <div class="alert alert-danger" role="alert" ng-message="matches">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Passwords must match.
+                                    </div>
+                                </div>
+                                <input type="password" 
+                                    placeholder="Repeat Password" 
+                                    class="form-control" 
+                                    ng-model="register.confirmPassword"
+                                    name="confirmpass"
+                                    required
+                                    ng-verify-matches="register.password"
+                                >
                             </div>
                         </div>
 
