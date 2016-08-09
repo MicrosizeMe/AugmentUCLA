@@ -18,17 +18,6 @@
 		this.phoneNumber;
 		this.email;
 
-		//Checks whether the given inputs are valid. Shows an error if so. 
-		this.validateUsername = function(name) {
-			console.log("!!!");
-			return "1";
-			// if (!name) return "required"
-			// trimmed = name.trim();
-			// if (trimmed.length == 0) return "required"
-			// if (trimmed.length <= 5) return "minlength";
-			// if (/\s/.test(trimmed)) return "whitespace"; //If there is any whitespace in the string
-		}
-
 		this.register = function() {
 			console.log(this.username);
 			console.log(this.password);
@@ -41,6 +30,28 @@
 		}
 
 	}]);
+
+	app.directive('ngVerifyUsername', function() {
+		return {
+			restrict: "A",
+			require: "ngModel",
+			link: function($scope, $element, $attrs, ngModel) {
+				ngModel.$validators.required = function(modelValue) {
+					return modelValue != undefined;
+				};
+
+				ngModel.$validators.minlength = function(modelValue) {
+					if (modelValue != undefined)
+						return modelValue.length > 5;
+					return true;
+				};
+
+				ngModel.$validators.test = function(modelValue) {
+					return modelValue != "testing";
+				};
+			}
+		}
+	});
 
 	
 	//This code is stolen off somewhere, I can't remember, may need to google later
