@@ -14,7 +14,6 @@
 			this.isActive = function(path) {
 				if (path == "/") {
 					//Hack for the index root
-					console.log($location.path());
 					return ($location.path() == "/" || $location.path() == "/blogpost");
 				}
 				return ($location.path().indexOf(path) === 0);

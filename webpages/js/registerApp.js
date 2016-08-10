@@ -14,7 +14,7 @@
 		this.firstName;
 		this.lastName;
 		this.uid;
-		this.year;
+		this.gradYear;
 		this.phoneNumber;
 		this.email;
 
@@ -24,14 +24,14 @@
 			console.log(this.firstName);
 			console.log(this.lastName);
 			console.log(this.uid);
-			console.log(this.year);
+			console.log(this.gradYear);
 			console.log(this.phoneNumber);
 			console.log(this.email);
 		}
 
 	}]);
 
-	//Verification code to ensure that the username is correct. Creates the nv-verify-username field. 
+	//Verification code to ensure that the username is correct.  
 	app.directive('ngVerifyUsername', function() {
 		return {
 			restrict: "A",
@@ -43,7 +43,7 @@
 
 				ngModel.$validators.minlength = function(modelValue) {
 					if (modelValue != undefined)
-						return modelValue.length > 5;
+						return modelValue.length >= 5;
 					return true;
 				};
 
@@ -57,24 +57,7 @@
 		}
 	});
 
-	app.directive('ngVerifyPassword', function() {
-		return {
-			restrict: "A",
-			require: "ngModel",
-			link: function($scope, $element, $attrs, ngModel) {
-				ngModel.$validators.required = function(modelValue) {
-					return (modelValue != undefined && modelValue.length != 0);
-				};
-
-				ngModel.$validators.minlength = function(modelValue) {
-					if (modelValue != undefined)
-						return modelValue.length > 10;
-					return true;
-				};
-			}
-		}
-	});
-
+	//Verifies the confirmation is there and the password matches input. 
 	app.directive('ngVerifyMatches', function() {
 		return {
 			restrict: "A",
@@ -97,7 +80,29 @@
 		}
 	});
 
-	
+
+	//Stolen code that capitalizes an input
+	app.directive('capitalizeFirst', function(uppercaseFilter, $parse) {
+	return {
+		require: 'ngModel',
+			link: function(scope, element, attrs, modelCtrl) {
+				var capitalize = function(inputValue) {
+					if (inputValue == undefined) return;
+					var capitalized = inputValue.charAt(0).toUpperCase() +
+						inputValue.substring(1);
+					if(capitalized !== inputValue) {
+						modelCtrl.$setViewValue(capitalized);
+						modelCtrl.$render();
+					}         
+					return capitalized;
+				}
+				var model = $parse(attrs.ngModel);
+				modelCtrl.$parsers.push(capitalize);
+				capitalize(model(scope));
+			}
+		};
+	});
+
 	//This code is stolen off somewhere, I can't remember, may need to google later
 	app.directive('phoneInput', ["$filter", "$browser", function($filter, $browser) {
 	    return {

@@ -111,6 +111,7 @@
                                     class="form-control"
                                     ng-model="register.password" 
                                     required
+                                    minlength="10"
                                     ng-verify-password
                                     name="password"   
                                 >
@@ -118,8 +119,8 @@
                         </div>
                         <!-- Confirm password -->
                         <div class="row">
-                            <div class="col-sm-12 form-group" ng-class="{'has-error': register.confirmPassword != register.password && registrationForm.confirmpass.$touched,
-                                                                         'has-success': register.confirmPassword === register.password && registrationForm.confirmpass.$touched}">
+                            <div class="col-sm-12 form-group" ng-class="{'has-error': registrationForm.confirmpass.$invalid && registrationForm.confirmpass.$touched,
+                                                                         'has-success': registrationForm.confirmpass.$valid && registrationForm.confirmpass.$touched}">
                                 <label class="control-label">Confirm Password<red-asterisk></red-asterisk></label>
                                 <div ng-messages="registrationForm.confirmpass.$error" style="color:maroon" role="alert" ng-hide="registrationForm.confirmpass.$untouched">
                                     <div class="alert alert-danger" role="alert" ng-message="required">
@@ -147,36 +148,93 @@
 
                         <!-- Demographic Info -->
                         <div class="row">
-                            <div class="col-sm-6 form-group">
+                            <div class="col-sm-6 form-group" ng-class="{'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$touched,
+                                                                        'has-success': registrationForm.firstname.$valid && registrationForm.firstname.$touched}">
                                 <label class="control-label">First Name<red-asterisk></red-asterisk></label>
-                                <p class="form-text text-muted">We need this for paperwork. Use a real name.</p>
+                                <div ng-messages="registrationForm.firstname.$error" style="color:maroon" role="alert" ng-hide="registrationForm.firstname.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Your name is required.
+                                    </div>
+                                </div>
                                 <input type="text" 
                                     placeholder="Enter First Name Here..." 
                                     class="form-control" 
                                     ng-model="register.firstName" 
                                     required
+                                    capitalize-first
                                     name="firstname"
                                 >
                             </div>
-                            <div class="col-sm-6 form-group">
-                                <label>Last Name</label>
-                                <input type="text" placeholder="Enter Last Name Here..." class="form-control" ng-model="register.lastName" required>
+                            <div class="col-sm-6 form-group" ng-class="{'has-error': registrationForm.lastname.$invalid && registrationForm.lastname.$touched,
+                                                                        'has-success': registrationForm.lastname.$valid && registrationForm.lastname.$touched}">
+                                <label class="control-label">Last Name<red-asterisk></red-asterisk></label>
+                                <div ng-messages="registrationForm.lastname.$error" style="color:maroon" role="alert" ng-hide="registrationForm.lastname.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Your name is required.
+                                    </div>
+                                </div>
+                                <input type="text" 
+                                    placeholder="Enter Last Name Here..." 
+                                    class="form-control" 
+                                    ng-model="register.lastName" 
+                                    required
+                                    capitalize-first
+                                    name="lastname"
+                                >
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6 form-group">
-                                <label>UID</label>
-                                <input type="text" placeholder="Enter Last Name Here.." class="form-control" ng-model="register.uid" required>
+                            <div class="col-sm-6 form-group" ng-class="{'has-error': registrationForm.uid.$invalid && registrationForm.uid.$touched,
+                                                                        'has-success': registrationForm.uid.$valid && registrationForm.uid.$touched}">
+                                <label class="control-label">UID<red-asterisk></red-asterisk></label>
+                                <div ng-messages="registrationForm.uid.$error" style="color:maroon" role="alert" ng-hide="registrationForm.uid.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        A UID is required.
+                                    </div>
+                                    <div class="alert alert-danger" role="alert" ng-message="minlength">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Your UID must be 9 digits long. 
+                                    </div>
+                                    <div class="alert alert-danger" role="alert" ng-message="maxlength">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Your UID must be 9 digits long. 
+                                    </div>
+                                </div>
+                                <input type="number" 
+                                    placeholder="Enter Last Name Here.." 
+                                    class="form-control" 
+                                    ng-model="register.uid" 
+                                    name="uid"
+                                    minlength="9"
+                                    maxlenght="9"
+                                    required
+                                >
                             </div>
-                            <div class="col-sm-6 form-group">
-                                <label>Year</label>
-                                <select class="form-control" placeholder="..." ng-model="register.year" required>
-                                    <option value="0"> ...</option>
-                                    <option value="1">Year 1</option>
-                                    <option value="2">Year 2</option>
-                                    <option value="3">Year 3</option>
-                                    <option value="4">Year 4</option>
-                                    <option value="5">Year 5+</option>
+                            <div class="col-sm-6 form-group" ng-class="{'has-error': registrationForm.gradyear.$invalid && registrationForm.gradyear.$touched,
+                                                                        'has-success': registrationForm.gradyear.$valid && registrationForm.gradyear.$touched}">
+                                <label class="control-label">Graduation Year<red-asterisk></red-asterisk></label>
+                                <div ng-messages="registrationForm.gradyear.$error" style="color:maroon" role="alert" ng-hide="registrationForm.gradyear.$untouched">
+                                    <div class="alert alert-danger" role="alert" ng-message="required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        A graduation year is required.
+                                    </div>
+                                </div>
+                                <select class="form-control" ng-model="register.gradYear" required name="gradyear">
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2020">2021</option>
                                 </select>
                             </div>
                         </div>
