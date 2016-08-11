@@ -22,9 +22,10 @@
 
     <!-- Angular -->
     <script type="text/javaScript" src="/js/angular.min.js"></script>
-    <script type="text/javascript" src="/js/headerController.js"></script>
-    <script type="text/javascript" src="/js/looseTemplates.js"></script>
-    <script type="text/javascript" src="/js/itemApp.js"></script>
+    <script type="text/javaScript" src="/js/headerController.js"></script>
+    <script type="text/javaScript" src="/js/looseTemplates.js"></script>
+    <script type="text/javaScript" src="/js/itemApp.js"></script>
+    <script type="text/javaScript" src="/js/merchSidebar.js"></script>
 
     <!-- Base Path -->
     <base href="/">
@@ -39,7 +40,7 @@
 
 </head>
 
-<body ng-app="ItemPage">
+<body ng-app="ItemPage" ng-cloak>
 
     <!-- Navigation -->
     <navigation-bar></navigation-bar>
@@ -49,14 +50,15 @@
 
         <div class="row">
 
-            <div class="col-md-3">
+            <merch-sidebar id="15"></merch-sidebar>
+            <!-- <div class="col-md-3">
                 <p class="lead">This should become some sort of navigation bar</p>
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Link to product catagory?</a>
                     <a href="#" class="list-group-item">Another product catagory</a>
                     <a href="#" class="list-group-item">A third product catagory</a>
                 </div>
-            </div>
+            </div> -->
 
             <div class="col-md-9">
 
