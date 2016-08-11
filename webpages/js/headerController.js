@@ -6,10 +6,10 @@
 
 	// var app = angular.module('headerController', []);
 	
-	app.controller('HeaderController', [ "$http", "$location", 
+	app.controller('HeaderController', ["$http", "$location", 
 		function($http, $location) {
 			var header = this;
-			this.logo = "logos/augmentlogo.png";
+			this.logo = "/logos/augmentlogo.png";
 
 			this.isActive = function(path) {
 				if (path == "/") {
