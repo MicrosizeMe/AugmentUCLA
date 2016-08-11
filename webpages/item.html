@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Item - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="/css/shop-item.css" rel="stylesheet">
+
+    <!-- Angular -->
+    <script type="text/javaScript" src="/js/angular.min.js"></script>
+    <script type="text/javascript" src="/js/headerController.js"></script>
+    <script type="text/javascript" src="/js/looseTemplates.js"></script>
+    <script type="text/javascript" src="/js/itemApp.js"></script>
+
+    <!-- Base Path -->
+    <base href="/">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="ItemPage">
+
+    <!-- Navigation -->
+    <navigation-bar></navigation-bar>
+
+    <!-- Page Content -->
+    <div class="container" ng-controller="ShopItemController as item">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">This should become some sort of navigation bar</p>
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Link to product catagory?</a>
+                    <a href="#" class="list-group-item">Another product catagory</a>
+                    <a href="#" class="list-group-item">A third product catagory</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <img class="img-responsive" ng-src="{{item.image}}" alt="">
+                    </div>
+                    <div class="panel-body">
+                        <div class="caption-full">
+                            <h4 class="pull-right">{{item.price | currency}}</h4>
+                            <h4><a href="#">{{item.name}}</a>
+                            </h4>
+                            <p ng-bind-html="item.description"></p>
+                                <div>
+                                    <button type="button" class="btn btn-lg btn-info" ng-click="register.register()">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart
+                                    </button>                   
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+        <footer-and-copyright></footer-and-copyright>
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

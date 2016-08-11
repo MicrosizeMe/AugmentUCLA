@@ -51,6 +51,10 @@ app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/login.html'));
 });
 
+app.get('/item', function(req, res) {
+	res.sendFile(path.join(__dirname, 'webpages/item.html'));
+});
+
 
 app.get('/api_endpoint', function(req, res) {
     var json_object = { name: "Node.JS Demo", location: "ACM Clubhouse" };
