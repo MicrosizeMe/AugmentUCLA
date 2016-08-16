@@ -16,11 +16,15 @@
 					//Hack for the index root
 					return ($location.path() == "/" || $location.path() == "/blogpost");
 				}
+				if (path == "/merch") {
+					//Hack for merch
+					return ($location.path() == "/item" || $location.path() == "/merch");	
+				}
 				return ($location.path().indexOf(path) === 0);
 			};
 
 			this.isLoggedIn = function() {
-				return false;
+				return true;
 			}
 		}
 	]);
