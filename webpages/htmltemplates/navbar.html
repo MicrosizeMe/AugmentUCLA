@@ -19,13 +19,16 @@
                     <a href="/" target="_self">Blog</a>
                 </li>
                 <li ng-class="{ active: header.isActive('/about')}">
-                    <a href="/about.html" target="_self">About</a>
+                    <a href="/about" target="_self">About</a>
                 </li>
                 <li ng-class="{ active: header.isActive('/tournament')}">
-                    <a href="/tournament.html" target="_self">Tournament Signup</a>
+                    <a href="/tournament" target="_self">Tournament Signup</a>
                 </li>
                 <li ng-class="{ active: header.isActive('/calendar')}">
-                    <a href="/calendar.html" target="_self">Calendar</a>
+                    <a href="/calendar" target="_self">Calendar</a>
+                </li>
+                <li ng-class="{ active: header.isActive('/merch')}">
+                    <a href="/merch" target="_self"><span class="glyphicon glyphicon-shopping-cart"></span> Merch and Membership</a>
                 </li>
                 <li class="dropdown" ng-hide="{{header.isLoggedIn()}}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>

@@ -15,6 +15,7 @@
 <div class="carousel-inner">
     <div class="item" ng-repeat="slide in carousel.slides track by $index" ng-class="carousel.getActive($index)">
         <div class="fill" ng-style="{'background-image':'url(' + slide.imageSrc + ')'}"></div>
+        <!-- <img ng-src="{{slide.imageSrc}}"> -->
         <div class="carousel-caption">
             <h2>{{slide.imageCaption}}</h2>
         </div>
