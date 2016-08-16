@@ -2,15 +2,12 @@
 	var app = angular.module("MerchPage", [
 		'headerController',
 		'looseDirectives',
-		'merchSidebarController',
-		'carouselController'
+		'merchSidebarController'
 	]);
 
 	app.controller('CarouselController', ["$http", "$location",  function($http, $location) {
 		//Get which team we're supposed to be pulling the data from
 		var team = $location.search().team;
-
-		console.log("carousel");
 
 		//Get carousel data somehow
 		this.slides = [

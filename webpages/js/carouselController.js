@@ -31,13 +31,4 @@
 		};
 
 	}]);
-
-	app.directive('carousel', function() {
-		return {
-			restrict: 'A',
-			templateUrl: '/htmltemplates/carousel.html',
-			controller: 'CarouselController',
-			controllerAs: 'carousel'
-		};
-	});
 }());
