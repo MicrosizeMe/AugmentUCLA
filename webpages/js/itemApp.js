@@ -15,7 +15,7 @@
 			this.image = "/logos/augmentlogo.png";
 			this.name = "Augment Membership";
 			this.price = 5.00;
-			this.description = $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>");
+			this.fullDescription = $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>");
 			this.maxQuantity = 10;
 			
 			this.purchasable = true;
