@@ -51,14 +51,6 @@
         <div class="row">
 
             <merch-sidebar id="15"></merch-sidebar>
-            <!-- <div class="col-md-3">
-                <p class="lead">This should become some sort of navigation bar</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Link to product catagory?</a>
-                    <a href="#" class="list-group-item">Another product catagory</a>
-                    <a href="#" class="list-group-item">A third product catagory</a>
-                </div>
-            </div> -->
 
             <div class="col-md-9">
 
@@ -67,16 +59,38 @@
                         <img class="img-responsive" ng-src="{{item.image}}" alt="">
                     </div>
                     <div class="panel-body">
-                        <div class="caption-full">
-                            <h4 class="pull-right">{{item.price | currency}}</h4>
-                            <h4><a href="#">{{item.name}}</a>
-                            </h4>
-                            <p ng-bind-html="item.description"></p>
-                                <div>
-                                    <button type="button" class="btn btn-lg btn-info" ng-click="register.register()">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart
-                                    </button>                   
+                        <div class=row>
+                            <div class="col-md-12">
+                                <h4 class="pull-right">{{item.price | currency}}</h4>
+                                <h4><a href="#">{{item.name}}</a>
+                                </h4>
+                                <p ng-bind-html="item.description"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <!-- <div class="col-md-9">
                                 </div>
+                                <div class="col-md-3">
+                                </div> -->
+                                <div ng-hide="item.alreadyHas || !item.purchasable">
+                                    <div class="inline" ng-hide="item.maxQuantity == 1">
+                                        <b>Quantity:</b>
+                                        <input type="number" class="quantity-control input-number" value="1" min="1" ng-max="">
+                                    </div>
+                                    <div class="inline">
+                                        <button type="button" class="btn btn-lg btn-info" ng-click="item.addToCart()">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="alert alert-danger" ng-hide="item.purchasable">
+                                    <em>Sorry, this is out of stock. Check back later!</em>
+                                </div>
+                                <div class="alert alert-info" ng-show="item.alreadyHas">
+                                    <em>You seem to already have one of these! Probably don't want to buy another. </em>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
