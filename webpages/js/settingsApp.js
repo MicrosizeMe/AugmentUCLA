@@ -1,8 +1,32 @@
 (function() {
 
 	var app = angular.module('SettingsPage', [
-		'headerController',
-		'looseDirectives'
+		'looseDirectives',
+		'RegistrationDirectives'
+		], 
+		function($locationProvider) {
+		    $locationProvider.html5Mode(true);
+		}
+	);
+
+	app.controller('SettingsController', ["$http", "$location",
+		function($http, $location) {
+			//Get personal info somehow
+			this.obtainedFirstName = "Anbo";
+		}
+	]);
+
+	app.controller('UpdateInfoController', ["$http", "$location",
+		function($http, $location) {
+			this.currentPassword;
+			this.password;
+			this.firstName;
+			this.lastName;
+			this.uid;
+			this.gradYear;
+			this.phoneNumber;
+			this.email;
+		}
 	]);
 
 	app.controller('HeaderController', ["$http", "$location", 

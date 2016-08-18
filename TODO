@@ -13,3 +13,13 @@ Real name
 Password
 Email
 http://stackoverflow.com/questions/14419651/filters-on-ng-model-in-an-input/14425022#14425022
+
+
+
+Settings page
+Mission critical
+* Password change
+* See current membership status
+* Links to membership
+* Make checks for username validity
+* Checks for password validity
