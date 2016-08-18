@@ -59,6 +59,11 @@ app.get('/merch', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/merch.html'));
 });
 
+app.get('/settings', function(req, res) {
+	res.sendFile(path.join(__dirname, 'webpages/settings.html'));
+});
+
+
 
 
 
