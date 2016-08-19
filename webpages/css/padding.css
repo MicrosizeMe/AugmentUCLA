@@ -1,4 +1,4 @@
-.top200 { margin-top:200px; }
+.top200 { margin-top:100px; }
 
 @media (max-width: 978px) {
     .top200 { margin-top:15px; }

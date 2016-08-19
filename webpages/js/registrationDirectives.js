@@ -9,9 +9,9 @@
 			restrict: "A",
 			require: "ngModel",
 			link: function($scope, $element, $attrs, ngModel) {
-				ngModel.$validators.required = function(modelValue) {
-					return (modelValue != undefined && modelValue.length != 0);
-				};
+				// ngModel.$validators.required = function(modelValue) {
+				// 	return (modelValue != undefined && modelValue.length != 0);
+				// };
 
 				ngModel.$validators.minlength = function(modelValue) {
 					if (modelValue != undefined)
@@ -38,15 +38,18 @@
 				otherModelValue: "=ngVerifyMatches"
 			},
 			link: function($scope, $element, $attrs, ngModel) {
-				ngModel.$validators.required = function(modelValue) {
-					return (modelValue != undefined && modelValue.length != 0);
-				};
+				// ngModel.$validators.required = function(modelValue) {
+				// 	return (modelValue != undefined && modelValue.length != 0);
+				// };
 
 				ngModel.$validators.matches = function(modelValue) {
-					if (modelValue != undefined) {
+					if (modelValue == undefined && $scope.otherModelValue == undefined) {
+						return true;
+					}
+					if (modelValue != undefined && $scope.otherModelValue != undefined) {
 						return modelValue == $scope.otherModelValue;
 					}
-					return true;
+					return false;
 				};
 			}
 		}

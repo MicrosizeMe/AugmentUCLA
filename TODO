@@ -23,3 +23,6 @@ Mission critical
 * Links to membership
 * Make checks for username validity
 * Checks for password validity
+* Make registration alert when fields are not completed
+* CART
+* Checkout interfaces
