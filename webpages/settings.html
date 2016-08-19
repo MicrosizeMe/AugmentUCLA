@@ -340,7 +340,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" ng-controller="UpdateInfoController as update">
                     <div class="col-md-3">
                         <h2>
                             Change your information
@@ -372,20 +372,19 @@
                                     <input type="password" 
                                         placeholder="Current Password" 
                                         class="form-control"
-                                        ng-model="register.currentPassword" 
+                                        ng-model="update.currentPassword" 
                                         required
-                                        ng-verify-username
                                         name="currentPassword"   
                                     >
                                 </div>
                             </div>
                             <!-- Password -->
                             <div class="row">
-                                <div class="col-sm-12 form-group" ng-class="{'has-error': (updateForm.password.$invalid && updateForm.password.$touched) ,
-                                                                             'has-success': (updateForm.password.$valid && updateForm.password.$touched)}">
-                                    <label class="control-label">Password<red-asterisk></red-asterisk></label>
+                                <div class="col-sm-12 form-group" ng-class="{'has-error': (updateForm.newPassword.$invalid && updateForm.newPassword.$touched) ,
+                                                                             'has-success': (updateForm.newPassword.$valid && updateForm.newPassword.$touched)}">
+                                    <label class="control-label">New Password</label>
                                     <p class="form-text text-muted">At least 10 characters long.</p>
-                                    <div ng-messages="updateForm.password.$error" style="color:maroon" role="alert" ng-hide="updateForm.password.$untouched">
+                                    <div ng-messages="updateForm.newPassword.$error" style="color:maroon" role="alert" ng-hide="updateForm.newPassword.$untouched">
                                         <div class="alert alert-danger" role="alert" ng-message="required">
                                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                             <span class="sr-only">Error:</span>
@@ -400,11 +399,10 @@
                                     <input type="password" 
                                         placeholder="Password" 
                                         class="form-control"
-                                        ng-model="register.password" 
-                                        required
+                                        ng-model="update.newPassword" 
                                         minlength="10"
                                         ng-verify-password
-                                        name="password"   
+                                        name="newPassword"   
                                     >
                                 </div>
                             </div>
@@ -412,7 +410,7 @@
                             <div class="row">
                                 <div class="col-sm-12 form-group" ng-class="{'has-error': updateForm.confirmpass.$invalid && updateForm.confirmpass.$touched,
                                                                              'has-success': updateForm.confirmpass.$valid && updateForm.confirmpass.$touched}">
-                                    <label class="control-label">Confirm Password<red-asterisk></red-asterisk></label>
+                                    <label class="control-label">Confirm Password</label>
                                     <div ng-messages="updateForm.confirmpass.$error" style="color:maroon" role="alert" ng-hide="updateForm.confirmpass.$untouched">
                                         <div class="alert alert-danger" role="alert" ng-message="required">
                                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -428,10 +426,9 @@
                                     <input type="password" 
                                         placeholder="Repeat Password" 
                                         class="form-control" 
-                                        ng-model="register.confirmPassword"
+                                        ng-model="update.confirmPassword"
                                         name="confirmpass"
-                                        required
-                                        ng-verify-matches="register.password"
+                                        ng-verify-matches="update.password"
                                     >
                                 </div>
                             </div>
@@ -441,38 +438,22 @@
                             <div class="row">
                                 <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.firstname.$invalid && updateForm.firstname.$touched,
                                                                             'has-success': updateForm.firstname.$valid && updateForm.firstname.$touched}">
-                                    <label class="control-label">First Name<red-asterisk></red-asterisk></label>
-                                    <div ng-messages="updateForm.firstname.$error" style="color:maroon" role="alert" ng-hide="updateForm.firstname.$untouched">
-                                        <div class="alert alert-danger" role="alert" ng-message="required">
-                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                            <span class="sr-only">Error:</span>
-                                            Your name is required.
-                                        </div>
-                                    </div>
+                                    <label class="control-label">First Name</label>
                                     <input type="text" 
                                         placeholder="Enter First Name Here..." 
                                         class="form-control" 
-                                        ng-model="register.firstName" 
-                                        required
+                                        ng-model="update.firstName" 
                                         capitalize-first
                                         name="firstname"
                                     >
                                 </div>
                                 <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.lastname.$invalid && updateForm.lastname.$touched,
                                                                             'has-success': updateForm.lastname.$valid && updateForm.lastname.$touched}">
-                                    <label class="control-label">Last Name<red-asterisk></red-asterisk></label>
-                                    <div ng-messages="updateForm.lastname.$error" style="color:maroon" role="alert" ng-hide="updateForm.lastname.$untouched">
-                                        <div class="alert alert-danger" role="alert" ng-message="required">
-                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                            <span class="sr-only">Error:</span>
-                                            Your name is required.
-                                        </div>
-                                    </div>
+                                    <label class="control-label">Last Name</label>
                                     <input type="text" 
                                         placeholder="Enter Last Name Here..." 
                                         class="form-control" 
-                                        ng-model="register.lastName" 
-                                        required
+                                        ng-model="update.lastName" 
                                         capitalize-first
                                         name="lastname"
                                     >
@@ -481,13 +462,8 @@
                             <div class="row">
                                 <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.uid.$invalid && updateForm.uid.$touched,
                                                                             'has-success': updateForm.uid.$valid && updateForm.uid.$touched}">
-                                    <label class="control-label">UID<red-asterisk></red-asterisk></label>
+                                    <label class="control-label">UID</label>
                                     <div ng-messages="updateForm.uid.$error" style="color:maroon" role="alert" ng-hide="updateForm.uid.$untouched">
-                                        <div class="alert alert-danger" role="alert" ng-message="required">
-                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                            <span class="sr-only">Error:</span>
-                                            A UID is required.
-                                        </div>
                                         <div class="alert alert-danger" role="alert" ng-message="minlength">
                                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                             <span class="sr-only">Error:</span>
@@ -502,24 +478,16 @@
                                     <input type="number" 
                                         placeholder="Enter Last Name Here.." 
                                         class="form-control" 
-                                        ng-model="register.uid" 
+                                        ng-model="update.uid" 
                                         name="uid"
                                         minlength="9"
                                         maxlenght="9"
-                                        required
                                     >
                                 </div>
                                 <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.gradyear.$invalid && updateForm.gradyear.$touched,
                                                                             'has-success': updateForm.gradyear.$valid && updateForm.gradyear.$touched}">
-                                    <label class="control-label">Graduation Year<red-asterisk></red-asterisk></label>
-                                    <div ng-messages="updateForm.gradyear.$error" style="color:maroon" role="alert" ng-hide="updateForm.gradyear.$untouched">
-                                        <div class="alert alert-danger" role="alert" ng-message="required">
-                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                            <span class="sr-only">Error:</span>
-                                            A graduation year is required.
-                                        </div>
-                                    </div>
-                                    <select class="form-control" ng-model="register.gradYear" required name="gradyear">
+                                    <label class="control-label">Graduation Year</label>
+                                    <select class="form-control" ng-model="update.gradYear" name="gradyear">
                                         <option value="2016">2016</option>
                                         <option value="2017">2017</option>
                                         <option value="2018">2018</option>
@@ -533,13 +501,13 @@
                             <!-- Contact Info -->                        
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input type="text" placeholder="Enter Phone Number Here.." class="form-control" phone-input ng-model="register.phoneNumber">
+                                <input type="text" placeholder="Enter Phone Number Here.." class="form-control" phone-input ng-model="update.phoneNumber">
                             </div>      
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input type="email" placeholder="Enter Email Address Here.." class="form-control" ng-model="register.email">
+                                <input type="email" placeholder="Enter Email Address Here.." class="form-control" ng-model="update.email">
                             </div>
-                                <button type="button" class="btn btn-lg btn-info" ng-click="register.register()">Submit</button>                   
+                                <button type="button" class="btn btn-lg btn-info" ng-click="update.update()">Submit</button>                   
                             </div>
                         </form>
                     </div>

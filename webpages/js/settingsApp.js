@@ -19,13 +19,24 @@
 	app.controller('UpdateInfoController', ["$http", "$location",
 		function($http, $location) {
 			this.currentPassword;
-			this.password;
+			this.newPassword;
 			this.firstName;
 			this.lastName;
 			this.uid;
 			this.gradYear;
 			this.phoneNumber;
 			this.email;
+
+			this.update = function() {
+				console.log(this.currentPassword);
+				console.log(this.newPassword);
+				console.log(this.firstName);
+				console.log(this.lastName);
+				console.log(this.uid);
+				console.log(this.gradYear);
+				console.log(this.phoneNumber);
+				console.log(this.email);
+			};
 		}
 	]);
 
