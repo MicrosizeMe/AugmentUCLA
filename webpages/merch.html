@@ -128,9 +128,9 @@
                                 <h4>{{item.price | currency}}</h4>
                                 <p ng-bind-html="item.shortDescription"></p>
                             </div>
-                            <button type="button" class="btn btn-lg btn-info" href="{{'/item?item=' + item.id}}">
+                            <a type="button" class="btn btn-lg btn-info" href="{{'/item?item=' + item.id}}" target="_self">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> More info...
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -143,20 +143,8 @@
     </div>
     <!-- /.container -->
 
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
+    <!-- Footer -->
+    <footer-and-copyright></footer-and-copyright>
     <!-- /.container -->
 
     <!-- jQuery -->

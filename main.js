@@ -63,6 +63,13 @@ app.get('/settings', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/settings.html'));
 });
 
+app.get('/cart', function(req, res) {
+	res.sendFile(path.join(__dirname, 'webpages/cart.html'));
+});
+
+app.get('/cart', function(req, res) {
+	res.sendFile(path.join(__dirname, 'webpages/cart.html'));
+});
 
 
 
