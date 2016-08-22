@@ -328,7 +328,7 @@
             <div class="container-fluid" ng-controller="SettingsController as settings">
 
                 <!-- Page Heading -->
-                <div class="row" >
+                <div class="row col-lg-9">
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome,  {{settings.obtainedFirstName}}! <small>Here are your settings.</small>
@@ -342,23 +342,46 @@
                 </div>
 
                 <!-- See active memberships -->
-                <div class="row" ng-controller="MembershipController as memberships">
-                    <div class="col-md-3">
+                <div class="row col-lg-9" ng-controller="MembershipController as memberships">
+                    <div class="col-md-4">
                         <h2>
                             Membership Information
                             <p>
                             <small>See what you're a member of, buy membership, so on. </small>
                         </h2>
                     </div>
-                    <div class="col-md-6">
-                        <div class="row well" ng-repeat="club in memberships.clubs">
+                    <div class="col-md-8">
+                        <!-- <table class="table">
+                            <tr ng-repeat="club in memberships.clubs">
+                                <td class="col-sm-3">
+                                    <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self"><img ng-src="{{club.clubLogoUrl}}" class="image-fill vertical-center"></a></h3>
+                                </td>
+                                <td class="col-sm-9">
+                                    <div ng-show="club.isMember">
+                                        <div class="alert alert-success text-center" role="alert">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            Active member!
+                                        </div>
+                                    </div>
+                                    <div ng-hide="club.isMember">
+                                        <div class="alert alert-info text-center" role="alert" >
+                                            <a ng-href="{{'/item?item=' + club.membershipStoreId}}" target="_self">
+                                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                Not currently a member. Buy membership?
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table> -->
+                        <div class="row panel" ng-repeat="club in memberships.clubs">
                             <div class="col-sm-3">
-                                <img ng-src="{{club.clubLogoUrl}}" class="image-fill">
+                                <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self"><img ng-src="{{club.clubLogoUrl}}" class="image-fill vertical-center"></a></h3>
                             </div>
-                            <div class="col-sm-4">
-                                <a ng-href="{{'/about?team=' + club.clubId}}" target="_self">{{club.clubName}}</a>
-                            </div>
-                            <div class="col-sm-5">
+                            <!-- <div class="col-sm-4 text-center">
+                                <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self">{{club.clubName}}</a></h3>
+                            </div> -->
+                            <div class="col-sm-9">
                                 <div ng-show="club.isMember">
                                     <div class="alert alert-success text-center" role="alert">
                                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -367,10 +390,10 @@
                                     <!-- <button type="button" class="btn btn-lg btn-primary" disabled>Active member!</button> -->
                                 </div>
                                 <div ng-hide="club.isMember">
-                                    <div class="alert alert-info text-center" role="alert" ng-href="{{'/item?item=' + club.membershipStoreId}}" target="_self">
+                                    <div class="alert alert-info text-center" role="alert" >
                                         <a ng-href="{{'/item?item=' + club.membershipStoreId}}" target="_self">
                                             <span class="glyphicon glyphicon-shopping-cart"></span>
-                                            Not currently a member.
+                                            Not currently a member. Buy membership?
                                         </a>
                                     </div>
                                 </div>
@@ -380,8 +403,8 @@
                 </div>
 
                 <!-- Update Info -->
-                <div class="row" ng-controller="UpdateInfoController as update" >
-                    <div class="col-md-3">
+                <div class="row col-lg-9" ng-controller="UpdateInfoController as update" >
+                    <div class="col-md-4">
                         <h2>
                             Change your Information
                             <p>
@@ -393,7 +416,7 @@
                             Password is not correct. 
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <form name="updateForm">
                             {{updateForm.$valid}}
                             <!-- http://stackoverflow.com/questions/31127532/validate-custom-directive-using-ngmessages -->
