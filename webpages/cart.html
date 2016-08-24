@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="full">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/the-big-picture.css" rel="stylesheet">
+    <link href="css/padding.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Angular Scripts -->
+    <script type="text/JavaScript" src="/js/angular.min.js"></script>
+    <script type="text/JavaScript" src="/js/looseTemplates.js"></script>
+    <script type="text/JavaScript" src="/js/headerController.js"></script>
+    <script type="text/JavaScript" src="/js/cartApp.js"></script>
+
+    <!-- Base Path -->
+    <base href="/">    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="CartPage" ng-cloak>
+
+    <!-- Navigation -->
+    <navigation-bar></navigation-bar>
+
+    <div class="container" ng-controller="CartController as cart">
+        <div class="col-lg-9 well top200">
+            <h2> Your cart: </h2>
+        </div>
+
+        <div class="col-lg-9 well">
+            <table id="cart" class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Product</th>
+                        <th style="width:10%">Price</th>
+                        <th style="width:8%">Quantity</th>
+                        <th style="width:22%" class="text-center">Subtotal</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in cart.cart">
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs">
+                                    <a href="{{'/item?item=' + item.id}}" target="_self">
+                                        <img ng-src="{{item.image}}" alt="..." class="img-responsive"/>
+                                    </a>
+                                </div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">{{item.name}}</h4>
+                                    <p ng-html-bind="item.shortDescription"></p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">{{item.price | currency}}</td>
+                        <td data-th="Quantity">
+                            <input type="number" class="form-control text-center" ng-value="{{item.quantity}}">
+                        </td>
+                        <td data-th="Subtotal" class="text-center">{{item.subtotal | currency}}</td>
+                        <td class="actions" data-th="">
+                            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>                                
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="visible-xs">
+                        <td class="text-center"><strong>Total: {{cart.total | currency}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/merch" target="_self" class="btn btn-info"><i class="fa fa-angle-left"></i> Return to Store</a></td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td class="hidden-xs text-center"><strong>Total: {{cart.total | currency}}</strong></td>
+                        <td><a href="/checkout" target="_self" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <footer-and-copyright></footer-and-copyright>
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
