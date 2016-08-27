@@ -50,17 +50,65 @@
         <!-- Navigation -->
         <navigation-bar-settings></navigation-bar-settings>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" ng-controller="OrdersController as orders">
 
             <div class="container-fluid">
 
                 <!-- Page Heading -->
                 <div class="row col-lg-9">
                     <div class="col-lg-12">
-                        
+                        <h1 class="page-header">
+                            Your Orders
+                        </h1>
                     </div>
                 </div>
 
+                <!-- Order metadata -->
+                <div class="row col-lg-9">
+                    <div class="col-md-4">
+                        <h1 class="page-header">
+                            Pending Orders
+                        </h1>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- For each pending order panel -->
+                        <div class="panel panel-default" ng-repeat="order in orders.pendingOrders">
+                            <div class="panel-heading">
+                                <b>
+                                    Order {{ order.orderNumber }}
+                                </b>
+                                <div class="text-right">
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row" ng-repeat="itemRepresentation in orders.items" 
+                                        ng-init="item = order.itemList[itemRepresentation.itemId]">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="{{'/item?item=' + item.id}}" target="_self">
+                                                <img ng-src="{{item.image}}" alt="..." class="img-responsive"/>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-9">
+                    <div class="col-md-4">
+                        <h1 class="page-header">
+                            Completed Orders
+                        </h1>
+                    </div>
+                    <div class="col-md-8">
+                        
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
 

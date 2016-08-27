@@ -101,27 +101,29 @@
                                 </td>
                             </tr>
                         </table> -->
-                        <div class="row panel" ng-repeat="club in memberships.clubs">
-                            <div class="col-sm-3">
-                                <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self"><img ng-src="{{club.clubLogoUrl}}" class="image-fill vertical-center"></a></h3>
-                            </div>
-                            <!-- <div class="col-sm-4 text-center">
-                                <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self">{{club.clubName}}</a></h3>
-                            </div> -->
-                            <div class="col-sm-9">
-                                <div ng-show="club.isMember">
-                                    <div class="alert alert-success text-center" role="alert">
-                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                        Active member!
-                                    </div>
-                                    <!-- <button type="button" class="btn btn-lg btn-primary" disabled>Active member!</button> -->
+                        <div class="row panel panel-default" ng-repeat="club in memberships.clubs">
+                            <div class="panel-body">
+                                <div class="col-sm-3">
+                                    <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self"><img ng-src="{{club.clubLogoUrl}}" class="image-fill vertical-center"></a></h3>
                                 </div>
-                                <div ng-hide="club.isMember">
-                                    <div class="alert alert-info text-center" role="alert" >
-                                        <a ng-href="{{'/item?item=' + club.membershipStoreId}}" target="_self">
-                                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                                            Not currently a member. Buy membership?
-                                        </a>
+                                <!-- <div class="col-sm-4 text-center">
+                                    <h3><a ng-href="{{'/about?team=' + club.clubId}}" target="_self">{{club.clubName}}</a></h3>
+                                </div> -->
+                                <div class="col-sm-9">
+                                    <div ng-show="club.isMember">
+                                        <div class="alert alert-success text-center" role="alert">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            Active member!
+                                        </div>
+                                        <!-- <button type="button" class="btn btn-lg btn-primary" disabled>Active member!</button> -->
+                                    </div>
+                                    <div ng-hide="club.isMember">
+                                        <div class="alert alert-info text-center" role="alert" >
+                                            <a ng-href="{{'/item?item=' + club.membershipStoreId}}" target="_self">
+                                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                Not currently a member. Buy membership?
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +147,6 @@
                     </div>
                     <div class="col-md-8">
                         <form name="updateForm">
-                            {{updateForm.$valid}}
                             <!-- http://stackoverflow.com/questions/31127532/validate-custom-directive-using-ngmessages -->
                             <!-- Username and Password info -->
                             <!-- Current Password -->
