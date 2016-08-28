@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <!-- Order metadata -->
+                <!-- Pending Orders -->
                 <div class="row col-lg-9">
                     <div class="col-md-4">
                         <h1 class="page-header">
@@ -74,31 +74,56 @@
                         <!-- For each pending order panel -->
                         <div class="panel panel-default" ng-repeat="order in orders.pendingOrders">
                             <div class="panel-heading">
-                                <b>
-                                    Order {{ order.orderNumber }}
-                                </b>
-                                <div class="text-right">
-
+                                <div class="row">
+                                    <!-- Order number -->
+                                    <div class="panel-title">
+                                        <h3 class="col-sm-4"><b>
+                                            Order #{{ order.orderNumber }}
+                                        </b></h3>
+                                    </div>
+                                    <!-- Order data -->
+                                    <div class="text-right col-sm-8">
+                                        <p><b>Order placed:</b> {{ order.orderDate | date:"MMMM d, yyyy" }}</p>
+                                        <p><b>Expected delivery:</b> {{ order.delivery | date:"MMMM d, yyyy" }}</p>
+                                        <p><b>Total:</b> {{order.price | currency}}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <div class="row" ng-repeat="itemRepresentation in orders.items" 
-                                        ng-init="item = order.itemList[itemRepresentation.itemId]">
+                                <!-- For each item in the order -->
+                                <div class="col-lg-12" ng-repeat="itemRepresentation in order.items" ng-init="item = orders.itemList[itemRepresentation.itemId]">
                                     <div class="media">
-                                        <div class="media-left">
+                                        <div class="pull-left">
                                             <a href="{{'/item?item=' + item.id}}" target="_self">
-                                                <img ng-src="{{item.image}}" alt="..." class="img-responsive"/>
+                                                <img ng-src="{{item.image}}" alt="..." class="img-responsive media-object"/>
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <h4> 
+                                            <h4 class="media-heading"> 
+                                                {{ item.name }} 
+                                                <small>
+                                                    x {{itemRepresentation.quantity}}
+                                                </small>
+                                                 = 
+                                                <small>
+                                                    {{item.price * itemRepresentation.quantity | currency}}
+                                                </small>
+                                            </h4>
+                                            <p ng-bind-html="item.shortDescription"></p>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    <button type="button" class="btn btn-md btn-danger" ng-click="orders.deletePending($index)">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Cancel Order
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div 
+                <!-- Completed Orders -->
                 <div class="row col-lg-9">
                     <div class="col-md-4">
                         <h1 class="page-header">
@@ -106,7 +131,50 @@
                         </h1>
                     </div>
                     <div class="col-md-8">
-                        
+                        <!-- For each pending order panel -->
+                        <div class="panel panel-default" ng-repeat="order in orders.pendingOrders">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <!-- Order number -->
+                                    <div class="panel-title">
+                                        <h3 class="col-sm-4"><b>
+                                            Order #{{ order.orderNumber }}
+                                        </b></h3>
+                                    </div>
+                                    <!-- Order data -->
+                                    <div class="text-right col-sm-8">
+                                        <p><b>Order placed:</b> {{ order.orderDate | date:"MMMM d, yyyy" }}</p>
+                                        <p><b>Delivered on:</b> {{ order.delivery | date:"MMMM d, yyyy" }}</p>
+                                        <p><b>Total:</b> {{order.price | currency}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <!-- For each item in the order -->
+                                <div class="col-lg-12" ng-repeat="itemRepresentation in order.items" ng-init="item = orders.itemList[itemRepresentation.itemId]">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <a href="{{'/item?item=' + item.id}}" target="_self">
+                                                <img ng-src="{{item.image}}" alt="..." class="img-responsive media-object"/>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"> 
+                                                {{ item.name }} 
+                                                <small>
+                                                    x {{itemRepresentation.quantity}}
+                                                </small>
+                                                 = 
+                                                <small>
+                                                    {{item.price * itemRepresentation.quantity | currency}}
+                                                </small>
+                                            </h4>
+                                            <p ng-bind-html="item.shortDescription"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
