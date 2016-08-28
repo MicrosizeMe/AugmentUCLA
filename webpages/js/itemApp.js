@@ -21,8 +21,10 @@
 			this.purchasable = true;
 			this.alreadyHas = false;
 
-			this.addToCart = function() {
+			this.showAdded = false;
 
+			this.addToCart = function() {
+				this.showAdded = true;
 			};
 		}
 	]);

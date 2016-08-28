@@ -77,12 +77,12 @@
                         </td>
                         <td data-th="Price">{{item.price | currency}}</td>
                         <td data-th="Quantity">
-                            <input type="number" class="form-control text-center" ng-value="{{item.quantity}}">
+                            <input type="number" class="form-control text-center" ng-model="item.quantity">
                         </td>
                         <td data-th="Subtotal" class="text-center">{{item.subtotal | currency}}</td>
                         <td class="actions" data-th="">
-                            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>                                
+                            <button class="btn btn-info btn-sm" ng-click="cart.refresh($index)"><i class="fa fa-refresh"></i></button>
+                            <button class="btn btn-danger btn-sm" ng-click="cart.deleteItem($index)"><i class="fa fa-trash-o"></i></button>                                
                         </td>
                     </tr>
                 </tbody>

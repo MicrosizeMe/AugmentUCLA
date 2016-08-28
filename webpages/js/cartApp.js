@@ -43,12 +43,27 @@
 				},	
 			];
 
+			var scope = this;
 			this.total = 0.0;
 
-			for (var i = 0; i < this.cart.length; i++) {
-				var item = this.cart[i];
-				item.subtotal = item.price * item.quantity;
-				this.total += item.subtotal;
+			function updateTotal(){
+				scope.total = 0.0;
+				for (var i = 0; i < scope.cart.length; i++) {
+					var item = scope.cart[i];
+					item.subtotal = item.price * item.quantity;
+					scope.total += item.subtotal;
+				}
+			}
+
+			updateTotal();
+
+			this.deleteItem = function(index) {
+				scope.cart.splice(index, 1);
+				updateTotal();
+			}
+
+			this.refresh = function(index) {
+				updateTotal();
 			}
 
 			console.log(this.total);
