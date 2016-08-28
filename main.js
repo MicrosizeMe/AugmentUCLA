@@ -16,12 +16,17 @@ var app = express();
 
 // var authAgent = require("./auth")
 
-app.use('/', express.static('webpages'));
+// app.get('/', function(req, res) {
+// 	console.log("Sending index");
+// 	res.sendFile(path.join(__dirname, 'webpages/index.html'));
+// });
 
 app.get('/', function(req, res) {
-	console.log("Sending index");
-	res.sendFile(path.join(__dirname, 'webpages/index.html'));
+	console.log("Sending about`");
+	res.sendFile(path.join(__dirname, 'webpages/about.html'));
 });
+
+console.log("new");
 
 app.get('/about', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/about.html'));
@@ -79,7 +84,7 @@ app.get('/confirmation', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/confirmation.html'));
 });
 
-
+app.use('/', express.static('webpages'));
 
 app.get('/api_endpoint', function(req, res) {
     var json_object = { name: "Node.JS Demo", location: "ACM Clubhouse" };

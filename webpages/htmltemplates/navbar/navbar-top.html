@@ -1,11 +1,11 @@
 <ul class="nav navbar-nav navbar-right top-nav">
-    <li ng-class="{ active: header.isActive('/') }">
+    <li ng-class="{ active: header.isActive('/') }" ng-hide="true">
         <a href="/" target="_self">Blog</a>
     </li>
     <li ng-class="{ active: header.isActive('/about')}">
         <a href="/about" target="_self">About</a>
     </li>
-    <li ng-class="{ active: header.isActive('/tournament')}">
+    <li ng-class="{ active: header.isActive('/tournament')}" ng-hide="true">
         <a href="/tournament" target="_self">Tournament Signup</a>
     </li>
     <li ng-class="{ active: header.isActive('/calendar')}">
