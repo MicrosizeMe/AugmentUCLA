@@ -1,0 +1,27 @@
+HTTP post and get have system info in the header
+To get them
+
+for (var name in req.headers) req.headers[name] < something
+
+
+Responses also have headers, including content type. This superceeds file types. Also contain server metadata
+* Requests can have bodies as well
+* Post type commonly application/x-www-form-urlencoded, or multipart/form-data
+
+Request API on page 60
+
+Response: The thing you use to dictate what the client gets.
+API on page 61
+
+Common functions:
+* Rendering content
+	* 65: Take template, pass params, send that off
+* Dealing with forms
+
+EG: app.post('/process-contact', function(req, res) {
+	do things
+
+});
+
+Parameter syntax
+* app.put('api/tour/:id', function...) < adds an id field to req.params
