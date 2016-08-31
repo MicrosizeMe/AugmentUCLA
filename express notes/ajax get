@@ -1,0 +1,30 @@
+using post requests
+
+you need to require the body-parser middleware
+
+npm install --save body-parser
+
+app.use(require('body-parser').urlencode({ extended:true }));
+
+Such code will add req.body, which contains form fields to be made available.
+
+Server code for handling ajax post requests
+
+
+
+app.post('/process', function(req, res) {
+	console.log(req.body.field);
+
+	if (req.xhr || req.accepts('json,html') === 'json') {
+		do stuff
+	}
+});
+
+req.xhr is true if the request is ajax. req.accepts will try to determine the approrpiate response.
+	EG req.accepts('json,html') tests if the reponse should take json or html
+		* Basically, if the request is ajax or requests json, it will return that.
+
+TODO: Look up how to do file uploads later
+
+For file uploads, it is necessary to specify the type in the form as enctype="multipart/form-data". There's probably an express lib for this, look it up
+
