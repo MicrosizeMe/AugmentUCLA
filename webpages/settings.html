@@ -255,6 +255,33 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-12 form-group" ng-class="{'has-error': updateForm.email.$invalid && updateForm.email.$touched,'has-success': updateForm.email.$valid && updateForm.email.$touched}">
+                                    <label class="control-label">Email Address</label>
+                                    <div ng-messages="updateForm.email.$error" style="color:maroon" role="alert" ng-hide="updateForm.email.$untouched">
+                                        <div class="alert alert-danger" role="alert" ng-message="email">
+                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                            <span class="sr-only">Error:</span>
+                                            Your email is invalid.
+                                        </div>
+                                    </div>
+                                    <input type="email" placeholder="Enter Email Address Here.." name="email" class="form-control" ng-model="register.email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.gradyear.$invalid && updateForm.gradyear.$dirty,
+                                                                            'has-success': updateForm.gradyear.$valid && updateForm.gradyear.$dirty}">
+                                    <label class="control-label">Graduation Year</label>
+                                    <select class="form-control" ng-model="update.gradYear" name="gradyear">
+                                        <option value="0">Not a UCLA Student</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2020">2021</option>
+                                        <option value="1">Graduated</option>
+                                    </select>
+                                </div>
                                 <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.uid.$invalid && updateForm.uid.$dirty,
                                                                             'has-success': updateForm.uid.$valid && updateForm.uid.$dirty}">
                                     <label class="control-label">UID</label>
@@ -280,29 +307,14 @@
                                         maxlenght="9"
                                     >
                                 </div>
-                                <div class="col-sm-6 form-group" ng-class="{'has-error': updateForm.gradyear.$invalid && updateForm.gradyear.$dirty,
-                                                                            'has-success': updateForm.gradyear.$valid && updateForm.gradyear.$dirty}">
-                                    <label class="control-label">Graduation Year</label>
-                                    <select class="form-control" ng-model="update.gradYear" name="gradyear">
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2020">2021</option>
-                                    </select>
-                                </div>
                             </div>
 
                             <!-- Contact Info -->                        
                             <div class="form-group">
                                 <label>Phone Number</label>
                                 <input type="text" placeholder="Enter Phone Number Here.." class="form-control" phone-input ng-model="update.phoneNumber">
-                            </div>      
-                            <div class="form-group">
-                                <label>Email Address</label>
-                                <input type="email" placeholder="Enter Email Address Here.." class="form-control" ng-model="update.email">
                             </div>
+                            <div>
                                 <button type="button" class="btn btn-lg btn-info" ng-click="update.update()">Submit</button>                   
                             </div>
                         </form>
