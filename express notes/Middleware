@@ -1,0 +1,26 @@
+Middleware
+
+A function that takes in a request, a response, and a "next" function. 
+Registered by app.use
+
+Express acts as a pipeline, where middleware affects subsequent middleware
+* Order matters
+* Thus, last middle ware is commonly 404
+
+Toy example: 
+
+app.use(function(req, res, next) {
+	console.log('stuff');
+	next();
+});
+
+app.use(function(req, res, next) {
+	console.log('more');
+	res.send('Done')
+});
+
+
+app.use(function(req, res, next) {
+	console.log('never called');
+});
+
