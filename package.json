@@ -4,7 +4,7 @@
   "description": "Testing for website",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,7 @@
   "homepage": "https://github.com/MicrosizeMe/NodeJSFiddle#readme",
   "dependencies": {
     "angular": "^1.5.7",
-    "express": "^4.14.0"
-  },
-  "scripts": {
-    "start": "node main.js"
+    "express": "^4.14.0",
+    "mongoose": "^4.6.0"
   }
 }
