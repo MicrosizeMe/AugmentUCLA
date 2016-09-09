@@ -14,6 +14,8 @@ var path = require('path');
  
 var app = express();
 
+var database = require('./database.js')
+
 // var authAgent = require("./auth")
 
 // app.get('/', function(req, res) {
@@ -25,8 +27,6 @@ app.get('/', function(req, res) {
 	console.log("Sending about`");
 	res.sendFile(path.join(__dirname, 'webpages/about.html'));
 });
-
-console.log("new");
 
 app.get('/about', function(req, res) {
 	res.sendFile(path.join(__dirname, 'webpages/about.html'));
