@@ -10,88 +10,18 @@ http.createServer(function(request, response) {
 */
 var express = require('express');
 
-var path = require('path');
- 
 var app = express();
 
-var database = require('./database.js')
+var path = require('path');
+ 
+app = require("./routes")(app);
 
-// var authAgent = require("./auth")
+app = require('./api')(app);
 
-// app.get('/', function(req, res) {
-// 	console.log("Sending index");
-// 	res.sendFile(path.join(__dirname, 'webpages/index.html'));
-// });
+var database = require('./database.js');
 
-app.get('/', function(req, res) {
-	console.log("Sending about`");
-	res.sendFile(path.join(__dirname, 'webpages/about.html'));
-});
-
-app.get('/about', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/about.html'));
-});
-
-app.get('/tournament', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/tournament.html'));
-});
-
-app.get('/calendar', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/calendar.html'));
-});
-
-app.get('/contact', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/contact.html'));
-});
-
-app.get('/blogpost', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/blog-post.html'));
-});
-
-app.get('/register', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/register.html'));
-});
-
-app.get('/login', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/login.html'));
-});
-
-app.get('/item', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/item.html'));
-});
-
-app.get('/merch', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/merch.html'));
-});
-
-app.get('/settings', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/settings.html'));
-});
-
-app.get('/orders', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/orders.html'));
-});
-
-app.get('/cart', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/cart.html'));
-});
-
-app.get('/checkout', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/checkout.html'));
-});
-
-app.get('/confirmation', function(req, res) {
-	res.sendFile(path.join(__dirname, 'webpages/confirmation.html'));
-});
-
-app.use('/', express.static('webpages'));
-
-app.get('/api_endpoint', function(req, res) {
-    var json_object = { name: "Node.JS Demo", location: "ACM Clubhouse" };
-    res.send(json_object);
-});
 
 
 app.listen(process.env.PORT || 3000);
 
-console.log("Server up...");
+console.log("Server up!");

@@ -4,11 +4,28 @@
 		'looseDirectives'
 	]);
 
-	app.controller('CarouselController', ["$http", "$location",  function($http, $location) {
-		//Get which team we're supposed to be pulling the data from
+	app.factory('databaseInfo', ["$http", "$location", function($http, $location) {
 		var team = $location.search().team;
+		if (team == null) team = "augment";
 
-		//Get carousel data somehow
+		return $http({
+			method: 'GET',
+			url: '/api/getAbout?team=' + team
+		});
+	}]);
+
+	app.controller('CarouselController', ["databaseInfo", function(databaseInfo) {
+		var scope = this;
+
+		//Get the data from the http call from earlier. 
+		databaseInfo.then(function(returnRequest) {
+			console.log(returnRequest.data);
+			//If the field isn't there, then the thing had an error. Don't change values. 
+			if (returnRequest.data.slides != null)
+				scope.slides = returnRequest.data.slides;
+		});
+
+		//Get carousel data somehow. This will be updated upon a finsihed request. 
 		this.slides = [
 			{
 				imageSrc: "http://www.planwallpaper.com/static/images/i-should-buy-a-boat.jpg",
@@ -35,9 +52,19 @@
 
 	}]);
 
-	app.controller('DescriptionHandler', ["$http", "$location", function($http, $location) {
-		//Store the specific team we should be pulling data from
-		var team = $location.search().team;
+	app.controller('DescriptionHandler', ["databaseInfo", function(databaseInfo) {
+		var scope = this;
+
+		//Get the data from the http call from earlier. 
+		databaseInfo.then(function(returnRequest) {
+			scope.teamData = {};
+			console.log(returnRequest.data);
+			//If the field isn't there, then the thing had an error. Don't change values. 
+			if (returnRequest.data.mainHeader != null)
+				scope.teamData.header = returnRequest.data.mainHeader;
+			if (returnRequest.data.blocks != null)
+				scope.teamData.blocks = returnRequest.data.blocks;
+		});
 
 		//Get team data somehow
 		this.teamData = {
@@ -75,9 +102,18 @@
 		};
 	}]);
 
-	app.controller('PortfolioHandler', ["$http", "$location", function($http, $location) {
-		//Store the specific team we should be pulling data from
-		var team = $location.search().team;
+	app.controller('PortfolioHandler', ["databaseInfo", function(databaseInfo) {
+		var scope = this;
+
+		//Get the data from the http call from earlier. 
+		databaseInfo.then(function(returnRequest) {
+			console.log(returnRequest.data);
+			//If the field isn't there, then the thing had an error. Don't change values. 
+			if (returnRequest.data.header != null)
+				scope.header = returnRequest.data.portfolioHeader;
+			if (returnRequest.data.blocks != null)
+				scope.iconData = returnRequest.data.iconData;
+		});
 
 		//Get some stuff
 		this.header = "Teams";
@@ -105,7 +141,7 @@
 			{
 				imageLink: "/",
 				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			}	
+			}
 		];
 	}]);
 })();

@@ -17,6 +17,10 @@
 					//Hack for the index root
 					return (currentPath == "/" || currentPath == "/blogpost");
 				}
+				if (askedPath == "/about") {
+					//Hack for the index root
+					return (currentPath == "/" || currentPath == "/about");
+				}
 				if (askedPath == "/merch") {
 					//Hack for merch
 					return (currentPath == "/item" || currentPath == "/merch");	
