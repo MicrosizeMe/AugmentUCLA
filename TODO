@@ -4,6 +4,7 @@ Make blog login
 Make blog editor 
 Make author link searches work correctly
 Make a way to search comments by author and see post names
+Link up username shenanigans
 
 
 
@@ -14,6 +15,7 @@ Password
 Email
 http://stackoverflow.com/questions/14419651/filters-on-ng-model-in-an-input/14425022#14425022
 
+Make image storage use external cloud or something
 
 
 Settings page

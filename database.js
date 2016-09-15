@@ -1,6 +1,8 @@
 // Approach for mongodb approach
 var mongoose = require('mongoose');
 var About = require("./dbtemplates/about");
+var Item = require("./dbtemplates/item");
+var Store = require("./dbtemplates/store");
 
 var credentials = require('./credentials.js')
 var opts = {
@@ -100,7 +102,56 @@ About.find(function(err, aboutPages) {
 	}).save();
 });
 
+var itemCount = 5;
+//Establish items
+Item.find(function(err, items) {
+	if (err) return console.error(err);
+	if (items.length >= itemCount) return;
+	Item.remove(function(err) {
+		new Item({
+			itemID:  "1",
+			image: "/logos/augmentlogo.png",
+			name: "Augment Membership",
+			priceInCents: 500,
+			fullDescription: "<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>",
+			shortDescription: "<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>",
+			maxQuantity: 1,
+			purchasable: Boolean,
+			stock: -1
+		}).save();
+	});
+});
 
-About.find(function(err, aboutPages) {
 
+var storeCount = 5;
+//Establish storefronts
+Store.find(function(err, stores) {
+	if (err) return console.error(err);
+	if (stores.length >= storeCount) return;
+	Store.remove(function(err) {
+		new Store({
+			storeID: "membership",
+			slides: [
+				{
+					imageSrc: "http://www.planwallpaper.com/static/images/i-should-buy-a-boat.jpg",
+					imageCaption: "I should buy a boat!"
+				},
+				{
+					imageSrc: "http://www.planwallpaper.com/static/images/techno_wallpaper_2_0_hd_by_gredius-d5o48do.jpg",
+					imageCaption: "Starrrs"
+				},
+				{
+					imageSrc: "http://www.planwallpaper.com/static/images/Desktop-Wallpaper-HD2.jpg",
+					imageCaption: "Balooooons"
+				},
+				{
+					imageSrc: "http://www.intrawallpaper.com/static/images/wallpaper__eeveelution_rainbow_by_arkeis_pokemon-d49kjyc.jpg",
+					imageCaption: "What a nerd!"
+				}
+			],
+			items: [
+				"1"
+			]
+		}).save();
+	})
 })

@@ -13,12 +13,12 @@ var express = require('express');
 var app = express();
 
 var path = require('path');
+var database = require('./database.js');
  
 app = require("./routes")(app);
 
 app = require('./api')(app);
 
-var database = require('./database.js');
 
 
 

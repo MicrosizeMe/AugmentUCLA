@@ -5,9 +5,23 @@
 		'merchSidebarController'
 	]);
 
-	app.controller('CarouselController', ["$http", "$location",  function($http, $location) {
-		//Get which team we're supposed to be pulling the data from
+	app.factory('databaseMerchFinder', ['$http', "$location", function($http, $location) {
 		var team = $location.search().team;
+		if (team == null) team = "membership";
+
+		return $http({
+			method: 'GET',
+			url: '/api/getStorefront?team=' + team
+		});
+	}]);
+
+	app.controller('CarouselController', ["databaseMerchFinder", function(databaseMerchFinder) {
+		var scope = this;
+		databaseMerchFinder.then(function(returnRequest) {
+			if (returnRequest.data.error == null) {
+				scope.slides = returnRequest.data.slides;
+			}
+		})
 
 		//Get carousel data somehow
 		this.slides = [
@@ -36,69 +50,91 @@
 
 	}]);
 
-	app.controller('ShopController', ['$http', '$location', '$sce', 
-		function($http, $location, $sce) {
-			//Get shop info somehow
+	app.controller('ShopController', ["databaseMerchFinder", "$sce", "$http", function(databaseMerchFinder, $sce, $http) {
+		//Get shop info somehow
+		var scope = this;
+		databaseMerchFinder.then(function(returnRequest) {
+			console.log(scope.items);
+			if (returnRequest.data.error == null) {
+				scope.items = [];
+				for (var i = 0; i < returnRequest.data.items.length; i++) {
+					var currentItem = {};
+					currentItem.id = returnRequest.data.items[i];
+					currentItem.index = i;
+					$http({
+						method: 'GET',
+						url: '/api/getMerchItem?item=' + currentItem.id
+					}).then(function(itemInfo) {
+						scope.items[currentItem.index] = {
+							id: itemInfo.data.itemID,
+							image: itemInfo.data.image,
+							name: itemInfo.data.name,
+							price: itemInfo.data.priceInCents / 100,
+							shortDescription: $sce.trustAsHtml(itemInfo.data.shortDescription)
+						};
+					});
+				}
+			}
+		})
 
-			this.items = [
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				},
-				{
-					id: 17894,
-					image: "/logos/augmentlogo.png",
-					name: "Augment Membership",
-					price: 5.00,
-					shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-				}	
-			];
-		}
-	]);
+		// this.items = [
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	},
+		// 	{
+		// 		id: 17894,
+		// 		image: "/logos/augmentlogo.png",
+		// 		name: "Augment Membership",
+		// 		price: 5.00,
+		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
+		// 	}	
+		// ];
+	}]);
 
 }());

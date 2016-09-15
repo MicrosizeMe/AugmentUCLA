@@ -29,19 +29,19 @@
 		this.slides = [
 			{
 				imageSrc: "http://www.planwallpaper.com/static/images/i-should-buy-a-boat.jpg",
-				imageCaption: "I should buy a boat!"
+				imageCaption: "There's nothing here!"
 			},
 			{
 				imageSrc: "http://www.planwallpaper.com/static/images/techno_wallpaper_2_0_hd_by_gredius-d5o48do.jpg",
-				imageCaption: "Starrrs"
+				imageCaption: "This is an about 404 page!"
 			},
 			{
 				imageSrc: "http://www.planwallpaper.com/static/images/Desktop-Wallpaper-HD2.jpg",
-				imageCaption: "Balooooons"
+				imageCaption: "That's not a team!"
 			},
 			{
 				imageSrc: "http://www.intrawallpaper.com/static/images/wallpaper__eeveelution_rainbow_by_arkeis_pokemon-d49kjyc.jpg",
-				imageCaption: "What a nerd!"
+				imageCaption: "I'm not sure what you expected!"
 			}
 		];
 
@@ -68,7 +68,7 @@
 
 		//Get team data somehow
 		this.teamData = {
-			header: "UCLA Augment: We kick ass and punch kittens.",
+			header: "404(ish): There isn't a team with that name.",
 			blocks: [
 				{
 					size: 12,

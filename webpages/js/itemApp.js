@@ -11,6 +11,21 @@
 			//Get item from database somehow
 			var itemID = $location.search().item;
 
+			var scope = this;
+			$http({
+				method: 'GET',
+				url: '/api/getMerchItem?item=' + itemID
+			}).then(function(returnRequest) {
+				var item = returnRequest.data;
+				if (item.error == null) {
+					scope.image = item.image;
+					scope.name = item.name;
+					scope.price = item.priceInCents / 100;
+					scope.fullDescription = $sce.trustAsHtml(item.fullDescription);
+					scope.maxQuantity = item.maxQuantity;
+				}
+				else console.log("Error was not null.");
+			});
 			
 			this.image = "/logos/augmentlogo.png";
 			this.name = "Augment Membership";
