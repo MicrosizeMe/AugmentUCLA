@@ -18,7 +18,10 @@
   "homepage": "https://github.com/MicrosizeMe/NodeJSFiddle#readme",
   "dependencies": {
     "angular": "^1.5.7",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "mongoose": "^4.6.0"
   }
 }

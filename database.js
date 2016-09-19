@@ -4,7 +4,7 @@ var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
 
-var credentials = require('./credentials.js')
+var credentials = require('./credentials.js');
 var opts = {
 	server: {
 		socketOptions: {
