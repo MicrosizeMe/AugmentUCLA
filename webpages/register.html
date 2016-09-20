@@ -57,6 +57,13 @@
                     <!-- Username and Password info -->
                     <!-- Username -->
                     <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-danger" role="alert" ng-hide="register.flashMessage == '' ">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                {{register.flashMessage}}
+                            </div>
+                        </div>
                         <div class="col-sm-12 form-group" ng-class="{'has-error': (registrationForm.username.$invalid && registrationForm.username.$touched) ,
                                                                      'has-success': (registrationForm.username.$valid && registrationForm.username.$touched)}">
                             <label class="control-label">Username<red-asterisk></red-asterisk></label>

@@ -18,9 +18,11 @@ var credentials = require('./credentials')
 var passport = require('passport');
 var expressSession = require('express-session');
 app.use(expressSession({secret: credentials.secret}));
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(require('body-parser').json({ extended: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+app.use(require('cookie-parser')(credentials.cookieSecret));
 
 
 app = require("./routes")(app);

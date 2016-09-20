@@ -7,12 +7,18 @@ var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
 var User = require("./dbtemplates/user-core");
+
+var auth = require('./auth')
+
 //Input: An express application
 module.exports = function(app) {
 
+	var setLogin = function(res, username, password) {
+		res.cookie('username', username, { signed: true, httpOnly: true });
+		res.cookie('password', auth.encrypt(password), { signed: true, httpOnly: true });
+	}
 
 	app.get('/api/getAbout', function(req, res) {
-		console.log(req.protocol);
 		var teamID = req.query.team;
 		if (teamID == null) teamID = 'augment';
 		About.find({teamID: teamID}, function(err, aboutPage) {
@@ -26,7 +32,6 @@ module.exports = function(app) {
 				return;
 			}
 			aboutPage = aboutPage[0];
-			console.log(aboutPage);
 			var returnItem = {
 				teamID: aboutPage.teamID,
 				slides: aboutPage.slides,
@@ -52,7 +57,6 @@ module.exports = function(app) {
 				return;
 			}
 			item = items[0]; 
-			console.log(item);
 			var returnItem = {
 				itemID: item.itemID,
 				image: item.image,
@@ -77,7 +81,6 @@ module.exports = function(app) {
 				res.send({error: "503: Database Error"});
 			}
 			store = storefronts[0];
-			console.log(store);
 			var returnItem = {
 				storeID: store.storeID,
 				slides: store.slides,
@@ -88,11 +91,12 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/checkUsername', function(req, res) {
-		User.find({ username: req.query.username }, function(user) {
+		User.find({ username: req.query.username.trim().toLowerCase }, function(err, user) {
 			res.send({ usernameExists: (user != null) });
 		});
 	})
 
+	//Registers a new account. Also logs the new account in.
 	app.post('/api/register', function(req, res) {
 		// Helper function: Returns "" if the username is valid, an error message
 		// otherwise.
@@ -149,7 +153,7 @@ module.exports = function(app) {
 			if (gradYear == null) {
 				return "";	
 			}
-			if (parseInt(gradYear) == NaN || parseInt(gradYear) <= 0) {
+			if (parseInt(gradYear) == NaN || parseInt(gradYear) < 0) {
 				return "GradYear: Not a valid input."
 			}
 			return "";
@@ -175,6 +179,8 @@ module.exports = function(app) {
 
 		var username = req.body.username.trim();
 		errorValidate(validateUsername(username));
+
+		var usernameLower = username.toLowerCase();
 		
 		var password = req.body.password;
 		errorValidate(validatePassword(password));
@@ -197,17 +203,22 @@ module.exports = function(app) {
 		var email = req.body.email;
 		errorValidate(validateEmail(email));
 
-		User.find({ username: username }, function(user) {
+		User.findOne({ usernameLower: usernameLower }, function(err, user) {
+			if (err) {
+				console.log(err);
+				return res.send({ error: err });
+			}
 			if (user != null) {
+				console.log(user);
 				// Username exists, block it
-				res.send({ error: "Username: Username is already taken." });
+				return res.send({ error: "Username: Username is already taken." });
 			}
 			else {
 				// Add the account. 
-				new User({
+				var user = new User({
 				// console.log({
 					username: username,
-					password: User.methods.generateHash(password),
+					usernameLower: usernameLower,
 					permissions: "user",
 					firstName: firstName,
 					lastName: lastName,
@@ -215,12 +226,41 @@ module.exports = function(app) {
 					gradYear: gradYear,
 					UID: uid,
 					phoneNumber: phoneNumber
-				}).save();
-				res.send({ status: "done" });
+				});
+				user.password = user.generateHash(password);
+				user.save();
+				setLogin(res, username, password);
+				return res.send({ status: "done" });
 			}
 		});
 	});
 
+	//The api call necessary for setting the cookie needed for calls that involve authentication.
+	app.post('/api/login', function(req, res) {
+		var username = req.body.username.trim();
+		var usernameLower = username.toLowerCase();
+		var password = req.body.password;
+		User.findOne({ usernameLower: usernameLower }, function(err, user) {
+			if (err) {
+				console.log(err);
+				return res.send({ error: err });
+			}
+			if (user == null) {
+				console.log(user);
+				return res.send({ error: "Username: Username not found!" });
+			}
+			else {
+				//Found the username. 
+				if (!user.validPassword(password)) {
+					return res.send({ error: "Password: Password is invalid!" });
+				}
+				else {
+					setLogin(res, username, password);
+					return res.send({ status: "done" });
+				}
+			}
+		});
+	});
 
 	console.log("Api up...");
 	return app;

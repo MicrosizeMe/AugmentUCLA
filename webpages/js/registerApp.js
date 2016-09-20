@@ -6,9 +6,9 @@
 		'RegistrationDirectives'
 	]);
 
-	app.controller('RegisterController', ["$http", "$location",  function($http, $location) {
-		//Get which team we're supposed to be pulling the data from
-		var team = $location.search().team;
+	app.controller('RegisterController', ["$http", "$window", "$scope", function($http, $window, $scope) {
+		var scope = this;
+		this.flashMessage = "";
 
 		this.username;
 		this.password;
@@ -20,14 +20,41 @@
 		this.email;
 
 		this.register = function() {
-			console.log(this.username);
-			console.log(this.password);
-			console.log(this.firstName);
-			console.log(this.lastName);
-			console.log(this.uid);
-			console.log(this.gradYear);
-			console.log(this.phoneNumber);
-			console.log(this.email);
+			if ($scope.registrationForm.$invalid) {
+				scope.flashMessage = "You forgot something!";
+				return;
+			}
+			if (scope.uid != undefined) {
+				scope.uid = "" + scope.uid;
+			}
+			var body = {
+				username: scope.username,
+				password: scope.password,
+				firstName: scope.firstName,
+				lastName: scope.lastName,
+				uid: scope.uid,
+				gradYear: scope.gradYear,
+				phoneNumber: scope.phoneNumber,
+				email: scope.email,				
+			}
+			console.log(body);
+			$http({
+				method: 'POST',
+				url: '/api/register', 
+				data: body
+			}).then(
+				function successCallback(response) {
+					console.log(response);
+					if (response.data.error != null) {
+						scope.flashMessage = response.data.error;
+						return;
+					}
+					else {
+						scope.flashMessage = "";
+						$window.location.href = '/';
+					}
+				}
+			);
 		}
 
 	}]);

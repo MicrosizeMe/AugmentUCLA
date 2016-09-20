@@ -3,7 +3,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('./dbtemplates/user-core');
 
 module.exports = function(passport) {
-	passport.serializeUser(function(user, done) {
+	
+    //Used to identify the user
+    passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
 
@@ -28,12 +30,5 @@ module.exports = function(passport) {
 
     		return done(null, user);
     	});
-    });
-
-    passport.use('local-register', new LocalStrategy({
-    	passReqToCallback: true
-    }),
-    function(req, username, password, done) {
-    	
     });
 }
