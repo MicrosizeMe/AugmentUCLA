@@ -19,14 +19,61 @@
 		this.phoneNumber;
 		this.email;
 
+		this.interests = [
+			{ 
+				fullClubName: "Counter-Strike: Global Offensive",
+				shortName: "csgo",
+				interested: false
+			},
+			{ 
+				fullClubName: "Dota 2",
+				shortName: "dota2",
+				interested: false
+			},
+			{ 
+				fullClubName: "Hearthstone",
+				shortName: "hearthstone",
+				interested: false
+			},
+			{ 
+				fullClubName: "League of Legends",
+				shortName: "league",
+				interested: false
+			},
+			{ 
+				fullClubName: "Overwatch",
+				shortName: "overwatch",
+				interested: false
+			},
+			{ 
+				fullClubName: "Super Smash Brothers: Melee",
+				shortName: "smash4",
+				interested: false
+			},
+			{ 
+				fullClubName: "Super Smash Brothers 4",
+				shortName: "melee",
+				interested: false
+			},
+		];
+
 		this.register = function() {
 			if ($scope.registrationForm.$invalid) {
 				scope.flashMessage = "You forgot something!";
 				return;
 			}
+			
 			if (scope.uid != undefined) {
 				scope.uid = "" + scope.uid;
 			}
+
+			var interestList = [];
+			for (var i = 0; i < scope.interests.length; i++) {
+				var interest = scope.interests[i];
+				if (interest.interested) 
+					interestList.push(interest.shortName);
+			}
+
 			var body = {
 				username: scope.username,
 				password: scope.password,
@@ -35,7 +82,8 @@
 				uid: scope.uid,
 				gradYear: scope.gradYear,
 				phoneNumber: scope.phoneNumber,
-				email: scope.email,				
+				email: scope.email,
+				interests: interestList
 			}
 			console.log(body);
 			$http({

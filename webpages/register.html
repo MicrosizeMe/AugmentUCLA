@@ -24,6 +24,7 @@
 
     <!-- Angular -->
     <script type="text/JavaScript" src="/js/angular.min.js"></script>
+    <script type="text/JavaScript" src="/js/angular-cookies.js"></script>
     <script type="text/JavaScript" src="/js/angular-messages.js"></script>
     <script type="text/javascript" src="/js/registerApp.js"></script>
     <script type="text/javascript" src="/js/headerController.js"></script>
@@ -263,12 +264,23 @@
                     <div class="form-group">
                         <label>Phone Number</label>
                         <input type="text" placeholder="Enter Phone Number Here.." class="form-control" phone-input ng-model="register.phoneNumber">
-                    </div>      
-                        <button type="button" class="btn btn-lg btn-info" ng-click="register.register()">Submit</button>                   
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <label class="control-label">Areas of Interest</label>
+                            <p class="form-text text-muted">Check any clubs you care about.</p>
+                            <div class="checkbox" ng-repeat="interest in register.interests">
+                                <label>
+                                    <input type="checkbox" ng-model="interest.interested"> {{interest.fullClubName}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-lg btn-info" ng-click="register.register()">Submit</button>                   
                 </form>
             </div>
-        <!-- /.row -->
         </div>
     </div>
     <!-- /.container -->

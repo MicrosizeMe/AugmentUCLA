@@ -11,7 +11,8 @@ var userSchema = mongoose.Schema({
 	email: String,
 	gradYear: Number,
 	UID: String,
-	phoneNumber: String
+	phoneNumber: String,
+	interests: [String]
 });
 
 

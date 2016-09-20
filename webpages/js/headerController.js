@@ -1,13 +1,18 @@
 (function() {
 
-	var app = angular.module('headerController', [], function($locationProvider) {
+	var app = angular.module('headerController', ["ngCookies"], function($locationProvider) {
 	    $locationProvider.html5Mode(true);
 	}); 
 
 	// var app = angular.module('headerController', []);
 	
-	app.controller('HeaderController', ["$http", "$location", 
-		function($http, $location) {
+	app.controller('HeaderController', ["$http", "$location", "$cookies", 
+		function($http, $location, $cookies) {
+			console.log("If you're looking in here, clearly you're interested in code. Email me if you want to help out! anbo_wei@outlook.com");
+			console.log("Now stop looking in here, it's hideous.");
+			console.log($cookies.get("username"));
+			var loggedIn = ($cookies.get("username") != null);
+
 			var header = this;
 			this.logo = "/logos/augmentlogo.png";
 

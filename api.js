@@ -14,8 +14,8 @@ var auth = require('./auth')
 module.exports = function(app) {
 
 	var setLogin = function(res, username, password) {
-		res.cookie('username', username, { signed: true, httpOnly: true });
-		res.cookie('password', auth.encrypt(password), { signed: true, httpOnly: true });
+		res.cookie('username', username, { signed: true });
+		res.cookie('password', auth.encrypt(password), { signed: true });
 	}
 
 	app.get('/api/getAbout', function(req, res) {
@@ -169,6 +169,16 @@ module.exports = function(app) {
 			}
 			return "";
 		}
+
+		var validateInterests = function(interests) {
+			var validInterests = ["dota2", "smash4", "melee", "csgo", "league", "overwatch", "hearthstone"];
+			for (var i = 0; i < interests.length; i++) {
+				if (!validInterests.includes(interests[i])) {
+					return "Interests: Invalid interest.";
+				}
+				return "";
+			}
+		}
 		
 		var errorValidate = function(error) {
 			if (error != "") {
@@ -203,6 +213,9 @@ module.exports = function(app) {
 		var email = req.body.email;
 		errorValidate(validateEmail(email));
 
+		var interests = req.body.interests;
+		errorValidate(validateInterests(interests));
+
 		User.findOne({ usernameLower: usernameLower }, function(err, user) {
 			if (err) {
 				console.log(err);
@@ -225,7 +238,8 @@ module.exports = function(app) {
 					email: email,
 					gradYear: gradYear,
 					UID: uid,
-					phoneNumber: phoneNumber
+					phoneNumber: phoneNumber,
+					interests: interests
 				});
 				user.password = user.generateHash(password);
 				user.save();
