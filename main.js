@@ -26,7 +26,7 @@ app.use(require('cookie-parser')(credentials.cookieSecret));
 
 
 app = require("./routes")(app);
-app = require('./api')(app);
+app = require('./openApi')(app);
 
 
 

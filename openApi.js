@@ -1,4 +1,5 @@
-//This code is responsible for managing calls made by the front end
+//This code is responsible for managing calls made by the front end that do not require
+//authentication.
 
 var express = require('express');
 var path = require('path');
@@ -15,7 +16,7 @@ module.exports = function(app) {
 
 	var setLogin = function(res, username, password) {
 		console.log("Setting cookie");
-		res.cookie('username', username, { signed: true });
+		res.cookie('username', username);
 		res.cookie('password', auth.encrypt(password), { signed: true });
 	}
 
@@ -311,7 +312,7 @@ module.exports = function(app) {
 			}
 		});
 	});
-
-	console.log("Api up...");
+	
+	console.log("Open Api up...");
 	return app;
 }
