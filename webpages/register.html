@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>Registration form! - AUGment@UCLA</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -243,19 +243,18 @@
                                     <span class="sr-only">Error:</span>
                                     Your UID must be 9 digits long. 
                                 </div>
-                                <div class="alert alert-danger" role="alert" ng-message="maxlength">
+                                <div class="alert alert-danger" role="alert" ng-message="numeric">
                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                     <span class="sr-only">Error:</span>
-                                    Your UID must be 9 digits long. 
+                                    Your UID must be 9 <i>digits</i> long.
                                 </div>
                             </div>
-                            <input type="number" 
-                                placeholder="Enter Last Name Here.." 
+                            <input type="text" 
+                                placeholder="Enter UID Here.." 
                                 class="form-control" 
                                 ng-model="register.uid" 
                                 name="uid"
-                                minlength="9"
-                                maxlenght="9"
+                                ng-verify-uid
                             >
                         </div>
                     </div>

@@ -29,6 +29,32 @@
 		}
 	});
 
+	//Verification code to ensure that the username is correct.  
+	app.directive('ngVerifyUid', function() {
+		return {
+			restrict: "A",
+			require: "ngModel",
+			link: function($scope, $element, $attrs, ngModel) {
+				// ngModel.$validators.required = function(modelValue) {
+				// 	return (modelValue != undefined && modelValue.length != 0);
+				// };
+
+				ngModel.$validators.minlength = function(modelValue) {
+					if (modelValue != undefined)
+						return modelValue.length == 9;
+					return true;
+				};
+
+				ngModel.$validators.numeric = function(modelValue) {
+					if (modelValue != undefined) {
+						return /^[0-9]+$/i.test(modelValue);
+					}
+					return true;
+				};
+			}
+		}
+	});
+
 	//Verifies the confirmation is there and the password matches input. 
 	app.directive('ngVerifyMatches', function() {
 		return {

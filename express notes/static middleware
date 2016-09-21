@@ -1,2 +1,0 @@
-app.use(express.static(__dirname + '/directory'));
-^ Everything there is served statically

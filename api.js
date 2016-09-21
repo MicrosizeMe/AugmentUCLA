@@ -14,6 +14,7 @@ var auth = require('./auth')
 module.exports = function(app) {
 
 	var setLogin = function(res, username, password) {
+		console.log("Setting cookie");
 		res.cookie('username', username, { signed: true });
 		res.cookie('password', auth.encrypt(password), { signed: true });
 	}
@@ -98,6 +99,12 @@ module.exports = function(app) {
 
 	//Registers a new account. Also logs the new account in.
 	app.post('/api/register', function(req, res) {
+		console.log("");
+		console.log("New Req");
+		console.log("Registering...");
+		console.log("");
+		console.log(req.body);
+		console.log("");
 		// Helper function: Returns "" if the username is valid, an error message
 		// otherwise.
 
@@ -130,7 +137,7 @@ module.exports = function(app) {
 			if (name == null) {
 				return "Name: Names are required.";
 			}
-			if (!/^[a-zA-Z]+$/.test(name)) {
+			if (!/^[a-zA-Z \-']+$/.test(name)) {
 				return "Name: Name is not alphabetical.";
 			}
 			return "";
@@ -171,50 +178,74 @@ module.exports = function(app) {
 		}
 
 		var validateInterests = function(interests) {
+			console.log(interests.length);
 			var validInterests = ["dota2", "smash4", "melee", "csgo", "league", "overwatch", "hearthstone"];
 			for (var i = 0; i < interests.length; i++) {
-				if (!validInterests.includes(interests[i])) {
-					return "Interests: Invalid interest.";
+				if (!(validInterests.indexOf(interests[i]) >= 0)) {
+					return "Interests: Invalid interest.: " + interests[i] + " :" + validInterests.indexOf(interests[i]);
 				}
-				return "";
 			}
+			return "";
 		}
 		
-		var errorValidate = function(error) {
+		var shouldExit = function(error) {
 			if (error != "") {
 				res.send({ error: error });
+				console.log("Error!");
+				return true;
 			}
-			return;
+			return false;
 		}
 
 		var username = req.body.username.trim();
-		errorValidate(validateUsername(username));
+		if (shouldExit(validateUsername(username))) {
+			return;
+		}
 
 		var usernameLower = username.toLowerCase();
 		
 		var password = req.body.password;
-		errorValidate(validatePassword(password));
+		if (shouldExit(validatePassword(password))) {
+			return;
+		}
 
 		var firstName = req.body.firstName.trim();
-		errorValidate(validateName(firstName));
+		if (shouldExit(validateName(firstName))) {
+			return;
+		}
 
 		var lastName = req.body.lastName.trim();
-		errorValidate(validateName(lastName));
+		if (shouldExit(validateName(lastName))) {
+			return;
+		}
 
 		var uid = req.body.uid;
-		errorValidate(validateDigits(uid, 9));
+		if (shouldExit(validateDigits(uid, 9))) {
+			return;
+		}
 
 		var gradYear = req.body.gradYear;
-		errorValidate(validateGradYear(gradYear));
+		if (shouldExit(validateGradYear(gradYear))) {
+			return;
+		}
 
 		var phoneNumber = req.body.phoneNumber;
-		errorValidate(validateDigits(phoneNumber, 10));
+		if (shouldExit(validateDigits(phoneNumber, 10))) {
+			return;
+		}
 
 		var email = req.body.email;
-		errorValidate(validateEmail(email));
+		if (shouldExit(validateEmail(email))) {
+			return;
+		}
 
 		var interests = req.body.interests;
-		errorValidate(validateInterests(interests));
+		if (interests == null) interests = [];
+		if (shouldExit(validateInterests(interests))) {
+			return;
+		}
+
+		console.log("Input valid...");
 
 		User.findOne({ usernameLower: usernameLower }, function(err, user) {
 			if (err) {
@@ -227,6 +258,7 @@ module.exports = function(app) {
 				return res.send({ error: "Username: Username is already taken." });
 			}
 			else {
+				console.log("Registration okay to go, starting");
 				// Add the account. 
 				var user = new User({
 				// console.log({
@@ -243,8 +275,12 @@ module.exports = function(app) {
 				});
 				user.password = user.generateHash(password);
 				user.save();
-				setLogin(res, username, password);
-				return res.send({ status: "done" });
+				// setLogin(res, username, password);
+				res.cookie('username', username, { signed: true });
+				res.cookie('password', auth.encrypt(password), { signed: true });
+				console.log("Done with cookie");
+				res.send({ status: "done" });
+				console.log("Super done");
 			}
 		});
 	});
