@@ -29,7 +29,19 @@ app = require('./openApi')(app);
 
 
 
+var tcpPortUsed = require('tcp-port-used');
+tcpPortUsed.check(process.env.PORT || 3000, "localhost").then(
+	function(inuse) {
+		var port = process.env.PORT || 3000;
+		if (inuse) {
+			port = 4000;
+		}
+		app.listen(port);
+		console.log("Server up on port " + port);
+	}
+	, 
+	function(err) {
+		console.log('Error: ' err.message);
+	}
+);
 
-app.listen(process.env.PORT || 3000);
-
-console.log("Server up!");
