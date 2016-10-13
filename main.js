@@ -15,7 +15,6 @@ var path = require('path');
 var database = require('./database.js');
 var credentials = require('./credentials')
 
-var passport = require('passport');
 var expressSession = require('express-session');
 app.use(expressSession({secret: credentials.secret}));
 app.use(require('body-parser').json({ extended: true }));
