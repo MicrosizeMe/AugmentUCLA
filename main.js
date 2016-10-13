@@ -30,7 +30,7 @@ app = require('./openApi')(app);
 
 
 var tcpPortUsed = require('tcp-port-used');
-tcpPortUsed.check(process.env.PORT || 3000, "localhost").then(
+tcpPortUsed.check(process.env.PORT || 3000, "127.0.0.1").then(
 	function(inuse) {
 		var port = process.env.PORT || 3000;
 		if (inuse) {
@@ -41,7 +41,7 @@ tcpPortUsed.check(process.env.PORT || 3000, "localhost").then(
 	}
 	, 
 	function(err) {
-		console.log('Error: ' err.message);
+		console.log('Error: ' + err.message);
 	}
 );
 
