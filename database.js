@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
+var Teams = require("./dbtemplates/teams")
 
 var credentials = require('./credentials.js');
 var opts = {
@@ -17,6 +18,12 @@ mongoose.connect(credentials.mongo.connectionString, opts);
 
 //Establish team pages
 currentAboutPageCount = 1;
+
+Teams.remove(function(err) {
+	new Teams({
+		teamIDs: ["dota2", "smash4", "melee", "csgo", "league", "overwatch", "hearthstone"]
+	}).save();
+})
 
 About.find(function(err, aboutPages) {
 	if (err) return console.error(err);

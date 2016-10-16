@@ -8,6 +8,7 @@ var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
 var User = require("./dbtemplates/user-core");
+var Teams = require("./dbtemplates/teams")
 
 var auth = require('./auth')
 
@@ -23,17 +24,16 @@ module.exports = function(app) {
 	app.get('/api/getAbout', function(req, res) {
 		var teamID = req.query.team;
 		if (teamID == null) teamID = 'augment';
-		About.find({teamID: teamID}, function(err, aboutPage) {
+		About.findOne({teamID: teamID}, function(err, aboutPage) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
 				return;
 			}
-			if (aboutPage.length == 0) {
+			if (aboutPage == null) {
 				res.send({error: "Page Not Found"});
 				return;
 			}
-			aboutPage = aboutPage[0];
 			var returnItem = {
 				teamID: aboutPage.teamID,
 				slides: aboutPage.slides,
@@ -48,17 +48,16 @@ module.exports = function(app) {
 
 	app.get('/api/getMerchItem', function(req, res) {
 		var itemID = req.query.item;
-		Item.find({itemID: itemID}, function(err, items) {
+		Item.findOne({itemID: itemID}, function(err, item) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
 				return;
 			}
-			if (items.length == 0) {
+			if (item == null) {
 				res.send({error: "Item Not Found"});
 				return;
 			}
-			item = items[0]; 
 			var returnItem = {
 				itemID: item.itemID,
 				image: item.image,
@@ -77,12 +76,15 @@ module.exports = function(app) {
 	app.get('/api/getStorefront', function(req, res) {
 		var storeID = req.query.team;
 		if (storeID == null) storeID = "membership";
-		Store.find({storeID: storeID}, function(err, storefronts) {
+		Store.findOne({storeID: storeID}, function(err, store) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
 			}
-			store = storefronts[0];
+			if (store == null) {
+				res.send({error: "Item Not Found"});
+				return;
+			}
 			var returnItem = {
 				storeID: store.storeID,
 				slides: store.slides,
@@ -93,7 +95,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/checkUsername', function(req, res) {
-		User.find({ username: req.query.username.trim().toLowerCase }, function(err, user) {
+		User.findOne({ usernameLower: req.query.username.trim().toLowerCase() }, function(err, user) {
 			res.send({ usernameExists: (user != null) });
 		});
 	})
@@ -178,12 +180,12 @@ module.exports = function(app) {
 			return "";
 		}
 
-		var validateInterests = function(interests) {
+		var validateInterests = function(interests, interestList) {
 			console.log(interests.length);
-			var validInterests = ["dota2", "smash4", "melee", "csgo", "league", "overwatch", "hearthstone"];
+			var validInterests = interestList;
 			for (var i = 0; i < interests.length; i++) {
 				if (!(validInterests.indexOf(interests[i]) >= 0)) {
-					return "Interests: Invalid interest.: " + interests[i] + " :" + validInterests.indexOf(interests[i]);
+					return "Interests: Invalid interest: " + interests[i];
 				}
 			}
 			return "";
@@ -240,50 +242,60 @@ module.exports = function(app) {
 			return;
 		}
 
-		var interests = req.body.interests;
-		if (interests == null) interests = [];
-		if (shouldExit(validateInterests(interests))) {
-			return;
-		}
+		// var interests = req.body.interests;
+		// if (interests == null) interests = [];
+		// if (shouldExit(validateInterests(interests))) {
+		// 	return;
+		// }
 
-		console.log("Input valid...");
+		//Validate interests. This has to be a separate call since we read the team list dynamically.
+		Teams.findOne({}, function(err, teamlist) {
+			
+			var interests = req.body.interests;
+			if (interests == null) interests = [];
+			if (shouldExit(validateInterests(interests, teamlist.teamIDs))) {
+				return;
+			}
 
-		User.findOne({ usernameLower: usernameLower }, function(err, user) {
-			if (err) {
-				console.log(err);
-				return res.send({ error: err });
-			}
-			if (user != null) {
-				console.log(user);
-				// Username exists, block it
-				return res.send({ error: "Username: Username is already taken." });
-			}
-			else {
-				console.log("Registration okay to go, starting");
-				// Add the account. 
-				var user = new User({
-				// console.log({
-					username: username,
-					usernameLower: usernameLower,
-					permissions: "user",
-					firstName: firstName,
-					lastName: lastName,
-					email: email,
-					gradYear: gradYear,
-					UID: uid,
-					phoneNumber: phoneNumber,
-					interests: interests
-				});
-				user.password = user.generateHash(password);
-				user.save();
-				// setLogin(res, username, password);
-				res.cookie('username', username, { signed: true });
-				res.cookie('password', auth.encrypt(password), { signed: true });
-				console.log("Done with cookie");
-				res.send({ status: "done" });
-				console.log("Super done");
-			}
-		});
+			console.log("Input valid...");
+			User.findOne({ usernameLower: usernameLower }, function(err, user) {
+				if (err) {
+					console.log(err);
+					return res.send({ error: err });
+				}
+				if (user != null) {
+					console.log(user);
+					// Username exists, block it
+					return res.send({ error: "Username: Username is already taken." });
+				}
+				else {
+					console.log("Registration okay to go, starting");
+					// Add the account. 
+					var user = new User({
+					// console.log({
+						username: username,
+						usernameLower: usernameLower,
+						permissions: "user",
+						firstName: firstName,
+						lastName: lastName,
+						email: email,
+						gradYear: gradYear,
+						UID: uid,
+						phoneNumber: phoneNumber,
+						interests: interests
+					});
+					user.password = user.generateHash(password);
+					user.save();
+					// setLogin(res, username, password);
+					res.cookie('username', username, { signed: true });
+					res.cookie('password', auth.encrypt(password), { signed: true });
+					console.log("Done with cookie");
+					setLogin(res, username, password);
+					res.send({ status: "done" });
+					console.log("Super done");
+				}
+			});
+		})
 	});
 
 	//The api call necessary for setting the cookie needed for calls that involve authentication.

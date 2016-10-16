@@ -22,10 +22,21 @@ module.exports = function(app) {
 		res.cookie('password', auth.encrypt(password), { signed: true });
 	}
 
-	//TODO
-	var verifyLogin = function(req, res) {
-
+	//Anything from this point on in the express middleware flow requires a login, so might as well get it all over with at the same time.
+	var verifyLogin = function(req, res, next) {
+		User.findOne({usernameLower: req.cookies.username.toLower()}, function(err, user) {
+			if (user == null) {
+				return res.send({ error: "Username not found" });
+			}
+			if (!user.validPassword(auth.decrypt(req.signedCookies.password))) {
+				return res.send({ error: "Invalid Password" });
+			}
+			//If you get to this point, the username is valid. 
+			next();
+		})
 	}
+
+	app.use(verifyLogin);
 
 	console.log("User Api up...");
 	return app;
