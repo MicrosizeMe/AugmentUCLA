@@ -1,7 +1,7 @@
 //This code is responsible for managing calls made by the front end that require basic 
 //authentication (eg not admin level operations). It does this by first establishing
 //middleware that first verifies user credentials passed onto clients by cookies
-//via setLogin. If the request fails authentication, it returns an authorization error. 
+//via setLogin. If the request fails authentication, it returns an error. 
 
 var express = require('express');
 var path = require('path');
@@ -31,9 +31,10 @@ module.exports = function(app) {
 			if (!user.validPassword(auth.decrypt(req.signedCookies.password))) {
 				return res.send({ error: "Invalid Password" });
 			}
-			//If you get to this point, the username is valid. 
+			//If you get to this point, the username is valid. Pass the user object onwards.
+			req.userObject = user;
 			next();
-		})
+		});
 	}
 
 	app.use(verifyLogin);
