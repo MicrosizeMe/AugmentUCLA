@@ -21,23 +21,41 @@
                 <!-- <div class="well"> -->
                     <!-- <div class="col-md-12"> -->
                 <div class="well">
-                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                        <div class="form-group">
-                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                    <form class="form" accept-charset="UTF-8" name="loginForm">
+                        <div class="col-sm-12">
+                            <div class="alert alert-danger" role="alert" ng-hide="header.flashMessage == '' ">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                {{header.flashMessage}}
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="exampleInputPassword2">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                            <label class="sr-only">Username</label>
+                            <input 
+								type="text" 
+								class="form-control" 
+								id="exampleInputEmail2"
+								placeholder="Username" 
+								required
+								name="username"
+								ng-model="header.loginUsername"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">Password</label>
+                            <input 
+                            	type="password" 
+                            	class="form-control" 
+                            	id="exampleInputPassword2" 
+                            	placeholder="Password" 
+                            	required
+                            	name="password"
+                            	ng-model="header.loginPassword"
+                            >
                             <div class="help-block text-right"><a href="">Forgot your password?</a></div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Keep me logged in
-                            </label>
+                            <button class="btn btn-primary btn-block" ng-click="header.login()">Sign in</button>
                         </div>
                     </form>
                 </div>
@@ -88,7 +106,7 @@
             <li role="separator" class="divider"></li>
             <li><a href="/cart" target="_self"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
+            <li><a href="#" ng-click="header.logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
         </ul>
     </li>
     <!--

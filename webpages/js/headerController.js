@@ -6,8 +6,8 @@
 
 	// var app = angular.module('headerController', []);
 	
-	app.controller('HeaderController', ["$http", "$location", "$cookies", 
-		function($http, $location, $cookies) {
+	app.controller('HeaderController', ["$http", "$location", "$cookies", "$window", "$scope",
+		function($http, $location, $cookies, $window, $scope) {
 			console.log("If you're looking in here, clearly you're interested in code. Email me if you want to help out! anbo_wei@outlook.com");
 			console.log("Now stop looking in here, it's hideous.");
 
@@ -35,7 +35,51 @@
 				}
 				else console.log("User doesn't appear to be logged in.");
 			});
-			//this.username = $cookies.get("username");
+
+			//If not logged in, here are the models for how we will do so.
+			this.loginUsername;
+			this.loginPassword;
+			//This is the flash message in case a form is forgotten.
+			this.flashMessage = "";
+
+			//Test if we're logged in,
+			this.isLoggedIn = function() {
+				return loggedIn;
+			}
+
+			//If not, here's the form to do so.
+			this.login = function() {
+				if ($scope.loginForm.$invalid) {
+					this.flashMessage = "Whoops, you forgot something!";
+				}
+				console.log(header.loginUsername);
+				console.log(header);
+				console.log(header.loginPassword);
+				$http({
+					method: 'POST',
+					url: '/api/login',
+					data: {
+						username: header.loginUsername,
+						password: header.loginPassword,
+					}
+				}).then(function(returnRequest) {
+					var response = returnRequest.data;
+					if (response.error == null) {
+						$window.location.reload();
+					}
+					else {
+						$window.location.href = '/login';
+					}
+				});
+					
+			}
+
+			this.logout = function() {
+				$cookies.remove("username");
+				$cookies.remove("password");
+				$window.location.reload();
+			}
+			
 
 			this.logo = "/logos/augmentlogo.png";
 
@@ -55,10 +99,6 @@
 				}
 				return (currentPath.indexOf(askedPath) === 0);
 			};
-
-			this.isLoggedIn = function() {
-				return loggedIn;
-			}
 		}
 	]);
 
