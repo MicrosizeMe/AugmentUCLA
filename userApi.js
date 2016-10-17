@@ -24,6 +24,9 @@ module.exports = function(app) {
 
 	//Anything from this point on in the express middleware flow requires a login, so might as well get it all over with at the same time.
 	var verifyLogin = function(req, res, next) {
+		if (req.cookies.username == null || req.signedCookies.password == null) {
+			return res.send({ error: "Not logged in"});
+		}
 		console.log(req.cookies.username.toLowerCase());
 		console.log(req.signedCookies.password);
 		console.log(auth.decrypt(req.signedCookies.password));
@@ -31,16 +34,32 @@ module.exports = function(app) {
 			if (user == null) {
 				return res.send({ error: "Username not found" });
 			}
-			if (!user.validPassword(auth.decrypt(req.signedCookies.password))) {
+			else if (!user.validPassword(auth.decrypt(req.signedCookies.password))) {
 				return res.send({ error: "Invalid Password" });
 			}
 			//If you get to this point, the username is valid. Pass the user object onwards.
-			req.userObject = user;
-			next();
+			else {
+				req.userObject = user;
+				next();
+			}
 		});
 	}
-
 	app.use(verifyLogin);
+
+	app.get('/api/getMyUserInfo', function(req, res) {
+		var returnObject = {
+			username: 		req.userObject.username,
+			firstName: 		req.userObject.firstName,
+			lastName: 		req.userObject.lastName,
+			email: 			req.userObject.email,
+			gradYear: 		req.userObject.gradYear,
+			UID: 			req.userObject.UID,
+			phoneNumber: 	req.userObject.phoneNumber,
+			interests: 		req.userObject.interests,
+		};
+		return res.send(returnObject);
+	});
+
 
 	console.log("User Api up...");
 	return app;

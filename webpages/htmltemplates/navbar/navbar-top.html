@@ -1,4 +1,4 @@
-<ul class="nav navbar-nav navbar-right top-nav">
+<ul class="nav navbar-nav navbar-right top-nav" ng-cloak>
     <li ng-class="{ active: header.isActive('/') }" ng-hide="true">
         <a href="/" target="_self">Blog</a>
     </li>
@@ -78,10 +78,10 @@
     </li>
     <li class="dropdown" ng-show="{{header.isLoggedIn()}}">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <b>Name here <span class="caret"></span></b>
+            <b>{{header.username}} <span class="caret"></span></b>
         </a>
         <ul class="dropdown-menu">
-            <li class="dropdown-header">Welcome, <b>Person!</b></li>
+            <li class="dropdown-header">Welcome, <b>{{header.firstName}}!</b></li>
             <li role="separator" class="divider"></li>
             <li><a href="/settings" target="_self"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
             <li><a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> Upcoming Tourmanents</a></li>

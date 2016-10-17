@@ -10,10 +10,33 @@
 		function($http, $location, $cookies) {
 			console.log("If you're looking in here, clearly you're interested in code. Email me if you want to help out! anbo_wei@outlook.com");
 			console.log("Now stop looking in here, it's hideous.");
-			console.log($cookies.get("username"));
+
+			//Initialize data to tell if the user is logged in. This is based on the existance of the cookie.
 			var loggedIn = ($cookies.get("username") != null);
 
+			//Used in callbacks.
 			var header = this;
+
+			//If logged in, get all relevant info. 
+			$http({
+				method: 'GET',
+				url: '/api/getMyUserInfo'
+			}).then(function(returnRequest) {
+				var userInfo = returnRequest.data;
+				if (userInfo.error == null) {
+					header.username 	= userInfo.username;
+					header.firstName 	= userInfo.firstName;
+					header.lastName 	= userInfo.lastName;
+					header.email 		= userInfo.email;
+					header.gradYear 	= userInfo.gradYear;
+					header.UID 			= userInfo.UID;
+					header.phoneNumber 	= userInfo.phoneNumber;
+					header.interests 	= userInfo.interests;
+				}
+				else console.log("User doesn't appear to be logged in.");
+			});
+			//this.username = $cookies.get("username");
+
 			this.logo = "/logos/augmentlogo.png";
 
 			this.isActive = function(askedPath) {
@@ -34,7 +57,7 @@
 			};
 
 			this.isLoggedIn = function() {
-				return true;
+				return loggedIn;
 			}
 		}
 	]);
