@@ -27,9 +27,28 @@ module.exports = function(app) {
 		if (req.userObject.permissions != "officer" && req.userObject.permissions != "admin") {
 			return res.send({ error: "Invalid credentials. You aren't cool enough." });
 		}
+		next();
 	}
 
 	app.use(verifyOfficer);
+
+	//Gets all unique emails associated with a given email. Useful for blast emails.
+	app.get('/api/getEmails', function(req, res) {
+		var teamID = req.query.team;
+		var returnList = [];
+		var seen = {};
+		User.find(function(err, users) {
+			for (var i = 0; i < users.length; i++) {
+				var interestList = users[i].interests;
+				var email = users[i].email;
+				if ((teamID == null || interestList.indexOf(teamID) >= 0) && !seen.hasOwnProperty(email)) {
+					returnList.push(users[i].email);
+					seen[email] = true;
+				}
+			}
+			return res.send(returnList);
+		});
+	});
 
 	console.log("Admin Api up...");
 	return app;

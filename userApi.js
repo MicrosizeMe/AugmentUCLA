@@ -24,7 +24,10 @@ module.exports = function(app) {
 
 	//Anything from this point on in the express middleware flow requires a login, so might as well get it all over with at the same time.
 	var verifyLogin = function(req, res, next) {
-		User.findOne({usernameLower: req.cookies.username.toLower()}, function(err, user) {
+		console.log(req.cookies.username.toLowerCase());
+		console.log(req.signedCookies.password);
+		console.log(auth.decrypt(req.signedCookies.password));
+		User.findOne({usernameLower: req.cookies.username.toLowerCase()}, function(err, user) {
 			if (user == null) {
 				return res.send({ error: "Username not found" });
 			}
