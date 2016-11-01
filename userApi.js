@@ -27,9 +27,6 @@ module.exports = function(app) {
 		if (req.cookies.username == null || req.signedCookies.password == null) {
 			return res.send({ error: "Not logged in"});
 		}
-		console.log(req.cookies.username.toLowerCase());
-		console.log(req.signedCookies.password);
-		console.log(auth.decrypt(req.signedCookies.password));
 		User.findOne({usernameLower: req.cookies.username.toLowerCase()}, function(err, user) {
 			if (user == null) {
 				return res.send({ error: "Username not found" });

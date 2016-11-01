@@ -24,9 +24,6 @@ var decrypt = function(text) {
 	return dec;
 }
 
-console.log(encrypt("testing"));
-console.log(decrypt(encrypt("testing")));
-
 module.exports = {
 	encrypt: encrypt,
 	decrypt: decrypt

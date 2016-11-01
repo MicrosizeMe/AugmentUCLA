@@ -102,12 +102,6 @@ module.exports = function(app) {
 
 	//Registers a new account. Also logs the new account in.
 	app.post('/api/register', function(req, res) {
-		console.log("");
-		console.log("New Req");
-		console.log("Registering...");
-		console.log("");
-		console.log(req.body);
-		console.log("");
 		// Helper function: Returns "" if the username is valid, an error message
 		// otherwise.
 
