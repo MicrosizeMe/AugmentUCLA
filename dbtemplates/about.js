@@ -20,7 +20,9 @@ if (dbChoice == 'mongoose') {
 		portfolioHeader: String,
 		iconData: [{
 			imageLink: String,
-			imageSrc: String
+			imageSrc: String,
+			title: String,
+			description: String
 		}]
 	});
 
@@ -86,27 +88,39 @@ if (dbChoice == 'mongoose') {
 				iconData: [
 					{
 						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
+						title: "Team Name",
+						description: "Something here!"
 					},
 					{
 						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
+						title: "Team Name",
+						description: null
 					},
 					{
 						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
+						title: "Team Name",
+						description: "Something here!"
 					},
 					{
 						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
+						title: "Team Name",
+						description: "Something here!"
 					},
 					{
 						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
+						title: "Team Name",
+						description: "Something here!"
 					},
 					{
 						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
+						title: "Team Name",
+						description: "Something here!"
 					}
 				]
 			}).save();
