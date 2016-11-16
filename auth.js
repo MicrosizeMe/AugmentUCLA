@@ -8,8 +8,6 @@ var crypto = require('crypto');
 var algorithm = 'aes192';
 var password = credentials.encryptionSecret;
 
-var User = require("./dbtemplates/user-core");
-
 var encrypt = function(text) {
 	var cipher = crypto.createCipher(algorithm, password);
 	var crypted = cipher.update(text, 'utf8', 'hex');
