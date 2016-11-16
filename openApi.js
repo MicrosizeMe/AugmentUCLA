@@ -24,7 +24,7 @@ module.exports = function(app) {
 	app.get('/api/getAbout', function(req, res) {
 		var teamID = req.query.team;
 		if (teamID == null) teamID = 'augment';
-		About.findOne({teamID: teamID}, function(err, aboutPage) {
+		About.getPageForTeam(teamID, function(err, aboutPage) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
@@ -48,7 +48,7 @@ module.exports = function(app) {
 
 	app.get('/api/getMerchItem', function(req, res) {
 		var itemID = req.query.item;
-		Item.findOne({itemID: itemID}, function(err, item) {
+		Item.getItemByID(itemID, function(err, item) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
@@ -76,7 +76,7 @@ module.exports = function(app) {
 	app.get('/api/getStorefront', function(req, res) {
 		var storeID = req.query.team;
 		if (storeID == null) storeID = "membership";
-		Store.findOne({storeID: storeID}, function(err, store) {
+		Store.getStorefrontByID(storeID, function(err, store) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
@@ -95,12 +95,13 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/checkUsername', function(req, res) {
-		User.findOne({ usernameLower: req.query.username.trim().toLowerCase() }, function(err, user) {
+		User.findUser(req.query.username.trim().toLowerCase(), function(err, user) {
 			res.send({ usernameExists: (user != null) });
 		});
-	})
+	});
 
-	//Registers a new account. Also logs the new account in.
+	/*
+	// Registers a new account. Also logs the new account in.
 	app.post('/api/register', function(req, res) {
 		// Helper function: Returns "" if the username is valid, an error message
 		// otherwise.
@@ -281,9 +282,6 @@ module.exports = function(app) {
 					user.password = user.generateHash(password);
 					user.save();
 					// setLogin(res, username, password);
-					res.cookie('username', username, { signed: true });
-					res.cookie('password', auth.encrypt(password), { signed: true });
-					console.log("Done with cookie");
 					setLogin(res, username, password);
 					res.send({ status: "done" });
 					console.log("Super done");
@@ -292,11 +290,45 @@ module.exports = function(app) {
 		})
 	});
 
+	*/
+	app.post('/api/register', function(req, res) {
+		var username = req.body.username.trim();
+		var password = req.body.password;
+		var interests = req.body.interests;
+		if (interests == null) interests = [];
+		User.register({
+				username: req.body.username.trim(),
+				password: req.body.password,
+				firstName: req.body.firstName.trim(),
+				lastName: req.body.lastName.trim(),
+				uid: req.body.uid,
+				gradYear: req.body.gradYear,
+				phoneNumber: req.body.phoneNumber,
+				email: req.body.email,
+				interests: interests
+			}, function(err) {
+				if (err) {
+					res.send({ error: err });
+					console.log("Registration error! " + err);
+					return;
+				}
+				else {
+					res.cookie('username', username, { signed: true });
+					res.cookie('password', auth.encrypt(password), { signed: true });
+					console.log("Done with cookie");
+					setLogin(res, username, password);
+					res.send({ status: "done" });
+					console.log("Super done");
+				}
+			}
+		);
+	});
 	//The api call necessary for setting the cookie needed for calls that involve authentication.
 	app.post('/api/login', function(req, res) {
 		var username = req.body.username.trim();
-		var usernameLower = username.toLowerCase();
 		var password = req.body.password;
+
+		/*
 		User.findOne({ usernameLower: usernameLower }, function(err, user) {
 			if (err) {
 				console.log(err);
@@ -317,6 +349,20 @@ module.exports = function(app) {
 				}
 			}
 		});
+		*/
+		User.loginCheck({
+				username: username,
+				password: password
+			}, function(err) {
+				if (err) {
+					return res.send({ error: err });
+				}
+				else {
+					setLogin(res, username, password);
+					return res.send({ status: "done" });
+				}
+			}
+		);
 	});
 	
 	console.log("Open Api up...");
