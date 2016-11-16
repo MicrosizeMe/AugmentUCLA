@@ -22,7 +22,12 @@ if (dbChoice == 'mongoose') {
 			imageLink: String,
 			imageSrc: String,
 			title: String,
-			description: String
+			description: String,
+			socialMedia: [{
+				imageLink: String,
+				//Font awesome icon class specifically
+				icon: String
+			}]
 		}]
 	});
 
@@ -90,37 +95,77 @@ if (dbChoice == 'mongoose') {
 						imageLink: "/",
 						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
 						title: "Team Name",
-						description: "Something here!"
+						description: "Something here!",
+						socialMedia: [{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-dropbox"
+						}]
 					},
 					{
 						imageLink: "/",
 						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
 						title: "Team Name",
-						description: null
+						description: null,
+						socialMedia: [{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						},
+						{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						},
+						{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						}]
 					},
 					{
 						imageLink: "/",
 						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
 						title: "Team Name",
-						description: "Something here!"
+						description: "Something here!",
+						socialMedia: [{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						}]
 					},
 					{
 						imageLink: "/",
 						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
 						title: "Team Name",
-						description: "Something here!"
+						description: "Something here!",
+						socialMedia: [{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						}]
 					},
 					{
 						imageLink: "/",
 						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
 						title: "Team Name",
-						description: "Something here!"
+						description: "Something here!",
+						socialMedia: [{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						}]
 					},
 					{
 						imageLink: "/",
 						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
 						title: "Team Name",
-						description: "Something here!"
+						description: "Something here!",
+						socialMedia: [{
+							imageLink: "http://gaming.logitech.com/en-us",
+							//Font awesome icon class specifically
+							icon: "fa-facebook-square"
+						}]
 					}
 				]
 			}).save();
