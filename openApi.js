@@ -95,7 +95,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/checkUsername', function(req, res) {
-		User.findUser(req.query.username.trim().toLowerCase(), function(err, user) {
+		User.findUser(req.query.username.trim(), function(err, user) {
 			res.send({ usernameExists: (user != null) });
 		});
 	});

@@ -125,9 +125,9 @@ if (dbChoice == 'mongoose') {
 
 	module.exports = {
 		mongooseModule: User,
-		findUser: function(usernameLower, callback) {
+		findUser: function(username, callback) {
 			//Format of callbackWithResult: err as first argument, user as the second argument
-			User.findOne({usernameLower: usernameLower}, callback);
+			User.findOne({usernameLower: username.toLowerCase()}, callback);
 		},
 		//Registers an input user into the database if possible.
 		//Callback function format: 
@@ -215,6 +215,9 @@ if (dbChoice == 'mongoose') {
 					}
 				}
 			});
+		},
+		getAll: function(callback) {
+			User.find(callback);
 		}
 	}
 }

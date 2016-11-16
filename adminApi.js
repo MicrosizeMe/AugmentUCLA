@@ -37,7 +37,7 @@ module.exports = function(app) {
 		var teamID = req.query.team;
 		var returnList = [];
 		var seen = {};
-		User.find(function(err, users) {
+		User.getAll(function(err, users) {
 			for (var i = 0; i < users.length; i++) {
 				var interestList = users[i].interests;
 				var email = users[i].email;
