@@ -56,8 +56,11 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item" ng-repeat="slide in carousel.slides track by $index" ng-class="carousel.getActive($index)">
-                <div class="fill" ng-style="{'background-image':'url(' + slide.imageSrc + ')'}"></div>
-                <!-- <img ng-src="{{slide.imageSrc}}"> -->
+            <!-- ng-style="{'background-image':'url(' + slide.imageSrc + ')'}" -->
+                <div class="fillDiv">
+                    <div class="fillDiv blur" ng-style="{'background-image':'url(' + slide.imageSrc + ')'}"></div>
+                    <img class="fill" ng-src="{{slide.imageSrc}}">
+                </div>
                 <div class="carousel-caption">
                     <h2>{{slide.imageCaption}}</h2>
                 </div>
@@ -91,7 +94,8 @@
                         <h4>{{block.title}}</h4>
                     </div>
                     <div class="panel-body">
-                        <p>{{block.content}}</p>
+                        <div ng-bind-html="block.content"></div>
+                        <!-- <p>{{block.content}}</p> -->
                         <a ng-hide="{{block.linkText === null}}" ng-href="{{block.linkUrl}}" target="_self" class="btn btn-default">{{block.linkText}}</a>
                     </div>
                 </div>
@@ -126,10 +130,35 @@
             <div class="col-lg-12">
                 <h2 class="page-header">{{portfolio.header}}</h2>
             </div>
-            <div class="col-md-4 col-sm-6" ng-repeat="icon in portfolio.iconData track by $index">
-                <a ng-href="{{icon.imageLink}}" target="_self">
-                    <img class="img-responsive img-portfolio img-hover" ng-src="{{icon.imageSrc}}" alt="">
-                </a>
+            <div class="col-md-12" ng-repeat="icon in portfolio.iconData track by $index">
+                <div class="col-md-4">
+                    <a ng-href="{{icon.imageLink}}" target="_self">
+                        <img class="img-responsive img-portfolio img-hover" ng-src="{{icon.imageSrc}}" alt="">
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>
+                                <a ng-href="{{icon.imageLink}}" target="_self">
+                                    {{icon.title}}
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{icon.description}}</p>
+                            <div>
+                                <div class="col-xs-1" ng-repeat="socialMedia in icon.socialMedia">
+                                    <a ng-href="{{socialMedia.imageLink}}" target="_self">
+                                        <i class="fa img-responsive img-hover fa-2x" ng-class="socialMedia.icon">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
             </div>
         </div>
         <!-- /.row -->

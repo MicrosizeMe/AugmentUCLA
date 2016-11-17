@@ -22,9 +22,9 @@ module.exports = function(app) {
 	}
 
 	app.get('/api/getAbout', function(req, res) {
-		var teamID = req.query.team;
-		if (teamID == null) teamID = 'augment';
-		About.getPageForTeam(teamID, function(err, aboutPage) {
+		var id = req.query.id;
+		if (id == null) id = 'augment';
+		About.getPageForId(id, function(err, aboutPage) {
 			if (err) {
 				console.log(err);
 				res.send({error: "503: Database Error"});
@@ -35,7 +35,7 @@ module.exports = function(app) {
 				return;
 			}
 			var returnItem = {
-				teamID: aboutPage.teamID,
+				id: aboutPage.id,
 				slides: aboutPage.slides,
 				mainHeader: aboutPage.mainHeader,
 				blocks: aboutPage.blocks,
