@@ -5,16 +5,16 @@
 	]);
 
 	app.factory('databaseInfo', ["$http", "$location", function($http, $location) {
-		var team = $location.search().team;
-		if (team == null) team = "augment";
+		var id = $location.search().id;
+		if (id == null) id = "augment";
 
 		return $http({
 			method: 'GET',
-			url: '/api/getAbout?team=' + team
+			url: '/api/getAbout?id=' + id
 		});
 	}]);
 
-	app.controller('CarouselController', ["databaseInfo", function(databaseInfo) {
+	app.controller('CarouselController', ["$sce", "databaseInfo", function($sce, databaseInfo) {
 		var scope = this;
 
 		//Get the data from the http call from earlier. 
@@ -52,7 +52,7 @@
 
 	}]);
 
-	app.controller('DescriptionHandler', ["databaseInfo", function(databaseInfo) {
+	app.controller('DescriptionHandler', ["$sce", "databaseInfo", function($sce, databaseInfo) {
 		var scope = this;
 
 		//Get the data from the http call from earlier. 
@@ -64,6 +64,11 @@
 				scope.teamData.header = returnRequest.data.mainHeader;
 			if (returnRequest.data.blocks != null)
 				scope.teamData.blocks = returnRequest.data.blocks;
+
+			var blocks = scope.teamData.blocks
+			for (var i = 0; i < blocks.length; i++) {
+				blocks[i].content = $sce.trustAsHtml(blocks[i].content);
+			}
 		});
 
 		//Get team data somehow
@@ -109,7 +114,7 @@
 		databaseInfo.then(function(returnRequest) {
 			console.log(returnRequest.data);
 			//If the field isn't there, then the thing had an error. Don't change values. 
-			if (returnRequest.data.header != null)
+			if (returnRequest.data.portfolioHeader != null)
 				scope.header = returnRequest.data.portfolioHeader;
 			if (returnRequest.data.blocks != null)
 				scope.iconData = returnRequest.data.iconData;
