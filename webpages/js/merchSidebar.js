@@ -6,16 +6,16 @@
 	app.controller('MerchSidebarController', ["$http", "$scope", function($http, $scope) {
 		//Get categories somehow
 		$scope.categories = [
-			{
-				name: "T-Shirts",
-				categoryId: 1,
-				href: "#"
-			},
-			{
-				name: "Tickets",
-				categoryId: 2,
-				href: "#"
-			},
+			// {
+			// 	name: "T-Shirts",
+			// 	categoryId: 1,
+			// 	href: "#"
+			// },
+			// {
+			// 	name: "Tickets",
+			// 	categoryId: 2,
+			// 	href: "#"
+			// },
 			{
 				name: "Membership",
 				categoryId: 3,

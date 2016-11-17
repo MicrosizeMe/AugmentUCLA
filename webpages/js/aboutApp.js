@@ -6,7 +6,7 @@
 
 	app.factory('databaseInfo', ["$http", "$location", function($http, $location) {
 		var id = $location.search().id;
-		if (id == null) id = "augment";
+		if (id == null) id = "fall2016lan";
 
 		return $http({
 			method: 'GET',

@@ -23,7 +23,7 @@ module.exports = function(app) {
 
 	app.get('/api/getAbout', function(req, res) {
 		var id = req.query.id;
-		if (id == null) id = 'augment';
+		if (id == null) id = 'fall2016lan';
 		About.getPageForId(id, function(err, aboutPage) {
 			if (err) {
 				console.log(err);

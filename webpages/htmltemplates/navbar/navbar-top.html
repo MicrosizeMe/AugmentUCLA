@@ -8,7 +8,7 @@
     <li ng-class="{ active: header.isActive('/tournament')}" ng-hide="true">
         <a href="/tournament" target="_self">Tournament Signup</a>
     </li>
-    <li ng-class="{ active: header.isActive('/calendar')}">
+    <li ng-class="{ active: header.isActive('/calendar')}" ng-hide="true">
         <a href="/calendar" target="_self">Calendar</a>
     </li>
     <li ng-class="{ active: header.isActive('/merch')}">
@@ -100,11 +100,11 @@
         </a>
         <ul class="dropdown-menu">
             <li class="dropdown-header">Welcome, <b>{{header.firstName}}!</b></li>
-            <li role="separator" class="divider"></li>
+            <!-- <li role="separator" class="divider"></li>
             <li><a href="/settings" target="_self"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
             <li><a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> Upcoming Tourmanents</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/cart" target="_self"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart</a></li>
+            <li><a href="/cart" target="_self"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart</a></li>-->
             <li role="separator" class="divider"></li>
             <li><a href="#" ng-click="header.logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
         </ul>
