@@ -78,7 +78,7 @@
 			}
 			
 
-			this.logo = "/logos/augmentlogo.png";
+			this.logo = "/logos/augment-logo-updated-11-18-16.png";
 
 			this.isActive = function(askedPath) {
 				var currentPath = $location.path();
