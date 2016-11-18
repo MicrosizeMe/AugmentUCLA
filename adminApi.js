@@ -88,7 +88,7 @@ module.exports = function(app) {
 	//Get all memberships for a given user.
 	app.get('/api/getMembershipsForUser', function(req, res) {
 		if (req.query.username == null) {
-			res.send({error: "You must search for something!"});
+			return res.send({error: "You must search for something!"});
 		}
 		console.log("Getting memberships for " + req.query.username);
 		UserMembership.findMembershipsForUser(
@@ -114,25 +114,59 @@ module.exports = function(app) {
 		);
 	});
 
-	//Set a membership for a given user.
-	app.post('/api/setMembership', function(req, res) {
-		if (req.body.username == null) {
-			res.send({error: "A username is required!"});
-		}
-		if (req.body.membership == null) {
-			res.send({error: "A membership to set is required!"});		
-		}
-	});
+	//Set a membership for a user.  
+	app.post('/api/setMembership', function(req, res) { 
+		var username = req.body.username; 
+		var membership = req.body.membership; 
+		if (!username) { 
+			return res.send({error: "Missing username!"}); 
+		} 
+		if (!membership) { 
+			return res.send({error: 'Which membership are you specifying?'}); 
+		} 
 
-	//Remove a membership for a given user.
-	app.post('/api/removeMembership', function(req, res) {
-		if (req.body.username == null) {
-			res.send({error: "A username is required!"});
-		}
-		if (req.body.membership == null) {
-			res.send({error: "A membership to delete is required!"});		
-		}
-	});
+		User.findUser(username, function(err, user) { 
+			if (!user) { 
+				//User doesn't exist! 
+				return res.send({error: "User doesn't exist!"}); 
+			} 
+			// User does exist, add the membership 
+			UserMembership.setMembership(username, membership, function(err) { 
+				if (err) { 
+					return res.send({error: err}); 
+				} 
+				else { 
+					res.send({status: "Done!"}); 
+				} 
+			}) 
+		}); 
+	}); 
+
+	//Remove a membership for a user.  
+	app.post('/api/removeMembership', function(req, res) { 
+		var username = req.body.username; 
+		var membership = req.body.membership; 
+		if (!username) { 
+			return res.send({error: "Missing username!"}); 
+		} 
+		if (!membership) { 
+			return res.send({error: 'Which membership are you specifying?'}); 
+		} 
+
+		User.findUser(username, function(err, user) { 
+			if (!user) { 
+				//User doesn't exist! 
+				return res.send({error: "User doesn't exist!"}); 
+			} 
+			// User does exist, add the membership 
+			UserMembership.removeMembership(username, membership, function(err) { 
+				if (err) { 
+					return res.send({error: err}); 
+				} 
+				res.send({status: "Done!"}); 
+			}) 
+		}); 
+	}); 
 
 	console.log("Admin Api up...");
 	return app;

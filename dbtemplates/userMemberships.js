@@ -1,13 +1,10 @@
 var dbChoice = 'mongoose'; 
 var StaticData = require('./staticData');
 
-var validateMembership = function(interests, interestList) {
-	console.log(interests.length);
+var validateMembership = function(membership, interestList) {
 	var validInterests = interestList;
-	for (var i = 0; i < interests.length; i++) {
-		if (!(validInterests.indexOf(interests[i]) >= 0)) {
-			return "Interests: Invalid interest: " + interests[i];
-		}
+	if (!(validInterests.indexOf(membership) >= 0)) { 
+		return "Interests: Invalid membership: " + membership;
 	}
 	return "";
 }
@@ -34,18 +31,18 @@ if (dbChoice == 'mongoose') {
 			//memberships field, stored as an array.
 			UserMembership.find({usernameLower: username.toLowerCase()}, 
 				function(err, users) {
-					var returnObject = { username: username };
-					var membershipObject = {};
 					if (err) {
 						callback(err);
 					}
-					else {
-						for (var i = 0; i < users.length; i++) {
-							membershipObject[users[i]] = true;
-						}
-						returnObject.membership = membershipObject;
-						callback(err, returnObject);
+					var returnObject = { username: username };
+					var membershipObject = {};
+					
+					for (var i = 0; i < users.length; i++) {
+						membershipObject[users[i].membership] = true;
 					}
+					returnObject.membership = membershipObject;
+					console.log(returnObject);
+					callback(err, returnObject);
 				}
 			);
 		},
@@ -54,23 +51,23 @@ if (dbChoice == 'mongoose') {
 		//when failure. Assumes the username actually is valid. 
 		setMembership: function(username, membership, callback) {
 			// Validate the membership
-			var membership = [membership];
 			var error = validateMembership(membership, StaticData.getMemberships());
 			if (error) {
 				callback(error);
 				return;
 			}
-			UserMembership.find({
+			UserMembership.findOne({
 				username: username.trim(),
 				usernameLower: username.trim().toLowerCase(),
 				membership: membership
-			}, function(err, membership) {
+			}, function(err, foundMemberships) {
 				if (err) {
 					callback(err);
 				}
 				else {
-					if (membership) {
+					if (foundMemberships) {
 						callback("User already has that membership!");
+						return;
 					}
 					else {
 						new UserMembership({

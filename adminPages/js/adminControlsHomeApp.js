@@ -58,6 +58,7 @@
 					alert("Something went wrong!");
 					return;
 				}
+				console.log(result.data.membership);
 				user.membership = result.data.membership;
 			}
 		};
@@ -94,7 +95,44 @@
 		}
 
 		this.updateMembership = function(user, membershipID) {
-			alert(user.username + ' ' + membershipID);
+			if (user.membership[membershipID]) {
+				// Thing is true, set the membership.
+				console.log(user.username);
+				console.log(membershipID);
+				console.log(user.membership[membershipID]);
+				$http({
+					method: 'POST',
+					url: '/api/setMembership',
+					data: {
+						username: user.username,
+						membership: membershipID
+					}
+				}).then(function() {
+					alert(
+						"Set " + membershipID + " membership for " + 
+						user.username + "."
+					);
+				});
+			}
+			else {
+				// Remove the membership.
+				console.log(user.username);
+				console.log(membershipID);
+				console.log(user.membership[membershipID]);
+				$http({
+					method: 'POST',
+					url: '/api/removeMembership',
+					data: {
+						username: user.username,
+						membership: membershipID
+					}
+				}).then(function() {
+					alert(
+						"Removed " + membershipID + " membership for " + 
+						user.username + "."
+					);
+				});
+			}
 		}
 
 	}]);
