@@ -206,14 +206,20 @@ and \
 will feature free play for League of Legends, Overwatch, Hearthstone, Counter-Strike: \
 Global Offensive, and Dota 2. Alongside our PC gaming counterparts, \
 we will be featuring on-site, prized tournaments in Smash 4 and Smash Melee as well as \
-the introduction of FIFA '17 under the AUGment banner! GIGABYTE will also be demo-ing \
-a Virtual Reality setup in conjunction with HTC; come by to witness the future of \
-gaming!\
+the introduction of FIFA '17 under the AUGment banner!\
 </p>\
 \
-<p>\
-Please register your raffle ticket above on Eventbrite! You must check-in at the \
+<p><b>\
+<a href='https://www.eventbrite.com/e/augment-week-8-lan-party-tickets-28812344498'>\
+Please register your raffle ticket above on Eventbrite!\
+</a></b> \
+You must check-in at the \
 registration table on site. Please register early to avoid the wait!\
+</p>\
+<p><b>Eventbrite Link: </b>\
+<a href='https://www.eventbrite.com/e/augment-week-8-lan-party-tickets-28812344498'>\
+https://www.eventbrite.com/e/augment-week-8-lan-party-tickets-28812344498 \
+</a>\
 </p>\
 "
 ,
