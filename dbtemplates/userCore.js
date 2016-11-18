@@ -127,7 +127,7 @@ if (dbChoice == 'mongoose') {
 		mongooseModule: User,
 		findUser: function(username, callback) {
 			//Format of callbackWithResult: err as first argument, user as the second argument
-			User.findOne({usernameLower: username.toLowerCase()}, callback);
+			User.findOne({usernameLower: username.trim().toLowerCase()}, callback);
 		},
 		findUsersByEmailOrUsername: function(string, callback) {
 			User.find({
