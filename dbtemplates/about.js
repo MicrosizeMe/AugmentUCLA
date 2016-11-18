@@ -321,7 +321,7 @@ mice, and headsets on-location for you to borrow.\
 						description: 
 							"<p>Gigabyte is a PC parts company that owns the Xtreme Gaming \
 							brand of products. They sponsor AUGment through providing prizing \
-							for tournaments, raffles, as well as hardware like Laptops and in \
+							for tournaments, raffles, as well as hardware like laptops and in \
 							the near future, PCs.\
 							</p>\
 							",
@@ -378,7 +378,7 @@ mice, and headsets on-location for you to borrow.\
 					},
 					{
 						imageLink: "http://www.sceptre.com/",
-						imageSrc: "/img/spectre.png",
+						imageSrc: "/img/sceptre.png",
 						title: "Sceptre",
 						description: 
 							"<p>Sceptre is a leading innovator in 4k display and high definition \
@@ -398,11 +398,6 @@ mice, and headsets on-location for you to borrow.\
 								imageLink: "https://twitter.com/SceptreDisplay",
 								//Font awesome icon class specifically
 								icon: "fa-twitter"
-							},
-							{
-								imageLink: "https://www.youtube.com/user/SceptreInc",
-								//Font awesome icon class specifically
-								icon: "fa-youtube"
 							},
 							{
 								imageLink: "https://www.instagram.com/sceptretv/",

@@ -89,6 +89,7 @@ module.exports = function(app) {
 				slides: store.slides,
 				items: store.items,
 			};
+			console.log(returnItem);
 			res.send(returnItem);
 		})
 	});

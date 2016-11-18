@@ -16,7 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
-    
+
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -74,8 +74,10 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item" ng-repeat="slide in carousel.slides track by $index" ng-class="carousel.getActive($index)">
-                                    <div class="fill" ng-style="{'background-image':'url(' + slide.imageSrc + ')'}"></div>
+                                    <!-- <div class="fill" ng-style="{'background-image':'url(' + slide.imageSrc + ')'}"></div> -->
                                     <!-- <img ng-src="{{slide.imageSrc}}"> -->
+                                    <div class="fillDiv blur" ng-style="{'background-image':'url(' + slide.imageSrc + ')'}"></div>
+                                    <img class="fit" ng-src="{{slide.imageSrc}}">
                                     <div class="carousel-caption">
                                         <h2>{{slide.imageCaption}}</h2>
                                     </div>

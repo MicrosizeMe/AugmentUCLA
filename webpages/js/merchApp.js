@@ -54,87 +54,28 @@
 		//Get shop info somehow
 		var scope = this;
 		databaseMerchFinder.then(function(returnRequest) {
-			console.log(scope.items);
+			var generateCallback = function(array, callbackIndex) {
+				return function(itemInfo) {
+					array[callbackIndex] = {
+						id: itemInfo.data.itemID,
+						image: itemInfo.data.image,
+						name: itemInfo.data.name,
+						price: itemInfo.data.priceInCents / 100,
+						shortDescription: $sce.trustAsHtml(itemInfo.data.shortDescription)
+					}
+				}
+			}
 			if (returnRequest.data.error == null) {
 				scope.items = [];
 				for (var i = 0; i < returnRequest.data.items.length; i++) {
-					var currentItem = {};
-					currentItem.id = returnRequest.data.items[i];
-					currentItem.index = i;
 					$http({
 						method: 'GET',
-						url: '/api/getMerchItem?item=' + currentItem.id
-					}).then(function(itemInfo) {
-						scope.items[currentItem.index] = {
-							id: itemInfo.data.itemID,
-							image: itemInfo.data.image,
-							name: itemInfo.data.name,
-							price: itemInfo.data.priceInCents / 100,
-							shortDescription: $sce.trustAsHtml(itemInfo.data.shortDescription)
-						};
-					});
+						url: '/api/getMerchItem?item=' + returnRequest.data.items[i]
+					}).then(generateCallback(scope.items, i));
 				}
+				console.log(scope.items);
 			}
-		})
-
-		// this.items = [
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	},
-		// 	{
-		// 		id: 17894,
-		// 		image: "/logos/augmentlogo.png",
-		// 		name: "Augment Membership",
-		// 		price: 5.00,
-		// 		shortDescription: $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>"),
-		// 	}	
-		// ];
+		});
 	}]);
 
 }());

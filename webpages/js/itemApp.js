@@ -23,13 +23,14 @@
 					scope.price = item.priceInCents / 100;
 					scope.fullDescription = $sce.trustAsHtml(item.fullDescription);
 					scope.maxQuantity = item.maxQuantity;
+					scope.purchasable = item.purchasable;
 				}
 				else console.log("Error was not null.");
 			});
 			
 			this.image = "/logos/augmentlogo.png";
 			this.name = "Augment Membership";
-			this.price = 5.00;
+			this.price = 5.00;2
 			this.fullDescription = $sce.trustAsHtml("<p>Access to all of our wonderful club events for the entire year! This pays tournament costs, something, yada, gib moneys. </p>");
 			this.maxQuantity = 10;
 			
