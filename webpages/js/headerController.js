@@ -52,9 +52,6 @@
 				if ($scope.loginForm.$invalid) {
 					this.flashMessage = "Whoops, you forgot something!";
 				}
-				console.log(header.loginUsername);
-				console.log(header);
-				console.log(header.loginPassword);
 				$http({
 					method: 'POST',
 					url: '/api/login',
