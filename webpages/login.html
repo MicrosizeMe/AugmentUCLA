@@ -28,6 +28,7 @@
     <script type="text/javascript" src="/js/indexBlogApp.js"></script>
     <script type="text/javascript" src="/js/headerController.js"></script>
     <script type="text/javascript" src="/js/blogSidebar.js"></script>
+    <script type="text/javascript" src="/js/loginApp.js"></script>
     <script type="text/javascript" src="/js/looseTemplates.js"></script>
 
     <!-- Base Path -->
@@ -42,28 +43,49 @@
 
 </head>
 
-<body ng-app="BlogFrontPage" ng-cloak class="full" >
+<body ng-app="LoginApp" ng-cloak class="full" >
 
     <!-- Navigation -->
     <navigation-bar></navigation-bar>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="LoginController as login">
         <div class="col-lg-6 top200">
                 <h1 class="col-lg-12 well">Login to Augment</h1>
                 <div class="col-lg-12 well">
+                    <div class="alert alert-danger" role="alert" ng-hide="login.flashMessage == '' ">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        {{login.flashMessage}}
+                    </div>
                     <form>    
                         <!-- Username and Password Info -->
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label>Username</label>
-                                <input type="text" placeholder="Username" class="form-control">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="exampleInputEmail2"
+                                    placeholder="Username" 
+                                    required
+                                    name="username"
+                                    ng-model="login.loginUsername"
+                                >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label>Password</label>
-                                <input type="password" placeholder="Password" class="form-control">
+                                <input 
+                                    type="password" 
+                                    class="form-control" 
+                                    id="exampleInputPassword2" 
+                                    placeholder="Password" 
+                                    required
+                                    name="password"
+                                    ng-model="login.loginPassword"
+                                >
                             </div>
                         </div>
                         <div class="row">
@@ -74,17 +96,16 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-12">
                                 <div class="help-block text-left"><a href="">Forgot your password?</a></div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="help-block text-left">New here? <b><a href="/register" target="_self">Join us!</a></b></div>
+                                <button class="btn btn-primary btn-block" ng-click="login.login()">Sign in</button>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-lg btn-info">Go!</button>                   
                     </form>
                 </div>
                 <!-- </div> -->
