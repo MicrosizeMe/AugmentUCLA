@@ -315,10 +315,115 @@ mice, and headsets on-location for you to borrow.\
 				portfolioHeader: "A Special Thanks to Our Sponsors!",
 				iconData: [
 					{
+						imageLink: "http://www.gigabyte.us/",
+						imageSrc: "/img/gigabyte-xg.png",
+						title: "Gigabyte Xtreme Gaming",
+						description: 
+							"<p>Gigabyte is a PC parts company that owns the Xtreme Gaming \
+							brand of products. They sponsor AUGment through providing prizing \
+							for tournaments, raffles, as well as hardware like Laptops and in \
+							the near future, PCs.\
+							</p>\
+							",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/GIGABYTE.US/",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://www.youtube.com/user/GIGABYTEChannel",
+								//Font awesome icon class specifically
+								icon: "fa-youtube"
+							},
+							{
+								imageLink: "https://www.instagram.com/gigabyte_official/",
+								//Font awesome icon class specifically
+								icon: "fa-instagram"
+							},
+						]
+					},
+					{
+						imageLink: "http://www.ibuypower.com/",
+						imageSrc: "/img/IBUYPOWER.png",
+						title: "iBUYPOWER",
+						description: 
+							"<p>iBUYPOWER specializes in building top-of-the-line custom \
+							gaming PCs for all price points. They sponsor AUGment through \
+							loaner PCs and other prizing.\
+							</p>\
+							",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/iBuypowerPC",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://twitter.com/iBUYPOWER",
+								//Font awesome icon class specifically
+								icon: "fa-twitter"
+							},
+							{
+								imageLink: "https://www.youtube.com/user/ibuypower",
+								//Font awesome icon class specifically
+								icon: "fa-youtube"
+							},
+							{
+								imageLink: "https://www.instagram.com/ibuypowerpc/",
+								//Font awesome icon class specifically
+								icon: "fa-instagram"
+							},
+						]
+					},
+					{
+						imageLink: "http://www.sceptre.com/",
+						imageSrc: "/img/spectre.png",
+						title: "Sceptre",
+						description: 
+							"<p>Sceptre is a leading innovator in 4k display and high definition \
+							TV’s and monitors. Relative newcomers to gaming, Sceptre has now reapplied \
+							its expertise and knowledge gleaned from its development of TV’s and refocused \
+							them into creating the perfect line of gaming monitors. Sceptre sponsors AUGment \
+							through prizing, as well as loaning of monitors for AUGment LANs and tournaments.\
+							</p>\
+							",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/SceptreInc",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://twitter.com/SceptreDisplay",
+								//Font awesome icon class specifically
+								icon: "fa-twitter"
+							},
+							{
+								imageLink: "https://www.youtube.com/user/SceptreInc",
+								//Font awesome icon class specifically
+								icon: "fa-youtube"
+							},
+							{
+								imageLink: "https://www.instagram.com/sceptretv/",
+								//Font awesome icon class specifically
+								icon: "fa-instagram"
+							},
+						]
+					},
+					{
 						imageLink: "http://easywaysusa.com/",
 						imageSrc: "/img/volcano-tea-logo.png",
 						title: "Volcano Tea House (Sawtelle)",
-						description: "Founded in 2001, Volcano Tea House launched its California flagship store in West Los Angeles and followed quickly with this location in Sawtelle. We continue to strive to produce superior products, fast and friendly service, and provide a relaxing environment for our patrons while showcasing the finest ingredients and authentic boba recipes.",
+						description: 
+							"<p>Founded in 2001, Volcano Tea House launched its California flagship store \
+							in West Los Angeles and followed quickly with this location in Sawtelle. We \
+							continue to strive to produce superior products, fast and friendly service, \
+							and provide a relaxing environment for our patrons while showcasing the finest \
+							ingredients and authentic boba recipes.\
+							</p>\
+							<p><b>Get 20% off your order when you show an AUGment ID!</b></p>\
+							",
 						socialMedia: [
 							{
 								imageLink: "https://www.facebook.com/pg/VolcanoTeaHouse/",
@@ -338,70 +443,120 @@ mice, and headsets on-location for you to borrow.\
 						]
 					},
 					{
-						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
-						title: "Team Name",
-						description: null,
-						socialMedia: [{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						},
-						{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						},
-						{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						}]
+						imageLink: "http://www.koalatcafe.com/",
+						imageSrc: "/img/koala-t.png",
+						title: "Koala T Cafe",
+						description: 
+							"<p>The earliest vision of Koala T was born out of the UCLA campus \
+							when two students sought to cater delicious, quality eats and boba \
+							to their fellow Bruins, college students who appreciated a well-crafted \
+							meal at a reasonable price. In addition to being the home of an award-winning \
+							chef, Koala T strives to become a leading fixture within the Westwood community. \
+							Our work with UCLA-based organizations through fundraisers and sponsorships are \
+							a testament to our commitment to create relationships with the student body of \
+							nearby campuses.\
+							</p>\
+							<p><b>Get 10% off your order when you show an AUGment ID!</b></p>\
+							",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/koalatcafe",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://twitter.com/koalatcafe",
+								//Font awesome icon class specifically
+								icon: "fa-twitter"
+							},
+							{
+								imageLink: "https://www.instagram.com/koalatcafe",
+								//Font awesome icon class specifically
+								icon: "fa-instagram"
+							},
+							{
+								imageLink: "https://www.yelp.com/biz/koala-t-caf%C3%A9-los-angeles",
+								//Font awesome icon class specifically
+								icon: "fa-yelp"
+							},
+						]
 					},
 					{
-						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
-						title: "Team Name",
-						description: "Something here!",
-						socialMedia: [{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						}]
+						imageLink: "http://frostaliciousnow.com/",
+						imageSrc: "/img/frostalicious.png",
+						title: "Frostalicious Shaved Snow",
+						description: 
+							"<p>Light as a snowflake, fluffy as a cloud, Frostalicious takes \
+							Taiwanese shaved ice to new heights. From the very first bite, your \
+							taste buds spring to life. As the rich, delicious ribbons swirl around \
+							your tongue, you bask in icy ecstasy. And that’s just the first spoonful.\
+							</p>\
+							<p><b>Get 10% off your order when you show an AUGment ID!</b></p>\
+							",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/frostalicious/",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://www.instagram.com/frosta_licious/",
+								//Font awesome icon class specifically
+								icon: "fa-twitter"
+							},
+							{
+								imageLink: "https://www.yelp.com/biz/frostalicious-los-angeles?osq=frostalicious+snow",
+								//Font awesome icon class specifically
+								icon: "fa-yelp"
+							},
+						]
 					},
 					{
-						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
-						title: "Team Name",
-						description: "Something here!",
-						socialMedia: [{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						}]
+						imageLink: "http://www.seoulsausage.com/",
+						imageSrc: "/img/seoul-sauasge.png",
+						title: "Seoul Sausage",
+						description: 
+							"<p>In less than three years. <b>Seoul Sausage Company</b> has \
+							become the premier force behind <b>cutting edge Korean BBQ.</b> \
+							What began as a tiny catering company run out of their apartment \
+							kitchen, Seoul Sausage is now a multi-faceted culinary enterprise \
+							comprised of two acclaimed restaurants (West LA and Downtown LA), \
+							two food trucks, a customized grilling scion and an in-demand \
+							catering company.\
+							</p>\
+							<p>\
+							Founded by brothers Ted and Yong Kim alongside Chef Chris Oh, \
+							Seoul Sausage Company broke onto the public’s awareness\
+							when they <b>won Season 3 of The Great Food Truck Race,</b> \
+							Food Network’s second highest rated show. Now, food celebrities \
+							such as Alton Brown, Giada De Laurentis and Bobby Flay frequent \
+							their store during TV shoots to munch on their favorite dishes.\
+							</p>\
+							",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/SeoulSausage/",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://twitter.com/SeoulSausage/",
+								//Font awesome icon class specifically
+								icon: "fa-twitter"
+							},
+							{
+								imageLink: "https://www.instagram.com/seoulsausage/",
+								//Font awesome icon class specifically
+								icon: "fa-instagram"
+							},
+							{
+								imageLink: 
+									"https://www.yelp.com/biz/seoul-sausage-company-los-angeles-2",
+								//Font awesome icon class specifically
+								icon: "fa-yelp"
+							},
+						]
 					},
-					{
-						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
-						title: "Team Name",
-						description: "Something here!",
-						socialMedia: [{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						}]
-					},
-					{
-						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
-						title: "Team Name",
-						description: "Something here!",
-						socialMedia: [{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-facebook-square"
-						}]
-					}
 				]
 			}).save();
 		},

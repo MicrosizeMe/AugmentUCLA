@@ -107,46 +107,53 @@
 		};
 	}]);
 
-	app.controller('PortfolioHandler', ["databaseInfo", function(databaseInfo) {
-		var scope = this;
+	app.controller('PortfolioHandler', ["$sce", "databaseInfo", 
+		function($sce, databaseInfo) {
+			var scope = this;
 
-		//Get the data from the http call from earlier. 
-		databaseInfo.then(function(returnRequest) {
-			console.log(returnRequest.data);
-			//If the field isn't there, then the thing had an error. Don't change values. 
-			if (returnRequest.data.portfolioHeader != null)
-				scope.header = returnRequest.data.portfolioHeader;
-			if (returnRequest.data.blocks != null)
-				scope.iconData = returnRequest.data.iconData;
-		});
+			//Get the data from the http call from earlier. 
+			databaseInfo.then(function(returnRequest) {
+				console.log(returnRequest.data);
+				//If the field isn't there, then the thing had an error. Don't change values. 
+				if (returnRequest.data.portfolioHeader != null)
+					scope.header = returnRequest.data.portfolioHeader;
+				if (returnRequest.data.blocks != null)
+					scope.iconData = returnRequest.data.iconData;
 
-		//Get some stuff
-		this.header = "Teams";
-		this.iconData = [
-			{
-				imageLink: "/",
-				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			},
-			{
-				imageLink: "/",
-				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			},
-			{
-				imageLink: "/",
-				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			},
-			{
-				imageLink: "/",
-				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			},
-			{
-				imageLink: "/",
-				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			},
-			{
-				imageLink: "/",
-				imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-			}
-		];
-	}]);
+				var blocks = scope.iconData;
+				for (var i = 0; i < blocks.length; i++) {
+					blocks[i].description = $sce.trustAsHtml(blocks[i].description);
+				}
+			});
+
+			//Get some stuff
+			this.header = "Teams";
+			this.iconData = [
+				{
+					imageLink: "/",
+					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+				},
+				{
+					imageLink: "/",
+					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+				},
+				{
+					imageLink: "/",
+					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+				},
+				{
+					imageLink: "/",
+					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+				},
+				{
+					imageLink: "/",
+					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+				},
+				{
+					imageLink: "/",
+					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
+				}
+			];
+		}
+	]);
 })();

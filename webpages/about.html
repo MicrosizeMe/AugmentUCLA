@@ -133,7 +133,7 @@
             <div class="col-md-12" ng-repeat="icon in portfolio.iconData track by $index">
                 <div class="col-md-4">
                     <a ng-href="{{icon.imageLink}}" target="_self">
-                        <img class="img-responsive img-portfolio img-hover" ng-src="{{icon.imageSrc}}" alt="">
+                        <img class="img-responsive img-portfolio img-hover fillPortfolio" ng-src="{{icon.imageSrc}}" alt="">
                     </a>
                 </div>
                 <div class="col-md-8">
@@ -146,7 +146,8 @@
                             </h4>
                         </div>
                         <div class="panel-body">
-                            <p>{{icon.description}}</p>
+                            <div ng-bind-html="icon.description"></div>
+                            <!-- <p>{{icon.description}}</p> -->
                             <div>
                                 <div class="col-xs-1" ng-repeat="socialMedia in icon.socialMedia">
                                     <a ng-href="{{socialMedia.imageLink}}" target="_self">
