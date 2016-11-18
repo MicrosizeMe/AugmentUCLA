@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
-var Teams = require("./dbtemplates/teams")
+var Data = require("./dbtemplates/staticData")
 
 var credentials = require('./credentials.js');
 var opts = {
@@ -16,7 +16,7 @@ var opts = {
 
 mongoose.connect(credentials.mongo.connectionString, opts);
 
-Teams.drop(Teams.initialize);
+Data.drop(Data.initialize);
 
 About.drop(About.initialize);
 

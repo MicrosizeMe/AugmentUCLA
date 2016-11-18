@@ -1,5 +1,5 @@
 var dbChoice = 'mongoose'; 
-var Teams = require('./teams');
+var Data = require('./staticData');
 
 var validateUsername = function(username) {
 	username = username.trim();
@@ -129,6 +129,14 @@ if (dbChoice == 'mongoose') {
 			//Format of callbackWithResult: err as first argument, user as the second argument
 			User.findOne({usernameLower: username.toLowerCase()}, callback);
 		},
+		findUsersByEmailOrUsername: function(string, callback) {
+			User.find({
+				$or: [
+					{usernameLower: string.toLowerCase()},
+					{email: string}
+				]
+			}, callback);
+		},
 		//Registers an input user into the database if possible.
 		//Callback function format: 
 		// first arg: error: If the db has an error or the input is wrong, 
@@ -143,7 +151,7 @@ if (dbChoice == 'mongoose') {
 			error = validateGradYear(userObject.gradYear);
 			error = validateDigits(userObject.phoneNumber, 10);
 			error = validateEmail(userObject.email);
-			error = validateInterests(userObject.interests, Teams.getTeams());
+			error = validateInterests(userObject.interests, Data.getTeams());
 
 			if (error) {
 				callback(error);

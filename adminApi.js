@@ -6,10 +6,9 @@
 var express = require('express');
 var path = require('path');
 var mongoose = require('mongoose');
-var About = require("./dbtemplates/about");
-var Item = require("./dbtemplates/item");
-var Store = require("./dbtemplates/store");
-var User = require("./dbtemplates/user-core");
+var User = require("./dbtemplates/userCore");
+var UserMembership = require("./dbtemplates/userMemberships");
+var StaticData = require('./dbtemplates/staticData')
 
 var auth = require('./auth')
 
@@ -32,6 +31,10 @@ module.exports = function(app) {
 
 	app.use(verifyOfficer);
 
+	app.get('/api/getMemberships', function(req, res) {
+		res.send({memberships: StaticData.getMemberships()});
+	});
+
 	//Gets all unique emails associated with a given email. Useful for blast emails.
 	app.get('/api/getEmails', function(req, res) {
 		var teamID = req.query.team;
@@ -48,6 +51,68 @@ module.exports = function(app) {
 			}
 			return res.send(returnList);
 		});
+	});
+
+	//Get all users with an email or a username satisfying the input.
+	app.get('/api/searchUserFromString', function(req, res) {
+		var searchString = req.query.search;
+		if (searchString == null) {
+			res.send({error: "You must search for something!"});
+		}
+		else {
+			User.findUsersByEmailOrUsername(searchString, function(err, users) {
+				if (err) {
+					return res.send(err);
+				}
+				else {
+					var mapUser = function(user) {
+						return {
+							username: user.username,
+							usernameLower: user.usernameLower, 
+							password: user.password, 
+							permissions: user.permissions, 
+							firstName: user.firstName, 
+							lastName: user.lastName, 
+							email: user.email, 
+							gradYear: user.gradYear,
+							UID: user.UID,
+							phoneNumber: user.phoneNumber, 
+							interests: user.interests
+						};
+					}
+					return res.send(users.map(mapUser));
+				}
+			});
+		}	
+	});
+
+	//Get all memberships for a given user.
+	app.get('/api/getMembershipsForUser', function(req, res) {
+		if (req.query.username == null) {
+			res.send({error: "You must search for something!"});
+		}
+		console.log("Getting memberships for " + req.query.username);
+		UserMembership.findMembershipsForUser(
+			req.query.username, 
+			function(err, memberships) {
+				if (err) {
+					return res.send({error: err});
+				}
+				else {
+					if (memberships == null) {
+						return res.send({error: "Couldn't find a user by that \
+							username!"});
+					}
+					var allMemberships = StaticData.getMemberships();
+					for (var i = 0; i < allMemberships.length; i++) {
+						if (!memberships.membership.hasOwnProperty(allMemberships[i])) {
+							memberships.membership[allMemberships[i]] = false;
+						}
+					}
+					return res.send(memberships);
+				}
+			}
+		);
 	});
 
 	console.log("Admin Api up...");

@@ -24,11 +24,11 @@ app.use(require('body-parser').json({ extended: true }));
 app.use(require('cookie-parser')(credentials.cookieSecret));
 
 
-app = require("./routes")(app);
+app = require("./openRoutes")(app);
 app = require('./openApi')(app);
 app = require('./userApi')(app);
 app = require('./adminApi')(app);
-
+app = require('./adminRoutes')(app);
 
 
 var tcpPortUsed = require('tcp-port-used');

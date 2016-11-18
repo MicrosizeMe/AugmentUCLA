@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
-var User = require("./dbtemplates/user-core");
+var User = require("./dbtemplates/userCore");
 
 var auth = require('./auth')
 

@@ -7,8 +7,7 @@ var mongoose = require('mongoose');
 var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
-var User = require("./dbtemplates/user-core");
-var Teams = require("./dbtemplates/teams")
+var User = require("./dbtemplates/userCore");
 
 var auth = require('./auth')
 
@@ -244,7 +243,7 @@ module.exports = function(app) {
 		// }
 
 		//Validate interests. This has to be a separate call since we read the team list dynamically.
-		Teams.findOne({}, function(err, teamlist) {
+		Data.findOne({}, function(err, teamlist) {
 			
 			var interests = req.body.interests;
 			if (interests == null) interests = [];
