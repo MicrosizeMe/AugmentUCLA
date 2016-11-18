@@ -31,7 +31,7 @@ module.exports = function(app) {
 
 	app.use(verifyOfficer);
 
-	app.get('/api/getMemberships', function(req, res) {
+	app.get('/api/getAllMemberships', function(req, res) {
 		res.send({memberships: StaticData.getMemberships()});
 	});
 
@@ -60,7 +60,7 @@ module.exports = function(app) {
 			res.send({error: "You must search for something!"});
 		}
 		else {
-			User.findUsersByEmailOrUsername(searchString, function(err, users) {
+			User.findUsersByString(searchString, function(err, users) {
 				if (err) {
 					return res.send(err);
 				}
@@ -69,7 +69,6 @@ module.exports = function(app) {
 						return {
 							username: user.username,
 							usernameLower: user.usernameLower, 
-							password: user.password, 
 							permissions: user.permissions, 
 							firstName: user.firstName, 
 							lastName: user.lastName, 
@@ -113,6 +112,26 @@ module.exports = function(app) {
 				}
 			}
 		);
+	});
+
+	//Set a membership for a given user.
+	app.post('/api/setMembership', function(req, res) {
+		if (req.body.username == null) {
+			res.send({error: "A username is required!"});
+		}
+		if (req.body.membership == null) {
+			res.send({error: "A membership to set is required!"});		
+		}
+	});
+
+	//Remove a membership for a given user.
+	app.post('/api/removeMembership', function(req, res) {
+		if (req.body.username == null) {
+			res.send({error: "A username is required!"});
+		}
+		if (req.body.membership == null) {
+			res.send({error: "A membership to delete is required!"});		
+		}
 	});
 
 	console.log("Admin Api up...");

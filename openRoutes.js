@@ -66,6 +66,10 @@ module.exports = function(app) {
 		res.sendFile(path.join(__dirname, 'webpages/confirmation.html'));
 	});
 
+	app.get('/thanks', function(req, res) {
+		res.sendFile(path.join(__dirname, 'webpages/thanks.html'));
+	});
+
 	app.use('/', express.static('webpages'));
 
 	console.log("Routes established...")

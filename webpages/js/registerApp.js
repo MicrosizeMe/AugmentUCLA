@@ -99,11 +99,17 @@
 					}
 					else {
 						scope.flashMessage = "";
-						$window.location.href = '/';
+						$window.location.href = '/thanks';
 					}
 				}
 			);
 		}
 
+	}]);
+
+	app.controller('ThanksController', ["$timeout", "$window", "$scope", function($timeout, $window, $scope) {
+		$timeout(function() {
+			$window.location.href = '/register';
+		}, 3000);
 	}]);
 })();

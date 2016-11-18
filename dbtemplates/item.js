@@ -79,7 +79,8 @@ if (dbChoice == 'mongoose') {
 				their passion for gaming.</p>\
 				<p>With over 191 chapters across the US and Canada, Tespa connects gamers the nation over \
 				with tournaments, swag boxes, scholarships, and more!</p>\
-				<p><b>By signing up with AUGment, you get everything in the membership box, shown above!</b>\
+				<p><b>By signing up with AUGment, you get everything in the membership box, shown above,\
+				as well as a Tespa exclusive card back!</b>\
 				This includes a t-shirt, lanyard, sunglasses, and a flame keycap for your mechanical keyboard!</p>\
 				\
 				",

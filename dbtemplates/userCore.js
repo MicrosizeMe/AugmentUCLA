@@ -129,11 +129,13 @@ if (dbChoice == 'mongoose') {
 			//Format of callbackWithResult: err as first argument, user as the second argument
 			User.findOne({usernameLower: username.toLowerCase()}, callback);
 		},
-		findUsersByEmailOrUsername: function(string, callback) {
+		findUsersByString: function(string, callback) {
 			User.find({
 				$or: [
 					{usernameLower: string.toLowerCase()},
-					{email: string}
+					{email: string},
+					{firstName: string},
+					{lastName: string},
 				]
 			}, callback);
 		},
