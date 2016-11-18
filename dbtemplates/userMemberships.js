@@ -1,10 +1,13 @@
 var dbChoice = 'mongoose'; 
 var StaticData = require('./staticData');
 
-var validateMembership = function(interest, interestList) {
+var validateMembership = function(interests, interestList) {
+	console.log(interests.length);
 	var validInterests = interestList;
-	if (!(validInterests.indexOf(interest) >= 0)) {
-		return "Interests: Invalid membership: " + interest;
+	for (var i = 0; i < interests.length; i++) {
+		if (!(validInterests.indexOf(interests[i]) >= 0)) {
+			return "Interests: Invalid interest: " + interests[i];
+		}
 	}
 	return "";
 }
@@ -51,24 +54,23 @@ if (dbChoice == 'mongoose') {
 		//when failure. Assumes the username actually is valid. 
 		setMembership: function(username, membership, callback) {
 			// Validate the membership
+			var membership = [membership];
 			var error = validateMembership(membership, StaticData.getMemberships());
 			if (error) {
 				callback(error);
 				return;
 			}
-			UserMembership.findOne({
+			UserMembership.find({
 				username: username.trim(),
 				usernameLower: username.trim().toLowerCase(),
 				membership: membership
-			}, function(err, foundMemberships) {
+			}, function(err, membership) {
 				if (err) {
 					callback(err);
 				}
 				else {
-					console.log(foundMemberships);
-					if (foundMemberships) {
+					if (membership) {
 						callback("User already has that membership!");
-						return;
 					}
 					else {
 						new UserMembership({
