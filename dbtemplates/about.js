@@ -211,7 +211,7 @@ the introduction of FIFA '17 under the AUGment banner!\
 \
 <p><b>\
 <a href='https://www.eventbrite.com/e/augment-week-8-lan-party-tickets-28812344498'>\
-Please register your raffle ticket above on Eventbrite!\
+Please register your raffle ticket on Eventbrite!\
 </a></b> \
 You must check-in at the \
 registration table on site. Please register early to avoid the wait!\
@@ -315,15 +315,27 @@ mice, and headsets on-location for you to borrow.\
 				portfolioHeader: "A Special Thanks to Our Sponsors!",
 				iconData: [
 					{
-						imageLink: "/",
-						imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg",
-						title: "Team Name",
-						description: "Something here!",
-						socialMedia: [{
-							imageLink: "http://gaming.logitech.com/en-us",
-							//Font awesome icon class specifically
-							icon: "fa-dropbox"
-						}]
+						imageLink: "http://easywaysusa.com/",
+						imageSrc: "/img/volcano-tea-logo.png",
+						title: "Volcano Tea House (Sawtelle)",
+						description: "Founded in 2001, Volcano Tea House launched its California flagship store in West Los Angeles and followed quickly with this location in Sawtelle. We continue to strive to produce superior products, fast and friendly service, and provide a relaxing environment for our patrons while showcasing the finest ingredients and authentic boba recipes.",
+						socialMedia: [
+							{
+								imageLink: "https://www.facebook.com/pg/VolcanoTeaHouse/",
+								//Font awesome icon class specifically
+								icon: "fa-facebook-square"
+							},
+							{
+								imageLink: "https://twitter.com/volcanoteahouse",
+								//Font awesome icon class specifically
+								icon: "fa-twitter"
+							},
+							{
+								imageLink: "https://www.instagram.com/volcanoteahouse/",
+								//Font awesome icon class specifically
+								icon: "fa-instagram"
+							},
+						]
 					},
 					{
 						imageLink: "/",

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="AboutPage" ng-cloak>
 
-<head>
+<head ng-controller="DescriptionHandler as description">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title ng-cloak>{{description.teamData.header}}: AUGment@UCLA</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
 </head>
 
-<body ng-app="AboutPage" ng-cloak>
+<body>
 
     <!-- Navigation -->
     <navigation-bar></navigation-bar>

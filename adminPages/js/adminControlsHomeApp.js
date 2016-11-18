@@ -1,6 +1,6 @@
 (function() {
 
-	var app = angular.module('SettingsPage', [
+	var app = angular.module('AdminControlsHomePage', [
 		'looseDirectives',
 		'RegistrationDirectives',
 		'ngMessages',
