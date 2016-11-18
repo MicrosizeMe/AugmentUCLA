@@ -24,7 +24,7 @@ if (dbChoice == 'mongoose') {
 		initialize: function(err) {
 			new Item({
 				itemID:  "1",
-				image: "/logos/augmentlogo.png",
+				image: "/img/augsquare.png",
 				name: "Augment Membership",
 				priceInCents: 1500,
 				fullDescription: 
@@ -59,7 +59,12 @@ if (dbChoice == 'mongoose') {
 				<li>A plastic membership card! <small><small><small>so shiney</small></small></small></li>\
 				</ul>\
 				\
-				<h3>...And membership benefits for ALL of our clubs, from League to Overwatch!",
+				<h3>...And membership benefits for ALL of our clubs, from League to Overwatch!</h3>\
+				<h3> If you're interested, talk to one of our officers and sign up for a membership \
+				<a href='https://docs.google.com/forms/d/e/1FAIpQLSefZSYByXqpTP1l0ipYby5fAAnusByIyMv--ooVNZZAIvr5jQ/viewform?c=0&w=1 \
+				target='_self'>here!</a></h3>\
+				"
+				,
 				shortDescription: 
 					"<p>Priority access to all of our club events \
 					for the entire year!</p>",
@@ -82,6 +87,11 @@ if (dbChoice == 'mongoose') {
 				<p><b>By signing up with AUGment, you get everything in the membership box, shown above,\
 				as well as a Tespa exclusive card back!</b>\
 				This includes a t-shirt, lanyard, sunglasses, and a flame keycap for your mechanical keyboard!</p>\
+				<h3> If you're interested, talk to one of our officers and fill out an AUGment form \
+				<a href='https://docs.google.com/forms/d/e/1FAIpQLSefZSYByXqpTP1l0ipYby5fAAnusByIyMv--ooVNZZAIvr5jQ/viewform?c=0&w=1 \
+				target='_self'>here</a> and a Tespa form \
+				<a href='https://recruit.tespa.org/join/UCLA/Member/ayHWTG' target='_self'> here!</a>\
+				</h3>\
 				\
 				",
 				shortDescription: "<p>Access to swag box and membership in an intercollegiate group!</p>",
