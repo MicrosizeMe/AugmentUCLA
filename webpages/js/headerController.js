@@ -6,8 +6,8 @@
 
 	// var app = angular.module('headerController', []);
 	
-	app.controller('HeaderController', ["$http", "$location", "$cookies", "$window", "$scope",
-		function($http, $location, $cookies, $window, $scope) {
+	app.controller('HeaderController', ["$http", "$location", "$cookies", "$window", "$scope", "$sce",
+		function($http, $location, $cookies, $window, $scope, $sce) {
 			console.log("If you're looking in here, clearly you're interested in code. Email me if you want to help out! anbo_wei@outlook.com");
 			console.log("Now stop looking in here, it's hideous.");
 
@@ -80,22 +80,42 @@
 
 			this.logo = "/logos/augment-logo-updated-11-18-16.png";
 
-			this.isActive = function(askedPath) {
+			// How we dynamically create links. This makes it so we don't
+			// have to change a lot of code in the future.
+			// Title references what the link text will be called, href
+			// refers to the link location, and exceptions refers to all other
+			// link locations that fall under this header. 
+			// If the current window location is the href or any of the exceptions
+			// then the selection will be highlighted.
+			this.headerLinks = [
+				{
+					title: $sce.trustAsHtml("About"),
+					href: "/about",
+					exceptions: ["/"],
+					isActive: false
+				},
+				{
+					title: $sce.trustAsHtml("<span class='glyphicon glyphicon-shopping-cart'></span> Merch and Membership"),
+					href: "/merch",
+					exceptions: ["/item"],
+					isActive: false
+				},
+			];
+
+			this.setActive = function() {
 				var currentPath = $location.path();
-				if (askedPath == "/") {
-					//Hack for the index root
-					return (currentPath == "/" || currentPath == "/blogpost");
+				for (var i = 0; i < header.headerLinks.length; i++) {
+					var entry = header.headerLinks[i];
+					var result = currentPath == entry.href;
+					for (var j = 0; j < entry.exceptions.length; j++) {
+						result = result || (currentPath == entry.exceptions[j]); 
+					}
+					entry.isActive = result;
+					if (result) break;
 				}
-				if (askedPath == "/about") {
-					//Hack for the index root
-					return (currentPath == "/" || currentPath == "/about");
-				}
-				if (askedPath == "/merch") {
-					//Hack for merch
-					return (currentPath == "/item" || currentPath == "/merch");	
-				}
-				return (currentPath.indexOf(askedPath) === 0);
 			};
+
+			this.setActive();
 		}
 	]);
 

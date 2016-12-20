@@ -1,5 +1,5 @@
 <ul class="nav navbar-nav navbar-right top-nav" ng-cloak>
-    <li ng-class="{ active: header.isActive('/') }" ng-hide="true">
+    <!-- <li ng-class="{ active: header.isActive('/') }" ng-hide="true">
         <a href="/" target="_self">Blog</a>
     </li>
     <li ng-class="{ active: header.isActive('/about')}">
@@ -13,6 +13,9 @@
     </li>
     <li ng-class="{ active: header.isActive('/merch')}">
         <a href="/merch" target="_self"><span class="glyphicon glyphicon-shopping-cart"></span> Merch and Membership</a>
+    </li> -->
+    <li ng-repeat="headerLink in header.headerLinks" ng-class="{ active: headerLink.isActive }">
+        <a ng-href="{{headerLink.href}}" target="_self" ng-bind-html="headerLink.title"></a>
     </li>
     <li class="dropdown" ng-hide="{{header.isLoggedIn()}}">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
