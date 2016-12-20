@@ -95,6 +95,12 @@
 					isActive: false
 				},
 				{
+					title: $sce.trustAsHtml("Sponsors"),
+					href: "/sponsors",
+					exceptions: [],
+					isActive: false
+				},
+				{
 					title: $sce.trustAsHtml("<span class='glyphicon glyphicon-shopping-cart'></span> Merch and Membership"),
 					href: "/merch",
 					exceptions: ["/item"],
@@ -162,6 +168,15 @@
 			controller: 'HeaderController',
 			controllerAs: "header"
 		}
+	});
+
+	app.directive("footerAndCopyright", function() {
+		return {
+			restrict: "E",
+			templateUrl: "/htmltemplates/footer-and-copyright.html",
+			controller: 'HeaderController',
+			controllerAs: "header"
+		};
 	});
 
 })();

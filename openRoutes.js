@@ -14,6 +14,10 @@ module.exports = function(app) {
 		res.sendFile(path.join(__dirname, 'webpages/about.html'));
 	});
 
+	app.get('/sponsors', function(req, res) {
+		res.sendFile(path.join(__dirname, 'webpages/sponsors.html'));
+	});
+
 	app.get('/tournament', function(req, res) {
 		res.sendFile(path.join(__dirname, 'webpages/tournament.html'));
 	});
