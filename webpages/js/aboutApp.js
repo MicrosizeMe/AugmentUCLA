@@ -74,36 +74,7 @@
 		//Get team data somehow
 		this.teamData = {
 			header: "404(ish): There isn't a team with that name.",
-			blocks: [
-				{
-					size: 12,
-					title: "About",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: null,
-					linkUrl: "#"
-				},
-				{
-					size: 4,
-					title: "Upcoming Tournaments",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: "Click my face!",
-					linkUrl: "#"
-				},
-				{
-					size: 4,
-					title: "Meeting Times",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: null,
-					linkUrl: "#"
-				},
-				{
-					size: 4,
-					title: "Contact Info",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: null,
-					linkUrl: "#"
-				}
-			]
+			blocks: []
 		};
 	}]);
 
@@ -128,32 +99,7 @@
 
 			//Get some stuff
 			this.header = "Teams";
-			this.iconData = [
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				}
-			];
+			this.iconData = [];
 		}
 	]);
 })();

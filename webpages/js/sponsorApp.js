@@ -23,24 +23,7 @@
 		});
 
 		//Get carousel data somehow. This will be updated upon a finsihed request. 
-		this.slides = [
-			{
-				imageSrc: "http://www.planwallpaper.com/static/images/i-should-buy-a-boat.jpg",
-				imageCaption: "There's nothing here!"
-			},
-			{
-				imageSrc: "http://www.planwallpaper.com/static/images/techno_wallpaper_2_0_hd_by_gredius-d5o48do.jpg",
-				imageCaption: "This is an about 404 page!"
-			},
-			{
-				imageSrc: "http://www.planwallpaper.com/static/images/Desktop-Wallpaper-HD2.jpg",
-				imageCaption: "That's not a team!"
-			},
-			{
-				imageSrc: "http://www.intrawallpaper.com/static/images/wallpaper__eeveelution_rainbow_by_arkeis_pokemon-d49kjyc.jpg",
-				imageCaption: "I'm not sure what you expected!"
-			}
-		];
+		this.slides = [];
 
 		//Set the first picture to active. 
 		this.getActive = function(index) {
@@ -71,36 +54,7 @@
 		//Get team data somehow
 		this.teamData = {
 			header: "404(ish): There isn't a team with that name.",
-			blocks: [
-				{
-					size: 12,
-					title: "About",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: null,
-					linkUrl: "#"
-				},
-				{
-					size: 4,
-					title: "Upcoming Tournaments",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: "Click my face!",
-					linkUrl: "#"
-				},
-				{
-					size: 4,
-					title: "Meeting Times",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: null,
-					linkUrl: "#"
-				},
-				{
-					size: 4,
-					title: "Contact Info",
-					content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?",
-					linkText: null,
-					linkUrl: "#"
-				}
-			]
+			blocks: []
 		};
 	}]);
 
@@ -125,32 +79,7 @@
 
 			//Get some stuff
 			this.header = "Teams";
-			this.iconData = [
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				},
-				{
-					imageLink: "/",
-					imageSrc: "http://www.mcclureco.com/images/home-mods/Icons-Industries-Mod/ind-mod-icon-k12.jpg"
-				}
-			];
+			this.iconData = [];
 		}
 	]);
 })();
