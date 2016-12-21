@@ -575,7 +575,7 @@ if (dbChoice == 'mongoose') {
 						linkUrl: "#"
 					}
 				],
-				portfolioHeader: "A Special Thanks to Our Sponsors!",
+				portfolioHeader: "Our Sponsors",
 				iconData: [
 					{
 						imageLink: "http://www.gigabyte.us/",
