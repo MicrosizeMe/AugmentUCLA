@@ -1,40 +1,52 @@
 <ul class="nav navbar-nav navbar-right top-nav" ng-cloak>
-    <!-- <li ng-class="{ active: header.isActive('/') }" ng-hide="true">
-        <a href="/" target="_self">Blog</a>
-    </li>
-    <li ng-class="{ active: header.isActive('/about')}">
-        <a href="/about" target="_self">About</a>
-    </li>
-    <li ng-class="{ active: header.isActive('/tournament')}" ng-hide="true">
-        <a href="/tournament" target="_self">Tournament Signup</a>
-    </li>
-    <li ng-class="{ active: header.isActive('/calendar')}" ng-hide="true">
-        <a href="/calendar" target="_self">Calendar</a>
-    </li>
-    <li ng-class="{ active: header.isActive('/merch')}">
-        <a href="/merch" target="_self"><span class="glyphicon glyphicon-shopping-cart"></span> Merch and Membership</a>
-    </li> -->
-    <li ng-repeat="headerLink in header.headerLinks" ng-class="{ active: headerLink.isActive }">
-        <a ng-href="{{headerLink.href}}" target="_self" ng-bind-html="headerLink.title"></a>
-    </li>
-    <li class="dropdown" ng-hide="{{header.isLoggedIn()}}">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-        <ul id="login-dp" class="dropdown-menu">
-            <li>
-                <!-- <div class="well"> -->
-                    <!-- <div class="col-md-12"> -->
-                <div class="well">
-                    <form class="form" accept-charset="UTF-8" name="loginForm">
-                        <div class="col-sm-12">
-                            <div class="alert alert-danger" role="alert" ng-hide="header.flashMessage == '' ">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
-                                {{header.flashMessage}}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only">Username</label>
-                            <input 
+	<!-- <li ng-class="{ active: header.isActive('/') }" ng-hide="true">
+		<a href="/" target="_self">Blog</a>
+	</li>
+	<li ng-class="{ active: header.isActive('/about')}">
+		<a href="/about" target="_self">About</a>
+	</li>
+	<li ng-class="{ active: header.isActive('/tournament')}" ng-hide="true">
+		<a href="/tournament" target="_self">Tournament Signup</a>
+	</li>
+	<li ng-class="{ active: header.isActive('/calendar')}" ng-hide="true">
+		<a href="/calendar" target="_self">Calendar</a>
+	</li>
+	<li ng-class="{ active: header.isActive('/merch')}">
+		<a href="/merch" target="_self"><span class="glyphicon glyphicon-shopping-cart"></span> Merch and Membership</a>
+	</li> -->
+	<li ng-repeat="headerLink in header.headerLinks" ng-class="{ active: headerLink.isActive, dropdown: headerLink.children != null}">
+		<a 
+			ng-class="{ 'dropdown-toggle': headerLink.children != null }" 
+			ng-attr-data-toggle="{{ headerLink.children != null ? 'dropdown' : null }}"
+			ng-href="{{headerLink.href}}" target="_self" 
+		>
+			<text ng-bind-html="headerLink.title"></text>
+			<b class="caret" ng-show="{{headerLink.children != null}}"></b>
+		</a>
+		<ul class="dropdown-menu alert-dropdown">
+			<li ng-repeat="child in headerLink.children">
+				<a ng-href="{{child.href}}" ng-bind-html="child.title" target="_self"></a>
+			</li>
+		</ul>
+	</li>
+	<li class="dropdown" ng-hide="{{header.isLoggedIn()}}">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+		<ul id="login-dp" class="dropdown-menu">
+			<li>
+				<!-- <div class="well"> -->
+					<!-- <div class="col-md-12"> -->
+				<div class="well">
+					<form class="form" accept-charset="UTF-8" name="loginForm">
+						<div class="col-sm-12">
+							<div class="alert alert-danger" role="alert" ng-hide="header.flashMessage == '' ">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span class="sr-only">Error:</span>
+								{{header.flashMessage}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">Username</label>
+							<input 
 								type="text" 
 								class="form-control" 
 								id="exampleInputEmail2"
@@ -42,96 +54,96 @@
 								required
 								name="username"
 								ng-model="header.loginUsername"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only">Password</label>
-                            <input 
-                            	type="password" 
-                            	class="form-control" 
-                            	id="exampleInputPassword2" 
-                            	placeholder="Password" 
-                            	required
-                            	name="password"
-                            	ng-model="header.loginPassword"
-                            >
-                            <!-- <div class="help-block text-right"><a href="">Forgot your password?</a></div> -->
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary btn-block" ng-click="header.login()">Sign in</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- </div> -->
-                <div class="bottom text-center">
-                    New here? <a href="/register" target="_self"><b>Join Us!</b></a>
-                </div>
-                <!-- </div> -->
-            </li>
-        </ul>
-    </li>
-    <li class="dropdown" ng-show="{{header.isLoggedIn()}}" ng-hide="true">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-        <ul class="dropdown-menu alert-dropdown">
-            <li>
-                <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-            </li>
-            <li>
-                <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-            </li>
-            <li>
-                <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-            </li>
-            <li>
-                <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-            </li>
-            <li>
-                <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-            </li>
-            <li>
-                <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">View All</a>
-            </li>
-        </ul>
-    </li>
-    <li class="dropdown" ng-show="{{header.isLoggedIn()}}">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <b>{{header.username}} <span class="caret"></span></b>
-        </a>
-        <ul class="dropdown-menu">
-            <li class="dropdown-header">Welcome, <b>{{header.firstName}}!</b></li>
-            <!-- <li role="separator" class="divider"></li>
-            <li><a href="/settings" target="_self"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
-            <li><a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> Upcoming Tourmanents</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="/cart" target="_self"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart</a></li>-->
-            <li role="separator" class="divider"></li>
-            <li><a href="#" ng-click="header.logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
-        </ul>
-    </li>
-    <!--
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="full-width.html">Full Width Page</a>
-            </li>
-            <li>
-                <a href="sidebar.html">Sidebar Page</a>
-            </li>
-            <li>
-                <a href="faq.html">FAQ</a>
-            </li>
-            <li>
-                <a href="404.html">404</a>
-            </li>
-            <li>
-                <a href="pricing.html">Pricing Table</a>
-            </li>
-        </ul>
-    </li>
-    -->
+							>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">Password</label>
+							<input 
+								type="password" 
+								class="form-control" 
+								id="exampleInputPassword2" 
+								placeholder="Password" 
+								required
+								name="password"
+								ng-model="header.loginPassword"
+							>
+							<!-- <div class="help-block text-right"><a href="">Forgot your password?</a></div> -->
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary btn-block" ng-click="header.login()">Sign in</button>
+						</div>
+					</form>
+				</div>
+				<!-- </div> -->
+				<div class="bottom text-center">
+					New here? <a href="/register" target="_self"><b>Join Us!</b></a>
+				</div>
+				<!-- </div> -->
+			</li>
+		</ul>
+	</li>
+	<li class="dropdown" ng-show="{{header.isLoggedIn()}}" ng-hide="true">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+		<ul class="dropdown-menu alert-dropdown">
+			<li>
+				<a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+			</li>
+			<li>
+				<a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+			</li>
+			<li>
+				<a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+			</li>
+			<li>
+				<a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+			</li>
+			<li>
+				<a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+			</li>
+			<li>
+				<a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#">View All</a>
+			</li>
+		</ul>
+	</li>
+	<li class="dropdown" ng-show="{{header.isLoggedIn()}}">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<b>{{header.username}} <span class="caret"></span></b>
+		</a>
+		<ul class="dropdown-menu">
+			<li class="dropdown-header">Welcome, <b>{{header.firstName}}!</b></li>
+			<!-- <li role="separator" class="divider"></li>
+			<li><a href="/settings" target="_self"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
+			<li><a href="#"><i class="fa fa-trophy" aria-hidden="true"></i> Upcoming Tourmanents</a></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="/cart" target="_self"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart</a></li>-->
+			<li role="separator" class="divider"></li>
+			<li><a href="#" ng-click="header.logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
+		</ul>
+	</li>
+	<!--
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="full-width.html">Full Width Page</a>
+			</li>
+			<li>
+				<a href="sidebar.html">Sidebar Page</a>
+			</li>
+			<li>
+				<a href="faq.html">FAQ</a>
+			</li>
+			<li>
+				<a href="404.html">404</a>
+			</li>
+			<li>
+				<a href="pricing.html">Pricing Table</a>
+			</li>
+		</ul>
+	</li>
+	-->
 </ul>

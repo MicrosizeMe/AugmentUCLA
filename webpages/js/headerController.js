@@ -87,24 +87,42 @@
 			// link locations that fall under this header. 
 			// If the current window location is the href or any of the exceptions
 			// then the selection will be highlighted.
+			// The children field contains a list of objects that correspond to 
+			// subpages this header should contain, specifically title and link info.
 			this.headerLinks = [
 				{
 					title: $sce.trustAsHtml("About"),
+					activeList: ["/about", "/"],
+					isActive: false,
 					href: "/about",
-					exceptions: ["/"],
-					isActive: false
+					children: [
+						{
+							title: $sce.trustAsHtml("AUGment@UCLA"),
+							href: "/about"
+						},
+						{
+							title: $sce.trustAsHtml("League Of Legends@UCLA"),
+							href: "/about?id=league"
+						},
+						{
+							title: $sce.trustAsHtml("Hearthstone@UCLA"),
+							href: "/about?id=league"
+						},
+					]
 				},
 				{
 					title: $sce.trustAsHtml("Sponsors"),
+					activeList: ["/sponsors"],
+					isActive: false,
 					href: "/sponsors",
-					exceptions: [],
-					isActive: false
+					children: null
 				},
 				{
 					title: $sce.trustAsHtml("<span class='glyphicon glyphicon-shopping-cart'></span> Merch and Membership"),
+					activeList: ["/merch", "/item"],
+					isActive: false,
 					href: "/merch",
-					exceptions: ["/item"],
-					isActive: false
+					children: null
 				},
 			];
 
@@ -113,8 +131,8 @@
 				for (var i = 0; i < header.headerLinks.length; i++) {
 					var entry = header.headerLinks[i];
 					var result = currentPath == entry.href;
-					for (var j = 0; j < entry.exceptions.length; j++) {
-						result = result || (currentPath == entry.exceptions[j]); 
+					for (var j = 0; j < entry.activeList.length; j++) {
+						result = result || (currentPath == entry.activeList[j]); 
 					}
 					entry.isActive = result;
 					if (result) break;
