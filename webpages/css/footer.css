@@ -1,0 +1,19 @@
+/* Footer Styles */
+
+footer {
+    background-color: #0F0F0F;
+}
+
+footer p, footer small, footer a {
+    color: #9d9d9d;
+}
+
+footer a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+footer .container {
+    padding-top: 0px;
+    padding-bottom: 50px;
+}
