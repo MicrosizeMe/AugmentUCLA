@@ -101,13 +101,33 @@
 							href: "/about"
 						},
 						{
-							title: $sce.trustAsHtml("League Of Legends@UCLA"),
+							title: $sce.trustAsHtml("League Of Legends"),
 							href: "/about?id=league"
 						},
 						{
-							title: $sce.trustAsHtml("Hearthstone@UCLA"),
-							href: "/about?id=league"
+							title: $sce.trustAsHtml("Hearthstone"),
+							href: "/about?id=hearthstone"
 						},
+						{
+							title: $sce.trustAsHtml("Overwatch"),
+							href: "/about?id=overwatch"
+						},
+						{
+							title: $sce.trustAsHtml("Melee"),
+							href: "/about?id=melee"
+						},
+						{
+							title: $sce.trustAsHtml("Smash4"),
+							href: "/about?id=smash4"
+						},
+						{
+							title: $sce.trustAsHtml("Dota 2"),
+							href: "/about?id=dota2"
+						},
+						{
+							title: $sce.trustAsHtml("CSGO"),
+							href: "/about?id=csgo"
+						}
 					]
 				},
 				{
