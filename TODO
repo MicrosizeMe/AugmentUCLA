@@ -1,11 +1,31 @@
 TODO:
 
-Make blog login
-Make blog editor 
-Make author link searches work correctly
-Make a way to search comments by author and see post names
-Link up username shenanigans
+Long term:
 
+Blog (Beyond long term)
+	Make blog login
+	Make blog editor 
+	Make author link searches work
+	Make a way to search comments by author and see post names
+	Link up username shenanigans
+
+Tournament management
+	Whoa there long term
+
+Medium Term: 
+
+User info
+	Email
+		Set up email API
+		Set up password reset
+	Settings
+		Config
+			Set up user preference modification
+		Membership
+			Set up user viewership for memberships
+
+Short term: 
+	Make all other information sites
 
 
 Login fields
