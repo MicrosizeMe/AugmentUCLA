@@ -36,10 +36,8 @@ module.exports = function(app) {
 			var returnItem = {
 				id: aboutPage.id,
 				slides: aboutPage.slides,
-				mainHeader: aboutPage.mainHeader,
-				blocks: aboutPage.blocks,
-				portfolioHeader: aboutPage.portfolioHeader,
-				iconData: aboutPage.iconData,
+				title: aboutPage.title,
+				sectionBlocks: aboutPage.sectionBlocks,
 			};
 			res.send(returnItem);
 		});

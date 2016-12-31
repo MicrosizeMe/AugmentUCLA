@@ -5,11 +5,11 @@
 	}); 
 
 	// var app = angular.module('headerController', []);
+	console.log("If you're looking in here, clearly you're interested in code. Email me if you want to help out! anbo_wei@outlook.com");
+	console.log("Now stop looking in here, it's hideous.");
 	
 	app.controller('HeaderController', ["$http", "$location", "$cookies", "$window", "$scope", "$sce",
 		function($http, $location, $cookies, $window, $scope, $sce) {
-			console.log("If you're looking in here, clearly you're interested in code. Email me if you want to help out! anbo_wei@outlook.com");
-			console.log("Now stop looking in here, it's hideous.");
 
 			//Initialize data to tell if the user is logged in. This is based on the existance of the cookie.
 			var loggedIn = ($cookies.get("username") != null);
@@ -33,7 +33,6 @@
 					header.phoneNumber 	= userInfo.phoneNumber;
 					header.interests 	= userInfo.interests;
 				}
-				else console.log("User doesn't appear to be logged in.");
 			});
 
 			//If not logged in, here are the models for how we will do so.
