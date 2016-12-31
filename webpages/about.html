@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="AboutPage" ng-cloak>
 
-<head ng-controller="DescriptionHandler as description">
+<head ng-controller="CarouselController as description">
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title ng-cloak>{{description.teamData.header}}: AUGment@UCLA</title>
+	<title ng-cloak>{{description.title}}: AUGment@UCLA</title>
 
 	<!-- Bootstrap Core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -79,87 +79,65 @@
 	</header>
 
 	<!-- Page Content -->
-	<div class="container">
-
-		<!-- Header Location Icons Section -->
-		<div class="row" ng-controller="DescriptionHandler as description" >
-			<div class="col-lg-12">
-				<h1 class="page-header">
-					{{description.teamData.header}}
-				</h1>
-			</div>
-			<!-- class="col-md-12" -->
-			<div ng-repeat="block in description.teamData.blocks" ng-attr-class="{{'col-md-' + block.size}}">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4>{{block.title}}</h4>
-					</div>
-					<div class="panel-body">
-						<div ng-bind-html="block.content"></div>
-						<a ng-hide="{{block.linkText === null}}" ng-href="{{block.linkUrl}}" target="_self" class="btn btn-default">{{block.linkText}}</a>
-					</div>
+	<div class="container" ng-controller="SectionBlockHandler as blockHandler">
+		<div class="row" ng-repeat="sectionBlock in blockHandler.sectionBlocks">
+			<!-- Well Content Section -->
+			<div class="row" ng-show="{{sectionBlock.type == 0}}">
+				<div class="col-lg-12">
+					<h1 class="page-header">
+						{{sectionBlock.mainHeader}}
+					</h1>
 				</div>
-			</div>
-			<!-- <div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
-					</div>
-					<div class="panel-body">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-						<a href="#" class="btn btn-default">Learn More</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
-					</div>
-					<div class="panel-body">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-						<a href="#" class="btn btn-default">Learn More</a>
-					</div>
-				</div>
-			</div> -->
-		</div>
-		<!-- /.row -->
-
-		<!-- Portfolio Section -->
-		<div class="row" ng-controller='PortfolioHandler as portfolio' ng-hide="{{portfolio.header == null}}">
-			<div class="col-lg-12">
-				<h2 class="page-header">{{portfolio.header}}</h2>
-			</div>
-			<div class="col-md-12" ng-repeat="icon in portfolio.iconData track by $index">
-				<div class="col-md-4">
-					<a ng-href="{{icon.imageLink}}" target="_self">
-						<img class="img-responsive img-portfolio img-hover fillPortfolio" ng-src="{{icon.imageSrc}}" alt="">
-					</a>
-				</div>
-				<div class="col-md-8">
+				<!-- class="col-md-12" -->
+				<div ng-repeat="block in sectionBlock.blocks" ng-attr-class="{{'col-md-' + block.size}}">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>
-								<a ng-href="{{icon.imageLink}}" target="_self">
-									{{icon.title}}
-								</a>
-							</h4>
+							<h4>{{block.title}}</h4>
 						</div>
 						<div class="panel-body">
-							<div ng-bind-html="icon.description"></div>
-							<!-- <p>{{icon.description}}</p> -->
-							<div>
-								<div class="col-xs-1" ng-repeat="socialMedia in icon.socialMedia">
-									<a ng-href="{{socialMedia.imageLink}}" target="_self">
-										<i class="fa img-responsive img-hover fa-2x" ng-class="socialMedia.icon">
-										</i>
+							<div ng-bind-html="block.content"></div>
+							<a ng-hide="{{block.linkText === null}}" ng-href="{{block.linkUrl}}" target="_self" class="btn btn-default">{{block.linkText}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Portfolio Section -->
+			<div class="row" ng-show="{{sectionBlock.type == 1}}">
+				<div class="col-lg-12">
+					<h2 class="page-header">{{sectionBlock.portfolioHeader}}</h2>
+				</div>
+				<div class="col-md-12" ng-repeat="icon in sectionBlock.portfolios track by $index">
+					<div class="col-md-4">
+						<a ng-href="{{icon.imageLink}}" target="_self">
+							<img class="img-responsive img-portfolio img-hover fillPortfolio" ng-src="{{icon.imageSrc}}" alt="">
+						</a>
+					</div>
+					<div class="col-md-8">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4>
+									<a ng-href="{{icon.imageLink}}" target="_self">
+										{{icon.title}}
 									</a>
+								</h4>
+							</div>
+							<div class="panel-body">
+								<div ng-bind-html="icon.description"></div>
+								<!-- <p>{{icon.description}}</p> -->
+								<div>
+									<div class="col-xs-1" ng-repeat="socialMedia in icon.socialMedia">
+										<a ng-href="{{socialMedia.imageLink}}" target="_self">
+											<i class="fa img-responsive img-hover fa-2x" ng-class="socialMedia.icon">
+											</i>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<p>
 				</div>
-				<p>
 			</div>
 		</div>
 		<!-- /.row -->
@@ -202,11 +180,8 @@
 			</div>
 		</div> -->
 
-		<hr>
-
-		<!-- Footer -->
-
 	</div>
+	<!-- Footer -->
 	<footer-and-copyright></footer-and-copyright>
 	<!-- /.container -->
 
