@@ -9,7 +9,7 @@ if (dbChoice == 'mongoose') {
 		startDate: Date,
 		endDate: Date,
 		aboutPageId: String,
-		shortDescription: String,
+		shortDescription: String
 	});
 
 	// Returns a string representing the time in which an event is to occur.
