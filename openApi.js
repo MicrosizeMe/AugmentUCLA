@@ -57,6 +57,8 @@ module.exports = function(app) {
 				res.send({error: "Page Not Found"});
 				return;
 			}
+
+			
 			var returnItem = {
 				id: calendarPage.id,
 				title: calendarPage.title,

@@ -41,10 +41,13 @@ if (dbChoice == 'mongoose') {
 				shortDescription: "Testing!"
 			}).save();
 		},
-		//Get the result of a search with one team as the ID
-		//Callback should have signature (err, aboutPage)
 		getEventById: function(id, callback) {
 			Event.findOne({id: id}, callback);
+		},
+		// Get the result of a search for all events in a list
+		// later than the current date, sorted by date.
+		getEventsById: function(ids, callback) {
+			
 		}
 	}
 }
