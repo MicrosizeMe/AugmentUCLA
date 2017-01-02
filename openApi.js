@@ -8,6 +8,7 @@ var About = require("./dbtemplates/about");
 var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
 var User = require("./dbtemplates/userCore");
+var Calendar = require("./dbtemplates/calendar");
 
 var auth = require('./auth')
 
@@ -38,6 +39,29 @@ module.exports = function(app) {
 				slides: aboutPage.slides,
 				title: aboutPage.title,
 				sectionBlocks: aboutPage.sectionBlocks,
+			};
+			res.send(returnItem);
+		});
+	});
+
+	app.get('/api/getCalendar', function(req, res) {
+		var id = req.query.id;
+		if (id == null) id = 'augment';
+		Calendar.getCalendarById(id, function(err, calendarPage) {
+			if (err) {
+				console.log(err);
+				res.send({error: "503: Database Error"});
+				return;
+			}
+			if (calendarPage == null) {
+				res.send({error: "Page Not Found"});
+				return;
+			}
+			var returnItem = {
+				id: calendarPage.id,
+				title: calendarPage.title,
+				iframeURL: calendarPage.iframeURL,
+				sectionBlocks: calendarPage.sectionBlocks,
 			};
 			res.send(returnItem);
 		});
