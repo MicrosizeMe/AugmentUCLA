@@ -4,20 +4,28 @@
     .top200 { margin-top:15px; }
 }
 
-@media only screen and (max-width : 767px) {
+@media only screen and (max-width : 978px) {
 	.box {
 		height: auto !important;
-	} 
+	}
 }
 
 .flexContainer {
-	display: flex; 
+	display: flex;
+	max-height: 800px;
 	flex-direction: column;
+}
+
+@media (max-width: 978px) {
+	.flexContainer { 
+		display: flex;
+		max-height: none;
+		flex-direction: column;
+	}
 }
 
 .scrollbox {
 	/*border: solid #ddd 1px;*/
-	/*height: 100%;*/
 	flex: 1;
 	overflow-y: auto;
 }
