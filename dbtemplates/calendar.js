@@ -19,9 +19,9 @@ if (dbChoice == 'mongoose') {
 		initialize: function() {
 			new Calendar({
 				id: "augment",
-				title: "Upcomming Augment Events",
+				title: "Upcoming AUGment Events",
 				iframeURL: "https://calendar.google.com/calendar/embed?src=acmbruins%40gmail.com&ctz=America/Los_Angeles",
-				events: ["test"]
+				events: ["test", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10"]
 			}).save();
 		},
 		//Get the result of a search with one team as the ID

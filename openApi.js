@@ -9,6 +9,7 @@ var Item = require("./dbtemplates/item");
 var Store = require("./dbtemplates/store");
 var User = require("./dbtemplates/userCore");
 var Calendar = require("./dbtemplates/calendar");
+var Event = require("./dbtemplates/event");
 
 var auth = require('./auth')
 
@@ -44,6 +45,8 @@ module.exports = function(app) {
 		});
 	});
 
+	// Get the calendar id given by the request and return information
+	// about the calendar and all future and ongoing events.
 	app.get('/api/getCalendar', function(req, res) {
 		var id = req.query.id;
 		if (id == null) id = 'augment';
@@ -58,14 +61,26 @@ module.exports = function(app) {
 				return;
 			}
 
-			
-			var returnItem = {
-				id: calendarPage.id,
-				title: calendarPage.title,
-				iframeURL: calendarPage.iframeURL,
-				sectionBlocks: calendarPage.sectionBlocks,
-			};
-			res.send(returnItem);
+			Event.getEventsById(calendarPage.events, function(err, events) {
+				var eventList = [];
+				for (var i = 0; i < events.length; i++) {
+					eventList.push({
+						id: events[i].id,
+						title: events[i].title,
+						startDate: events[i].startDate,
+						endDate: events[i].endDate,
+						aboutPageId: events[i].aboutPageId,
+						shortDescription: events[i].shortDescription
+					});
+				}
+				var returnItem = {
+					id: calendarPage.id,
+					title: calendarPage.title,
+					iframeURL: calendarPage.iframeURL,
+					events: eventList,
+				};
+				res.send(returnItem);
+			});
 		});
 	});
 

@@ -3,3 +3,21 @@
 @media (max-width: 978px) {
     .top200 { margin-top:15px; }
 }
+
+@media only screen and (max-width : 767px) {
+	.box {
+		height: auto !important;
+	} 
+}
+
+.flexContainer {
+	display: flex; 
+	flex-direction: column;
+}
+
+.scrollbox {
+	/*border: solid #ddd 1px;*/
+	/*height: 100%;*/
+	flex: 1;
+	overflow-y: auto;
+}
