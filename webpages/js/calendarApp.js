@@ -14,6 +14,18 @@
 	app.controller('CalendarController', ["$sce", "databaseInfo", function($sce, databaseInfo) {
 		var scope = this;
 
+		this.calculateDateString = function(event) {
+			// Start with date of start time, then write local time.
+			// If end date is the same date, you don't need to print it.
+
+			var returnString = "";
+			returnString += event.startDate.toLocaleDateString() + " ";
+			returnString += event.startDate.toLocaleTimeString() + " - ";
+			returnString += event.endDate.toLocaleDateString() + " ";
+			returnString += event.endDate.toLocaleTimeString();
+			return returnString;
+		}
+
 		// this.calendarData = {
 		// 	id: null,
 		// 	title: null,
@@ -32,7 +44,7 @@
 					startDate: new Date(2011, 8, 1),
 					endDate: new Date(2011, 9, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test3",
@@ -40,7 +52,7 @@
 					startDate: new Date(2020, 9, 1),
 					endDate: new Date(2020, 10, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test2",
@@ -48,7 +60,7 @@
 					startDate: new Date(2020, 8, 1),
 					endDate: new Date(2020, 9, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test4",
@@ -56,7 +68,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test5",
@@ -64,7 +76,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test6",
@@ -72,7 +84,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test7",
@@ -80,7 +92,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test8",
@@ -88,7 +100,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test9",
@@ -96,7 +108,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				},
 				{
 					id: "test10",
@@ -104,7 +116,7 @@
 					startDate: new Date(2020, 10, 1),
 					endDate: new Date(2020, 11, 1),
 					aboutPageId: "augment",
-					shortDescription: "Testing!"
+					shortDescription: $sce.trustAsHtml("Testing!")
 				}
 			]
 		};
@@ -116,9 +128,12 @@
 		// 	else {
 		// 		scope.calendarData = returnRequest.data;
 		// 		scope.calendarData.iframeURL = $sce.trustAsResourceUrl(scope.calendarData.iframeURL);
+		// 		for (var i = 0; i < scope.calendarData.events.length; i++) {
+		// 			var description = scope.calendarData.events[i].shortDescription;
+		// 			description = $sce.trustAsHtml(description);
+		// 		}
 		// 	}
 		// 	console.log(scope.calendarData);
 		// });
-
 	}]);
 })();
