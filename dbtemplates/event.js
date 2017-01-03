@@ -130,16 +130,28 @@ if (dbChoice == 'mongoose') {
 		// Limited to 10 events unless a limit is specified. Limit
 		// of 0 is no limit.
 		// Page number (defaults to 0) specifies which set we start from.
-		getEventsById: function(ids, callback, limit, pageNumber) {
+		// pastEvents, if true, instead specifies one should look for already passed events.
+		// (Defaults to false)
+		getEventsById: function(ids, callback, limit, pageNumber, pastEvents) {
 			if (limit === undefined) 
 				limit = 10;
 			if (pageNumber === undefined)
 				pageNumber = 0;
+			if (pastEvents === undefined)
+				pastEvents = false;
+
+			// Search greater than or equal to if not looking for past events, less than
+			// or equal to if looking for past.
+			var endDateSearchCondition = 
+				pastEvents ? { $lte: Date(Date.now()) } : { $gte: Date(Date.now()) };
+			// Search oldest first for new events, newest first for past. 
+			var searchOrder = pastEvents ? -1 : 1;
+
 			Event.find({ 
 				id: { $in: ids }, 
-				endDate: { $gte: Date(Date.now()) }
+				endDate: endDateSearchCondition
 			}).
-			sort({startDate: 1}).
+			sort({startDate: searchOrder}).
 			limit(limit).
 			skip(pageNumber * limit).
 			exec(callback);

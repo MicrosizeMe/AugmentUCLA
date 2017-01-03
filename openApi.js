@@ -84,6 +84,52 @@ module.exports = function(app) {
 		});
 	});
 
+	// Gets events of a given page range associated with a given calendar.
+	app.get('/api/getEvents', function(req, res) {
+		var id = req.query.id;
+		if (id == null) id = 'augment';
+		var pageNum = req.query.page;
+		if (pageNum === undefined) pageNum = 0;
+		var pastEvents = req.query.pastEvents;
+		if (pastEvents === undefined) pastEvents = false;
+		var eventsPerPage = req.query.eventsPerPage;
+		if (eventsPerPage === undefined) eventsPerPage = 10;	
+
+		Calendar.getCalendarById(id, function(err, calendarPage) {
+			if (err) {
+				console.log(err);
+				res.send({error: "503: Database Error"});
+				return;
+			}
+			if (calendarPage == null) {
+				res.send({error: "Page Not Found"});
+				return;
+			}
+
+			Event.getEventsById(calendarPage.events, function(err, events, eventsPerPage, pageNum, pastEvents) {
+				var eventList = [];
+				for (var i = 0; i < events.length; i++) {
+					eventList.push({
+						id: events[i].id,
+						title: events[i].title,
+						startDate: events[i].startDate,
+						endDate: events[i].endDate,
+						aboutPageId: events[i].aboutPageId,
+						shortDescription: events[i].shortDescription
+					});
+				}
+				var returnItem = {
+					id: calendarPage.id,
+					title: calendarPage.title,
+					iframeURL: calendarPage.iframeURL,
+					events: eventList,
+				};
+				res.send(returnItem);
+			});
+		});
+
+	});
+
 	app.get('/api/getMerchItem', function(req, res) {
 		var itemID = req.query.item;
 		Item.getItemByID(itemID, function(err, item) {
