@@ -17,3 +17,15 @@ var opts = {
 };
 
 mongoose.connect(credentials.mongo.connectionString, opts);
+
+Data.drop(Data.initialize);
+
+About.drop(About.initialize);
+
+Item.drop(Item.initialize);
+
+Store.drop(Store.initialize);
+
+Event.drop(Event.initialize);
+
+Calendar.drop(Calendar.initialize);

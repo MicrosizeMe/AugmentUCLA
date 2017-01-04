@@ -18,6 +18,7 @@
 	<!-- Custom CSS -->
 	<link href="css/the-big-picture.css" rel="stylesheet">
 	<link href="/css/footer.css" rel="stylesheet">
+	<link href="/css/padding.css" rel="stylesheet">
 
 	<!-- Custom Fonts -->
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -48,29 +49,54 @@
 	<navigation-bar></navigation-bar>
 
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container" ng-controller="CalendarController as calendar">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
-				<h1 class="well">Upcoming Events</h1>
+				<h1 class="well">{{calendar.calendarData.title}}</h1>
 			</div>
 		</div>
-		<div attr-class="col-md-12">
-			<div class="panel panel-default">
-				<!-- <div class="panel-heading">
-					<h3>Upcoming Events</h3>
-				</div> -->
-				<div class="panel-body">
-					<iframe src="https://calendar.google.com/calendar/embed?src=acmbruins%40gmail.com&ctz=America/Los_Angeles" style="border: 0" width="100%" height="800px" frameborder="0" scrolling="no"></iframe>
-				</div>
+		<div class="row">
+			<div class="col-lg-8">
+				<!-- <div class="box"> -->
+					<div class="panel panel-default">
+						<!-- <div class="panel-heading">
+							<h3>Upcoming Events</h3>
+						</div> -->
+						<div class="panel-body">
+							<iframe ng-src="{{calendar.calendarData.iframeURL}}" style="border: 0" width="100%" height="800px" frameborder="0" scrolling="no"></iframe>
+						</div>
+					</div>
+				<!-- </div> -->
+			</div>
+			<div class="col-lg-4">
+				<!-- <div class="box"> -->
+					<div class="well">
+						<div class="flexContainer">
+							<h2>Upcoming Events</h2>
+							<hr>
+							<div class="scrollbox">
+								<div class="panel panel-info" ng-repeat="event in calendar.calendarData.events">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<b>
+												<a ng-href="{{'/about?id=' + event.aboutPageId}}">
+													{{event.title}}
+												</a>
+											</b>
+										</h3>
+									</div>
+									<div class="panel-body">
+										<b>{{calendar.calculateDateString(event)}}</b>
+										<div ng-bind-html="event.shortDescription"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- </div> -->
 			</div>
 		</div>
 
-		<!-- <div class="row"> 
-			<div class="col-lg-12">
-				<hr>
-
-				<footer-and-copyright></footer-and-copyright>
-			</div>
 		</div> -->
 		
 		<!-- /.row -->
@@ -84,6 +110,8 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+	<!-- <script src="/js/padding.js"></script> -->
 
 </body>
 
