@@ -94,41 +94,41 @@
 					activeList: ["/about", "/"],
 					isActive: false,
 					href: "/about",
-					// children: [
-					// 	{
-					// 		title: $sce.trustAsHtml("AUGment@UCLA"),
-					// 		href: "/about"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("League Of Legends"),
-					// 		href: "/about?id=league"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("Hearthstone"),
-					// 		href: "/about?id=hearthstone"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("Overwatch"),
-					// 		href: "/about?id=overwatch"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("Melee"),
-					// 		href: "/about?id=melee"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("Smash4"),
-					// 		href: "/about?id=smash4"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("Dota 2"),
-					// 		href: "/about?id=dota2"
-					// 	},
-					// 	{
-					// 		title: $sce.trustAsHtml("CSGO"),
-					// 		href: "/about?id=csgo"
-					// 	}
-					// ]
-					children: null
+					children: [
+						{
+							title: $sce.trustAsHtml("AUGment@UCLA"),
+							href: "/about"
+						},
+						{
+							title: $sce.trustAsHtml("League Of Legends"),
+							href: "/about?id=league"
+						},
+						{
+							title: $sce.trustAsHtml("Hearthstone"),
+							href: "/about?id=hearthstone"
+						},
+						{
+							title: $sce.trustAsHtml("Overwatch"),
+							href: "/about?id=overwatch"
+						},
+						{
+							title: $sce.trustAsHtml("Melee"),
+							href: "/about?id=melee"
+						},
+						{
+							title: $sce.trustAsHtml("Smash4"),
+							href: "/about?id=smash4"
+						},
+						{
+							title: $sce.trustAsHtml("Dota 2"),
+							href: "/about?id=dota2"
+						},
+						{
+							title: $sce.trustAsHtml("CSGO"),
+							href: "/about?id=csgo"
+						}
+					]
+					// children: null
 				},
 				{
 					title: $sce.trustAsHtml("Sponsors"),
@@ -137,46 +137,46 @@
 					href: "/sponsors",
 					children: null
 				},
-				// {
-				// 	title: $sce.trustAsHtml("Events"),
-				// 	activeList: ["/about", "/"],
-				// 	isActive: false,
-				// 	href: "/calendar",
-				// 	children: [
-				// 		{
-				// 			title: $sce.trustAsHtml("<b>All Events</b>"),
-				// 			href: "/calendar"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("League Of Legends"),
-				// 			href: "/calendar?id=league"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("Hearthstone"),
-				// 			href: "/calendar?id=hearthstone"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("Overwatch"),
-				// 			href: "/calendar?id=overwatch"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("Melee"),
-				// 			href: "/calendar?id=melee"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("Smash4"),
-				// 			href: "/calendar?id=smash4"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("Dota 2"),
-				// 			href: "/calendar?id=dota2"
-				// 		},
-				// 		{
-				// 			title: $sce.trustAsHtml("CSGO"),
-				// 			href: "/calendar?id=csgo"
-				// 		}
-				// 	]
-				// },
+				{
+					title: $sce.trustAsHtml("Events"),
+					activeList: ["/about", "/"],
+					isActive: false,
+					href: "/calendar",
+					children: [
+						{
+							title: $sce.trustAsHtml("<b>All Events</b>"),
+							href: "/calendar"
+						},
+						{
+							title: $sce.trustAsHtml("League Of Legends"),
+							href: "/calendar?id=league"
+						},
+						{
+							title: $sce.trustAsHtml("Hearthstone"),
+							href: "/calendar?id=hearthstone"
+						},
+						{
+							title: $sce.trustAsHtml("Overwatch"),
+							href: "/calendar?id=overwatch"
+						},
+						{
+							title: $sce.trustAsHtml("Melee"),
+							href: "/calendar?id=melee"
+						},
+						{
+							title: $sce.trustAsHtml("Smash4"),
+							href: "/calendar?id=smash4"
+						},
+						{
+							title: $sce.trustAsHtml("Dota 2"),
+							href: "/calendar?id=dota2"
+						},
+						{
+							title: $sce.trustAsHtml("CSGO"),
+							href: "/calendar?id=csgo"
+						}
+					]
+				},
 				{
 					title: $sce.trustAsHtml("<span class='glyphicon glyphicon-shopping-cart'></span> Merch and Membership"),
 					activeList: ["/merch", "/item"],
