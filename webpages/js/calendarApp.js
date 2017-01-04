@@ -129,8 +129,14 @@
 				scope.calendarData = returnRequest.data;
 				scope.calendarData.iframeURL = $sce.trustAsResourceUrl(scope.calendarData.iframeURL);
 				for (var i = 0; i < scope.calendarData.events.length; i++) {
-					var description = scope.calendarData.events[i].shortDescription;
-					description = $sce.trustAsHtml(description);
+					var currentEvent = scope.calendarData.events[i];
+					currentEvent.shortDescription 
+						= $sce.trustAsHtml(currentEvent.shortDescription);
+
+					currentEvent.startDate = new Date(currentEvent.startDate);
+					console.log(currentEvent.startDate);
+
+					currentEvent.endDate = new Date(currentEvent.endDate);
 				}
 			}
 			console.log(scope.calendarData);
